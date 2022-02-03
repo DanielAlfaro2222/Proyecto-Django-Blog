@@ -1,1 +1,1 @@
-# Proyecto-Django-blog---Curso-Tzuzul-code
+# Proyecto Django-blog Curso Tzuzul Code
