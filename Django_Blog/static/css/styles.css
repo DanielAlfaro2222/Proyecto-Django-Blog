@@ -1,0 +1,107 @@
+:root {
+    --font: 'Raleway', sans-serif;
+    --bgcolor: #0C3C26;
+}
+
+body {
+    padding-top: 4em;
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ------------------------ESTILOS DEL HEADER------------------------ */
+.nav-main {
+    width: 100%;
+    height: 70px;
+    background-color: var(--bgcolor);
+    position: fixed;
+    top: 0;
+    z-index: 500;
+}
+.container-nav-main {
+    display: flex;
+    width: 100vw;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+.container-nav-link {
+    color: white;
+    font-size: 1rem;
+}
+.container-nav-link__span {
+    color: lime;
+}
+
+.container-img-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 220px;
+    position: relative;
+    text-align: center;
+}
+.container-img-header__paragraph {
+    font-size: 1.5rem;
+    color: white;
+    font-weight: bolder;
+}
+.container-picture-header {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+.container-picture-header__img {
+    width: 100%;
+    height: 100%;
+}
+
+/* ------------------------ESTILOS DEL MAIN------------------------ */
+.main-index {
+    padding: 1em;
+}
+
+/* ------------------------ESTILOS DEL FOOTER------------------------ */
+.main-footer {
+    width: 100%;
+    height: 57px;
+    background-color: var(--bgcolor);
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    position: relative;
+    margin-top: auto;
+}
+.main-footer__paragraph {
+    line-height: 57px;
+    margin: 0;
+}
+.container-footer-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: lime;
+    color: white;
+    position: absolute;
+    top: -1em;
+    right: 1em;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+
+.container-footer-link__icon {
+    font-size: 1.2rem;
+}

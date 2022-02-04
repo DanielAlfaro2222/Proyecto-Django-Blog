@@ -6,7 +6,7 @@ import uuid
 
 class Category(models.Model):
     id_category = models.AutoField('Id categoria', primary_key = True)
-    name = models.CharField('Nombre categoria', max_length = 45)
+    name = models.CharField('Nombre categoria', max_length = 45, unique = True)
     slug = models.SlugField('Url', null = True, blank = True)
     create = models.DateTimeField('Fecha de creacion', auto_now_add = True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
@@ -22,7 +22,7 @@ class Category(models.Model):
 
 class Article(models.Model):
     id_article = models.AutoField('Id articulo', primary_key = True)
-    name = models.CharField('Nombre', max_length = 55)
+    name = models.CharField('Nombre', max_length = 55, unique = True)
     image = models.ImageField('Imagen', upload_to = 'article/images')
     content = models.TextField('Contenido')
     resume = models.CharField('Descripcion del articulo', max_length = 150)
