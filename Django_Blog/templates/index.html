@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Inicio</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Django | blog</h1>
+
+    <h2>Categorias</h2>
+    <ul>
+        {% for categoria in categorias %}
+            <li>{{categoria}}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Articulos</h2>
+    {% for articulo in articulos %}
+        <h3>Titulo: {{articulo.name}}</h3>
+        <img src="{{articulo.image.url}}" width="300">
+        <p><strong>Autor: </strong>{{articulo.author}}</p>
+        <p><strong>Fecha: </strong>{{articulo.modified}}</p>
+        <p><strong>Descripcion del articulo: </strong>{{articulo.resume}}</p>
+        <p><strong>Contenido: </strong>{{articulo.content}}</p>
+    {% endfor %}
+{% endblock %}
