@@ -7,4 +7,37 @@
 {% endblock %}
 
 {% block content %}
+    <main class="main">
+        <h2>Contacto</h2>
+
+        <!-- {% if messages %}
+            {% for mensaje in messages %}
+                <p>{{mensaje}}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>
+                {{formulario.nombre}}
+            </label>
+            
+            <label>
+                {{formulario.asunto}}
+            </label>
+
+            <label>
+                {{formulario.correo}}
+            </label>
+
+            <label>
+                {{formulario.mensaje}}
+            </label>
+
+            <button>Enviar</button>
+        </form> -->
+
+        <a href="{% url 'Users:send_mail' %}">Enviar correo</a>
+    </main>
 {% endblock %}

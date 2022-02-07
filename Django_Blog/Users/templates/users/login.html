@@ -7,4 +7,27 @@
 {% endblock %}
 
 {% block content %}
+    <main class="main">
+        <h2>Login</h2>
+        {% if messages %}
+            {% for mensaje in messages %}
+                <p>{{mensaje}}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            {{formulario.correo}}
+    
+            {{formulario.contrasena}}
+
+            <div>
+                <a href="{% url 'Users:register' %}">Crear cuenta</a>
+                <a href="#">Recuperar contraseña</a>
+            </div>
+    
+            <button>Iniciar sesion</button>
+        </form>
+    </main>
 {% endblock %}

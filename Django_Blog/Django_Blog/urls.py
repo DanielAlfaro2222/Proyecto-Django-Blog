@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index_view, name = 'index'),
     path('users/', include('Users.urls')),
+    path('blog/', include('Blog.urls')),
 ]
 
 # Configuracion para servir la media del aplicativo

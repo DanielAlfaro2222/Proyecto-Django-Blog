@@ -1,0 +1,14 @@
+<article class="container-article">
+    <h3 class="container-title-article">
+        <a href="{% url 'Blog:articulo' articulo.slug %}" class="container-title-article__link">
+            {{articulo.name}}
+        </a>
+    </h3>
+    <img src="{{articulo.image.url}}" class="container-article__img" loading="lazy">
+    <p class="container-article-author">
+        <span class="container-article-author__span">Autor: </span>
+        {{articulo.author.first_name}} {{articulo.author.last_name}}
+    </p>
+    <p class="container-article__paragraph">{{articulo.content}}</p>
+    <a href="{% url 'Blog:articulo' articulo.slug %}" class="container-article__link">Leer mas</a>
+</article>

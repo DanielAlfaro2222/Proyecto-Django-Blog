@@ -1,0 +1,24 @@
+@media screen and (min-width: 700px) {
+    .container-img-header {
+        height: 320px;
+    }
+    .container-img-header__paragraph {
+        font-size: 1.8rem;
+    }
+    .container-nav-link, .main-footer {
+        font-size: 1.2rem;
+    }
+    .main {
+        padding: 1.7em;
+    }
+    .container-footer-link__icon {
+        font-size: 1.2rem;
+    }
+    .container-footer-link {
+        width: 40px;
+        height: 40px;
+    }
+    .container-article__img {
+        height: 175px;
+    }
+}

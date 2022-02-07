@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>{{articulo.name}}</title>
+{% endblock %}
+
+{% block imagen_header %}
+    {% include 'snippets/imagen_header.html' with titulo=articulo.category %}
+{% endblock %}
+
+{% block content %}
+    <main class="main">
+        <section>
+            <h2>Titulo: {{articulo.name}}</h2>
+            <img src="{{articulo.image.url}}" width="300">
+            <p><strong>Autor: </strong>
+                {{articulo.author.first_name}} {{articulo.author.last_name}}
+            </p>
+            <p><strong>Fecha: </strong>{{articulo.modified}}</p>
+            <p><strong>Descripcion del articulo: </strong>{{articulo.resume}}</p>
+            <p><strong>Contenido: </strong>{{articulo.content}}</p>
+        </section>
+    
+        {% include 'snippets/categorias.html' %}
+    </main>
+{% endblock %}

@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
 
-{% load static %}
-
 {% block head %}
-    <title>Inicio</title>
+    <title>{{categoria.name}}</title>
 {% endblock %}
 
 {% block imagen_header %}
-    {% include 'snippets/imagen_header.html' with titulo='Django | Blog' %}
+    {% include 'snippets/imagen_header.html' with titulo=categoria.name %}
 {% endblock %}
 
 {% block content %}
@@ -16,9 +14,11 @@
             <h2 class="container-left-index__title">Articulos</h2>
             {% for articulo in articulos %}
                 {% include 'snippets/articulo.html' %}
+            {% empty %}
+                <p>No hay articulos relacionados con esta categoria :(</p>
             {% endfor %}
         </section>
-
+    
         {% include 'snippets/categorias.html' %}
     </main>
 {% endblock %}

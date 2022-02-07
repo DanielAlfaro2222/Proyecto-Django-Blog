@@ -1,0 +1,19 @@
+<section class="container-categories">
+    <h2 class="container-categories__title">Categorias</h2>
+    {% for categoria in categorias %}
+        <ul class="container-list-categories">
+            <li class="container-element-list-categories">
+                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644188650/Proyecto%20django-blog/rocket_q88iib.webp" alt="Imagen de un cohete" aria-hidden="true" class="container-element-list-categories__icon" loading="lazy">
+                <a href="{% url 'Blog:categoria' categoria.slug %}" class="container-element-list-categories__link">
+                    {{categoria}}
+                </a>
+            </li>
+        </ul>
+    {% endfor %}
+
+    <form method="POST" class="container-form-search-article">
+        {% csrf_token %}
+        <input type="text" class="container-form-search-article__input" placeholder="Buscar articulo...">
+        <button class="container-form-search-article__btn">Buscar</button>
+    </form>
+</section>

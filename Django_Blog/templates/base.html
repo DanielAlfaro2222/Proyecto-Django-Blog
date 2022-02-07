@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,700;1,300;1,600;1,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/media_queries/tablet.css' %}" media="(min-width: 700px)">
+    <link rel="stylesheet" href="{% static 'css/media_queries/desktop.css' %}" media="(min-width: 1200px)">
     {% block head %} {% endblock %}
 </head>
 <body>
@@ -20,25 +22,27 @@
             <ul class="container-nav-main">
                 <li class="container-element-nav">
                     <a href="{% url 'index' %}" class="container-nav-link">
-                        <span class="container-nav-link__span">Django</span> | Blog
+                        <span class="container-nav-link__span">Django</span>| Blog
                     </a>
                 </li>
-                <li class="container-element-nav">
-                    <a href="{% url 'Users:login' %}" class="container-nav-link">Iniciar sesion</a>
-                </li>
+
+                {% if request.user.is_authenticated %}
+                    <li class="container-element-nav">
+                        <a href="#" class="container-nav-link">
+                            <i class="far fa-user-circle fa-2x container-nav-link__icon" aria-hidden="true"></i>
+                            {{request.user.first_name.split | first}}
+                            {{request.user.last_name.split | first}}
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="container-element-nav">
+                        <a href="{% url 'Users:login' %}" class="container-nav-link">Iniciar sesion</a>
+                    </li>
+                {% endif %}
             </ul>
         </nav>
 
-        <div class="container-img-header">
-            <picture class="container-picture-header">
-                <source srcset="https://res.cloudinary.com/dpxek6oka/image/upload/v1644010187/Proyecto%20django-blog/laptop_rcnkkw.webp" media="(min-width: 1200px)" class="container-picture-header__img">
-
-                <source srcset="https://res.cloudinary.com/dpxek6oka/image/upload/v1644010187/Proyecto%20django-blog/tablet_mjew5y.webp" media="(min-width: 700px)" class="container-picture-header__img">
-
-                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644010187/Proyecto%20django-blog/celular_q4lmis.webp" class="container-picture-header__img">
-            </picture>
-            <p class="container-img-header__paragraph">Django | Blog</p>
-        </div>
+        {% block imagen_header %} {% endblock %}
     </header>
 
     {% block content %} {% endblock %}
