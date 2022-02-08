@@ -89,7 +89,7 @@ body {
 }
 .container-article__img {
     width: 100%;
-    height: 140px;
+    height: 170px;
 }
 .container-article__paragraph {
     height: 105px;
@@ -163,8 +163,32 @@ body {
     border: none;
     font-size: .9rem;
 }
+.mensaje_error, .mensaje_exito {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 70px;
+    font-size: .9rem;
+    border-radius: 0.7em;
+    -webkit-border-radius: 0.7em;
+    -moz-border-radius: 0.7em;
+    -ms-border-radius: 0.7em;
+    -o-border-radius: 0.7em;
+    padding: .5em;
+}
 .mensaje_error {
-    color: red;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+}
+.mensaje_exito {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+.mensaje_error__icon, .mensaje_exito__icon {
+    margin-right: .4em;
+    font-size: 1.8rem;
 }
 
 /* ------------------------ESTILOS DEL FOOTER------------------------ */

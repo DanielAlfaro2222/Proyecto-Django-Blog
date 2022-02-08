@@ -1,0 +1,44 @@
+.container-label-register {
+    display: block;
+    margin-bottom: 1em;
+    font-size: .9rem;
+}
+.container-label-register__input, .container-label-register__select {
+    display: block;
+    width: 100%;
+    height: 40px;
+    margin-top: 1em;
+    outline: none;
+    border: none;
+    border-radius: 1em;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -ms-border-radius: 1em;
+    -o-border-radius: 1em;
+    padding-left: .8em;
+    background-color: rgb(231, 224, 224);
+}
+
+.container-form-register__btn {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 1em;
+    -webkit-border-radius: 1em;
+    -moz-border-radius: 1em;
+    -ms-border-radius: 1em;
+    -o-border-radius: 1em;
+    color: white;
+    background-color: var(--bgcolor);
+    margin-bottom: 1em;
+    margin-top: 1em;
+    font-weight: 500;
+    font-size: .9rem;
+}
+
+.container-label-register__image {
+    width: 100%;
+    font-size: .9rem;
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

@@ -72,3 +72,20 @@ def set_slug_articulo(sender, instance, *args, **kwargs):
 
 # Unir el callback al modelo category
 pre_save.connect(set_slug_articulo, sender = Article)
+
+class Comment(models.Model):
+    id_comment = models.AutoField('Id comentario', primary_key = True)
+    author = models.ForeignKey(User, verbose_name = 'Autor', on_delete = models.DO_NOTHING)
+    article = models.ForeignKey(Article, verbose_name = 'Articulo', on_delete = models.DO_NOTHING)
+    content = models.TextField('Contenido')
+    create = models.DateTimeField('Fecha de creacion', auto_now_add = True)
+    modified = models.DateTimeField('Fecha de modificacion', auto_now =True)
+
+    def __str__(self):
+        return f'{self.id_comment}-{self.article}'
+
+    class Meta:
+        verbose_name = 'Comentario'
+        verbose_name_plural = 'Comentarios'
+        ordering = ['id_comment']
+        db_table = 'Comentario'

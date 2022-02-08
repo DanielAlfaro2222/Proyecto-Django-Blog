@@ -17,7 +17,10 @@
             <h2 class="container-left-index__title">Articulos</h2>
             {% if messages %}
                 {% for mensaje in messages %}
-                    <p class="mensaje_error">{{mensaje}}</p>
+                    <p class="mensaje_error">
+                        <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
+                        {{mensaje}}
+                    </p>
                 {% endfor %}
             {% endif %}
 

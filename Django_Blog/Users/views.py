@@ -39,6 +39,9 @@ def logout_view(request):
     return redirect('Users:login')
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('index')
+
     formulario = RegisterForm(request.POST or None)
 
     if request.method == 'POST' and formulario.is_valid():

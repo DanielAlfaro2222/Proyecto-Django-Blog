@@ -3,49 +3,50 @@
 {% load static %}
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <title>Registro</title>
 {% endblock %}
 
 {% block content %}
     <main class="main">
-        <h2>Registro</h2>
-        <fieldset>
-            <form method="POST" enctype="multipart/form-data">
+        <section class="container-section-register">
+            <h2 class="container-section-register__title">Registro</h2>
+            <form method="POST" enctype="multipart/form-data" class="container-form-register">
                 {% csrf_token %}
-
-                <label>
+    
+                <label class="container-label-register">
                     Nombre
                     {{formulario.nombre}}
                 </label>
-
-                <label>
+    
+                <label class="container-label-register">
                     Apellido
                     {{formulario.apellido}}
                 </label>
-
-                <label>
+    
+                <label class="container-label-register">
                     Genero
                     {{formulario.genero}}
                 </label>
-
-                <label>
+    
+                <label class="container-label-register">
                     Imagen de perfil
                     {{formulario.imagen}}
                 </label>
-
-                <label>
+    
+                <label class="container-label-register">
                     Correo
                     {{formulario.correo}}
                 </label>
-
-                <label>
+    
+                <label class="container-label-register">
                     Contraseña
                     {{formulario.contrasena}}
                 </label>
-
-
-                <button>Registrarse</button>
+    
+    
+                <button class="container-form-register__btn">Registrarse</button>
             </form>
-        </fieldset>
+        </section>
     </main>
 {% endblock %}

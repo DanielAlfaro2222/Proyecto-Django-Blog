@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Category
+from .models import Comment
 from .models import Article
 
 # Register your models here.
@@ -18,3 +19,5 @@ class ArticleAdmin(admin.ModelAdmin):
         'create', 
         'modified'
     ]
+
+admin.site.register(Comment)

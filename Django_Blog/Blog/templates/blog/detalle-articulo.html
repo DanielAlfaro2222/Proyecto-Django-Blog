@@ -12,7 +12,7 @@
 
 {% block content %}
     <main class="main main-index">
-        <section>
+        <article>
             <h2>Titulo: {{articulo.name}}</h2>
             <img src="{{articulo.image.url}}" width="300">
             <p><strong>Autor: </strong>
@@ -21,10 +21,21 @@
             <p><strong>Fecha: </strong>{{articulo.modified}}</p>
             <p><strong>Descripcion del articulo: </strong>{{articulo.resume}}</p>
             <p><strong>Contenido: </strong>{{articulo.content}}</p>
-        </section>
 
-        <section class="container-categories">
+            <section>
+                <h2>Comentarios</h2>
+                {% for comentario in comentarios %}
+                    <ul>
+                        <li>{{comentario}}</li>
+                    </ul>
+                {% empty %}
+                    <p>No hay comentarios :(</p>
+                {% endfor %}
+            </section>
+        </article>
+
+        <article class="container-categories">
             {% include 'snippets/categorias.html' %}
-        </section>
+        </article>
     </main>
 {% endblock %}

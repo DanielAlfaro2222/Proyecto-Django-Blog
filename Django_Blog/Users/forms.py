@@ -13,6 +13,7 @@ class LoginForm(forms.Form):
             'tab-index': 1,
             'placeholder': 'Correo',
             'max_length': 25,
+            'class': 'container-form-login__input'
         })
     )
     contrasena = forms.CharField(
@@ -20,6 +21,7 @@ class LoginForm(forms.Form):
         widget = forms.PasswordInput(attrs = {
             'tab-index': 2,
             'placeholder': 'Contraseña',
+            'class': 'container-form-login__input'
         })
     )
 
@@ -44,6 +46,7 @@ class RegisterForm(forms.Form):
         widget = forms.TextInput(attrs = {
             'autofocus': 'true',
             'tab-index': 1,
+            'class': 'container-label-register__input'
         })
     )
 
@@ -53,6 +56,7 @@ class RegisterForm(forms.Form):
         min_length = 4,
         widget = forms.TextInput(attrs = {
             'tab-index': 2,
+            'class': 'container-label-register__input'
         })
     )
 
@@ -61,6 +65,7 @@ class RegisterForm(forms.Form):
         max_length = 55,
         widget = forms.EmailInput(attrs = {
             'tab-index': 5,
+            'class': 'container-label-register__input'
         })
     )
 
@@ -68,6 +73,7 @@ class RegisterForm(forms.Form):
         required = True,
         widget = forms.Select(attrs = {
             'tab-index': 3,
+            'class': 'container-label-register__select'
         }),
         choices = GENDER
     )
@@ -75,13 +81,15 @@ class RegisterForm(forms.Form):
         required = False,
         widget = forms.FileInput(attrs = {
             'tab-index': 4,
+            'class': 'container-label-register__image'
         })
     )
 
     contrasena = forms.CharField(
         required = True,
         widget = forms.PasswordInput(attrs = {
-            'tab-index': 6
+            'tab-index': 6,
+            'class': 'container-label-register__input'
         })
     )
 

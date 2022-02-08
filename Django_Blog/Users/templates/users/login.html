@@ -3,31 +3,48 @@
 {% load static %}
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <title>Login</title>
 {% endblock %}
 
 {% block content %}
     <main class="main">
-        <h2>Login</h2>
-        {% if messages %}
-            {% for mensaje in messages %}
-                <p>{{mensaje}}</p>
-            {% endfor %}
-        {% endif %}
+        <section class="container-login">
+            <h2 class="container-login__title">Iniciar sesion</h2>
+            {% if messages %}
+                {% for mensaje in messages %}
+                    {% if mensaje.tags == 'error' %}
+                        <p class="mensaje_error">
+                            <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
+                            {{mensaje}}
+                        </p>
+                    {% else %}
+                        <p class="mensaje_exito">
+                            <i class="fa-solid fa-circle-exclamation mensaje_exito__icon"></i>
+                            {{mensaje}}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
 
-        <form method="POST">
-            {% csrf_token %}
+            <form method="POST" class="container-form-login">
+                {% csrf_token %}
 
-            {{formulario.correo}}
-    
-            {{formulario.contrasena}}
+                {{formulario.correo}}
+        
+                {{formulario.contrasena}}
 
-            <div>
-                <a href="{% url 'Users:register' %}">Crear cuenta</a>
-                <a href="#">Recuperar contraseña</a>
-            </div>
-    
-            <button>Iniciar sesion</button>
-        </form>
+                <div class="container-links-login">
+                    <a href="{% url 'Users:register' %}" class="container-links-login__link">
+                        Crear cuenta
+                    </a>
+                    <a href="#" class="container-links-login__link">
+                        Recuperar contraseña
+                    </a>
+                </div>
+        
+                <button class="container-form-login__btn">Iniciar sesion</button>
+            </form>
+        </section>
     </main>
 {% endblock %}
