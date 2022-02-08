@@ -12,13 +12,26 @@
 
 {% block content %}
     <main class="main main-index">
+
         <section class="container-left-index">
             <h2 class="container-left-index__title">Articulos</h2>
+            {% if messages %}
+                {% for mensaje in messages %}
+                    <p class="mensaje_error">{{mensaje}}</p>
+                {% endfor %}
+            {% endif %}
+
             {% for articulo in articulos %}
                 {% include 'snippets/articulo.html' %}
+            {% empty %}
+                <p>Lo siento, por ahora no hay articulos :(</p>
             {% endfor %}
         </section>
 
-        {% include 'snippets/categorias.html' %}
+        <section class="container-categories">
+            {% include 'snippets/categorias.html' %}
+
+            {% include 'snippets/formulario_busqueda_articulos.html' %}
+        </section>
     </main>
 {% endblock %}

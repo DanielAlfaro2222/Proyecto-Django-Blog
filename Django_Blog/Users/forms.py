@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import authenticate
+from .models import User
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -29,8 +30,75 @@ class LoginForm(forms.Form):
             )
 
 class RegisterForm(forms.Form):
+    GENDER = [
+        ('', '--'),
+        ('MALE', 'Hombre'),
+        ('FEMALE', 'Mujer'),
+        ('OTHER', 'Prefiero no decirlo')
+    ]
+
+    nombre = forms.CharField(
+        required = True,
+        max_length = 45,
+        min_length = 4,
+        widget = forms.TextInput(attrs = {
+            'autofocus': 'true',
+            'tab-index': 1,
+        })
+    )
+
+    apellido = forms.CharField(
+        required = True,
+        max_length = 45,
+        min_length = 4,
+        widget = forms.TextInput(attrs = {
+            'tab-index': 2,
+        })
+    )
+
+    correo = forms.EmailField(
+        required = True,
+        max_length = 55,
+        widget = forms.EmailInput(attrs = {
+            'tab-index': 5,
+        })
+    )
+
+    genero = forms.TypedChoiceField(
+        required = True,
+        widget = forms.Select(attrs = {
+            'tab-index': 3,
+        }),
+        choices = GENDER
+    )
+    imagen = forms.ImageField(
+        required = False,
+        widget = forms.FileInput(attrs = {
+            'tab-index': 4,
+        })
+    )
+
+    contrasena = forms.CharField(
+        required = True,
+        widget = forms.PasswordInput(attrs = {
+            'tab-index': 6
+        })
+    )
+
     def save(self):
-        pass
+        email = self.cleaned_data.get('correo')
+        password = self.cleaned_data.get('contrasena')
+
+        usuario = User.objects.create_user(email, password)
+
+        usuario.first_name = self.cleaned_data.get('nombre')
+        usuario.last_name = self.cleaned_data.get('apellido')
+        usuario.gender = self.cleaned_data.get('genero')
+        usuario.save()
+
+        return usuario
+
+
 
 class ContactForm(forms.Form):
     nombre = forms.CharField(

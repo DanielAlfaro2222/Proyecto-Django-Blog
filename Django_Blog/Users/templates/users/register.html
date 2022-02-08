@@ -9,5 +9,43 @@
 {% block content %}
     <main class="main">
         <h2>Registro</h2>
+        <fieldset>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label>
+                    Nombre
+                    {{formulario.nombre}}
+                </label>
+
+                <label>
+                    Apellido
+                    {{formulario.apellido}}
+                </label>
+
+                <label>
+                    Genero
+                    {{formulario.genero}}
+                </label>
+
+                <label>
+                    Imagen de perfil
+                    {{formulario.imagen}}
+                </label>
+
+                <label>
+                    Correo
+                    {{formulario.correo}}
+                </label>
+
+                <label>
+                    Contraseña
+                    {{formulario.contrasena}}
+                </label>
+
+
+                <button>Registrarse</button>
+            </form>
+        </fieldset>
     </main>
 {% endblock %}

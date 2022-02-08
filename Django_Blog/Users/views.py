@@ -6,6 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from .forms import RegisterForm
 # from django.template.loader import get_template
 # from django.conf import settings
 # from django.core.mail import EmailMultiAlternatives
@@ -38,7 +39,17 @@ def logout_view(request):
     return redirect('Users:login')
 
 def register_view(request):
-    return render(request, 'users/register.html', context = {})
+    formulario = RegisterForm(request.POST or None)
+
+    if request.method == 'POST' and formulario.is_valid():
+        usuario = formulario.save()
+        imagen = request.FILES.get('imagen')
+        usuario.image = imagen
+        usuario.save()
+
+    return render(request, 'users/register.html', context = {
+        'formulario': formulario,
+    })
 
 # def create_email(subject, correo_destino, template, context):
 #     template = get_template(template)

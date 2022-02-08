@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
-from django.contrib.auth.models import User
+from Users.models import User
 import uuid
 
 class Category(models.Model):

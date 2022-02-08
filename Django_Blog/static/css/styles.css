@@ -163,6 +163,9 @@ body {
     border: none;
     font-size: .9rem;
 }
+.mensaje_error {
+    color: red;
+}
 
 /* ------------------------ESTILOS DEL FOOTER------------------------ */
 .main-footer {
