@@ -5,10 +5,16 @@ from .models import Category
 from .utils import busqueda_articulos_por_categoria
 from django.contrib import messages
 from .models import Comment
+from django.core.paginator import Paginator
 
 def category_view(request, slug):
     categoria = Category.objects.get(slug = slug)
     articulos = Article.objects.filter(category = categoria, state = True).order_by('-id_article')
+
+    # Paginacion por cada 5 articulos
+    paginacion = Paginator(articulos, 1)
+    num_pagina = request.GET.get('page')
+    articulos = paginacion.get_page(num_pagina)
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')
@@ -20,7 +26,8 @@ def category_view(request, slug):
 
     return render(request, 'blog/detalle-categoria.html', context = {
         'categoria': categoria,
-        'articulos': articulos
+        'articulos': articulos,
+        'paginacion': paginacion
     })
 
 

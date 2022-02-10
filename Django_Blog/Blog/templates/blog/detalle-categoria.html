@@ -26,6 +26,10 @@
             {% empty %}
                 <p>No hay articulos relacionados con esta categoria :(</p>
             {% endfor %}
+
+            {% if not request.GET.q %}
+                {% include 'snippets/paginacion_articulos.html' %}
+            {% endif %}
         </section>
     
         <section class="container-categories">

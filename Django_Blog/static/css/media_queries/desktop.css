@@ -70,6 +70,18 @@
         margin-left: auto;
         margin-right: auto;
     }
+    .container-paginator-articles {
+        height: 44px;
+    }
+    .container-list-paginator-articles {
+        font-size: 1rem;
+    }
+    .container-element-list-paginator {
+        width: 30px;
+    }
+    .container-element-list-paginator--width {
+        width: 90px;
+    }
 }
 
 @media screen and (min-width: 1200px) {

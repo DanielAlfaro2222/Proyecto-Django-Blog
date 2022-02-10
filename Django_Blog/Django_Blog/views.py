@@ -2,9 +2,15 @@ from django.shortcuts import render
 from Blog.models import Article
 from Blog.utils import busqueda_articulos
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 def index_view(request):
     articulos = Article.objects.all().order_by('-id_article')
+    
+    # Paginacion por cada 5 articulos
+    paginacion = Paginator(articulos, 1)
+    num_pagina = request.GET.get('page')
+    articulos = paginacion.get_page(num_pagina)
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')
@@ -14,4 +20,7 @@ def index_view(request):
         else:
             articulos = busqueda_articulos(request, request.GET.get('q'))
 
-    return render(request, 'index.html', context = {'articulos': articulos})
+    return render(request, 'index.html', context = {
+        'articulos': articulos,
+        'paginacion': paginacion,
+    })

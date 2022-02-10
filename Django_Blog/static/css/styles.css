@@ -190,6 +190,40 @@ body {
     margin-right: .4em;
     font-size: 1.8rem;
 }
+.container-paginator-articles {
+    height: 40px;
+    margin-top: 1.5em;
+}
+.container-list-paginator-articles {
+    display: flex;
+    height: 100%;
+    padding: 0;
+    list-style: none;
+    font-size: .9rem;
+}
+.container-element-list-paginator__link {
+    color: var(--bgcolor);
+    line-height: 40px;
+}
+.container-element-list-paginator {
+    width: 25px;
+    border: 1px solid rgb(204, 204, 204);
+    text-align: center;
+}
+.container-element-list-paginator--width {
+    width: 70px;
+    height: 100%;
+}
+.container-element-list-paginator--active, .container-element-list-paginator__link--active {
+    background-color: var(--bgcolor);
+    color: white;
+    border: none;
+}
+.container-element-list-paginator__link--deactivate {
+    color: gray;
+    pointer-events: none;
+    cursor: default;
+}
 
 /* ------------------------ESTILOS DEL FOOTER------------------------ */
 .main-footer {

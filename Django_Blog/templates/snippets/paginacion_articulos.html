@@ -1,0 +1,49 @@
+{% if articulos.has_other_pages %}
+    <article class="container-paginator-articles">
+            <ul class="container-list-paginator-articles">
+                {% if articulos.has_previous %}
+                    <li class="container-element-list-paginator container-element-list-paginator--width">
+                        <a href="?page={{articulos.previous_page_number}}" class="container-element-list-paginator__link">
+                            Anterior
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="container-element-list-paginator container-element-list-paginator--width">
+                        <a href="#" class="container-element-list-paginator__link container-element-list-paginator__link--deactivate">
+                            Anterior
+                        </a>
+                    </li>
+                {% endif %}
+                        
+                {% for i in paginacion.page_range %}
+                    {% if articulos.number == i %}
+                        <li class="container-element-list-paginator container-element-list-paginator--active">
+                            <a href="?page={{i}}" class="container-element-list-paginator__link container-element-list-paginator__link--active">
+                                {{i}}
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="container-element-list-paginator">
+                            <a href="?page={{i}}" class="container-element-list-paginator__link">
+                                {{i}}
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if articulos.has_next %}
+                    <li class="container-element-list-paginator container-element-list-paginator--width ">
+                        <a href="?page={{articulos.next_page_number}}" class="container-element-list-paginator__link">
+                            Siguiente
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="container-element-list-paginator container-element-list-paginator--width">
+                        <a href="#" class="container-element-list-paginator__link container-element-list-paginator__link--deactivate">
+                            Siguiente
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+    </article>
+{% endif %}
