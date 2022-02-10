@@ -50,6 +50,10 @@ def register_view(request):
         usuario.image = imagen
         usuario.save()
 
+        if usuario:
+            login(request, usuario)
+            return redirect('index')
+
     return render(request, 'users/register.html', context = {
         'formulario': formulario,
     })

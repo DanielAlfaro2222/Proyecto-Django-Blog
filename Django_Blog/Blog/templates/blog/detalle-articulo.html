@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block head %}
+    <link rel="stylesheet" href="{% static 'css/articulo.css' %}">
     <title>{{articulo.name}}</title>
 {% endblock %}
 
@@ -12,22 +13,70 @@
 
 {% block content %}
     <main class="main main-index">
-        <article>
-            <h2>Titulo: {{articulo.name}}</h2>
+        <article class="container-detail-article">
+            <h2 class="container-detail-article__title">
+                Titulo: {{articulo.name}}
+            </h2>
             <img src="{{articulo.image.url}}" width="300">
-            <p><strong>Autor: </strong>
+            <p>
+                <strong>Autor: </strong>
                 {{articulo.author.first_name}} {{articulo.author.last_name}}
             </p>
-            <p><strong>Fecha: </strong>{{articulo.modified}}</p>
-            <p><strong>Descripcion del articulo: </strong>{{articulo.resume}}</p>
-            <p><strong>Contenido: </strong>{{articulo.content}}</p>
+            <p>
+                <strong>Fecha: </strong>{{articulo.modified}}
+            </p>
+            <p>
+                <strong>Descripcion del articulo: </strong>{{articulo.resume}}
+            </p>
+            <p>
+                <strong>Contenido: </strong>{{articulo.content}}
+            </p>
 
             <section>
+                {% if messages %}
+                    {% for mensaje in messages %}
+                        {% if mensaje.tags == 'error' %}
+                            <p class="mensaje_error">
+                                <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
+                                {{mensaje}}
+                            </p>
+                        {% else %}
+                            <p class="mensaje_exito">
+                                <i class="fa-solid fa-circle-exclamation mensaje_exito__icon"></i>
+                                {{mensaje}}
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+                <form action="{% url 'Blog:agregar_comentario' articulo.slug %}" method="POST" class="container-add-comment">
+                    {% csrf_token %}
+                    <textarea name="comentario" id="" cols="30" rows="10" class="container-add-comment__textarea"></textarea>
+                    <button class="container-add-comment__btn">Agregar comentario</button>
+                </form>
+
                 <h2>Comentarios</h2>
+
                 {% for comentario in comentarios %}
-                    <ul>
-                        <li>{{comentario}}</li>
-                    </ul>
+                    <article class="container-commentary">
+                        <p class="container-author-commentary">
+                            <img src="{{comentario.author.image.url}}" alt="Foto de perfil usuario" class="container-author-commentary__img">
+                            {{ comentario.author.first_name.split | first }}
+                            {{ comentario.author.last_name.split | first }}
+                        </p>
+                        <p>{{comentario.content}}</p>
+                        <p class="container-commentary__paragraph">{{comentario.modified | date:"j F Y"}}</p>
+                        {% if comentario.author == request.user %}
+                            <p class="container-actions-commentary">
+                                <a href="#" class="container-actions-commentary__link">
+                                    Editar
+                                </a>
+                                <a href="#" class="container-actions-commentary__link container-actions-commentary__link--color">
+                                    Eliminar
+                                </a>
+                            </p>
+                        {% endif %}
+                    </article>
                 {% empty %}
                     <p>No hay comentarios :(</p>
                 {% endfor %}

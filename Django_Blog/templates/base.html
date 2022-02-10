@@ -29,7 +29,11 @@
                 {% if request.user.is_authenticated %}
                     <li class="container-element-nav">
                         <a href="#" class="container-nav-link">
-                            <i class="far fa-user-circle fa-2x container-nav-link__icon" aria-hidden="true"></i>
+                            {% if request.user.image %}
+                                <img src="{{request.user.image.url}}" alt="Foto de perfil del usuario" class="container-nav-link__img">
+                            {% else %}
+                                <i class="far fa-user-circle fa-2x container-nav-link__icon" aria-hidden="true"></i>
+                            {% endif %}
                             {{request.user.first_name.split | first}}
                             {{request.user.last_name.split | first}}
                         </a>

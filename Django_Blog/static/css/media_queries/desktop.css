@@ -77,10 +77,40 @@
         font-size: 1rem;
     }
     .container-element-list-paginator {
-        width: 30px;
+        width: 35px;
     }
     .container-element-list-paginator--width {
         width: 90px;
+    }
+    .container-commentary {
+        font-size: 1.1rem;
+        padding: 1.4em;
+        position: relative;
+    }
+    .container-actions-commentary {
+        position: absolute;
+        top: 0;
+        right: 5px;
+    }
+    .container-commentary__paragraph {
+        margin-bottom: 0;
+    }
+    .container-author-commentary__img {
+        width: 53px;
+        height: 53px;
+    }
+    .container-actions-commentary__link {
+        height: 37px;
+        line-height: 37px;
+        font-size: 1rem;
+    }
+    .container-add-comment__btn {
+        font-size: 1rem;
+        width: 175px;
+    }
+    .container-detail-article {
+        width: 75%;
+        padding-right: 2em;
     }
 }
 
