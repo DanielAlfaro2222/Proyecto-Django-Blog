@@ -42,7 +42,7 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['articulo'] = context['object']
-        context['comentarios'] = Comment.objects.filter(article = context['articulo']).order_by('-modified')
+        context['comentarios'] = Comment.objects.filter(article = context['articulo'], state = True).order_by('-modified')
 
         return context
 
@@ -56,4 +56,26 @@ def add_comment(request, slug):
         )
         messages.success(request, 'Comentario agregado con exito!')
 
-    return redirect(reverse('Blog:articulo', kwargs={'slug': slug}))
+    return redirect(reverse('Blog:articulo', kwargs = {'slug': slug}))
+
+@login_required
+def delete_comment(request, slug):
+    if request.method == 'POST':
+        comentario = Comment.objects.get(id_comment = request.POST.get('id'))
+        comentario.state = False
+        comentario.save()
+
+        messages.success(request, 'Comentario eliminado con exito!')
+
+    return redirect(reverse('Blog:articulo', kwargs = {'slug': slug}))
+
+@login_required
+def edit_comment(request, slug):
+    if request.method == 'POST':
+        comentario = Comment.objects.get(id_comment = request.POST.get('id'))
+        comentario.content = request.POST.get('comentario')
+        comentario.save()
+
+        messages.success(request, 'Comentario editado con exito!')
+
+    return redirect(reverse('Blog:articulo', kwargs = {'slug': slug}))

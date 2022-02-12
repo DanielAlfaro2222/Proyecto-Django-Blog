@@ -32,8 +32,9 @@
                             {% if request.user.image %}
                                 <img src="{{request.user.image.url}}" alt="Foto de perfil del usuario" class="container-nav-link__img">
                             {% else %}
-                                <i class="far fa-user-circle fa-2x container-nav-link__icon" aria-hidden="true"></i>
+                                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp" alt="Foto de perfil del usuario" class="container-nav-link__img">
                             {% endif %}
+                            
                             {{request.user.first_name.split | first}}
                             {{request.user.last_name.split | first}}
                         </a>

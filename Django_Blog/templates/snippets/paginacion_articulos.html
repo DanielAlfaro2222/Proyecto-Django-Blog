@@ -21,17 +21,33 @@
                         
                 {% for i in paginacion.page_range %}
                     {% if articulos.number == i %}
-                        <li class="container-element-list-paginator container-element-list-paginator--active">
-                            <a href="?page={{i}}" class="container-element-list-paginator__link container-element-list-paginator__link--active">
-                                {{i}}
-                            </a>
-                        </li>
+                        {% if request.GET.q %}
+                            <li class="container-element-list-paginator container-element-list-paginator--active">
+                                <a href="?q={{request.GET.q}}&page={{i}}" class="container-element-list-paginator__link container-element-list-paginator__link--active">
+                                    {{i}}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="container-element-list-paginator container-element-list-paginator--active">
+                                <a href="?page={{i}}" class="container-element-list-paginator__link container-element-list-paginator__link--active">
+                                    {{i}}
+                                </a>
+                            </li>
+                        {% endif %}
                     {% else %}
-                        <li class="container-element-list-paginator">
-                            <a href="?page={{i}}" class="container-element-list-paginator__link">
-                                {{i}}
-                            </a>
-                        </li>
+                        {% if request.GET.q %}
+                            <li class="container-element-list-paginator">
+                                <a href="?q={{request.GET.q}}&page={{i}}" class="container-element-list-paginator__link">
+                                    {{i}}
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="container-element-list-paginator">
+                                <a href="?page={{i}}" class="container-element-list-paginator__link">
+                                    {{i}}
+                                </a>
+                            </li>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
 

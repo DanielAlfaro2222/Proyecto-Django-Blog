@@ -112,6 +112,12 @@
         width: 75%;
         padding-right: 2em;
     }
+    .container-section-register__title {
+        margin-top: 0;
+    }
+    .errorlist {
+        font-size: .9rem;
+    }
 }
 
 @media screen and (min-width: 1200px) {

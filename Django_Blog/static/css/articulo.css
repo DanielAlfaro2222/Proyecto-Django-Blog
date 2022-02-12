@@ -22,6 +22,7 @@
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     margin-right: .8em;
+    background-color: white;
 }
 .container-add-comment {
     margin-bottom: 1.5em;

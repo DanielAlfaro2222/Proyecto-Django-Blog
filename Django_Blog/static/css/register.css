@@ -42,3 +42,12 @@
     margin-top: 1em;
     margin-bottom: 1em;
 }
+
+.errorlist {
+    padding: 0;
+    color: red;
+    font-size: .8rem;
+    list-style: none;
+    margin-top: .5em;
+    padding-left: .2em;
+}

@@ -80,6 +80,7 @@ class Comment(models.Model):
     content = models.TextField('Contenido')
     create = models.DateTimeField('Fecha de creacion', auto_now_add = True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now =True)
+    state = models.BooleanField('Estado', default = True)
 
     def __str__(self):
         return f'{self.id_comment}-{self.article}'

@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 
 def index_view(request):
-    articulos = Article.objects.all().order_by('-id_article')
+    articulos = Article.objects.filter(state = True).order_by('-id_article')
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')

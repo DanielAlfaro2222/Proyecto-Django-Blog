@@ -87,11 +87,40 @@ class RegisterForm(forms.Form):
 
     contrasena = forms.CharField(
         required = True,
+        min_length = 8,
         widget = forms.PasswordInput(attrs = {
             'tab-index': 6,
             'class': 'container-label-register__input'
         })
     )
+
+    def clean_correo(self):
+        correo = self.cleaned_data.get('correo')
+
+        if User.objects.filter(email = correo).exists():
+            raise forms.ValidationError('El correo ya esta registrado en el sistema.')
+
+        return correo
+
+    def clean_contrasena(self):
+        contrasena = self.cleaned_data.get('contrasena')
+
+        mayusculas = 0
+        numeros = 0
+        simbolos = 0
+
+        for caracter in contrasena:
+            if caracter in "!#$%&'()*+,-./:;=?{|}~[\]^_`@·½¬><":
+                simbolos += 1
+            elif caracter in '0123456789':
+                numeros += 1
+            elif caracter == caracter.upper():
+                mayusculas += 1
+
+        if mayusculas < 1 or numeros < 1 or simbolos < 1:
+            raise forms.ValidationError('La contraseña debe tener minimo 8 caracteres y debe contener 1 mayuscula, 1 simbolo y 1 numero.')
+
+
 
     def save(self):
         email = self.cleaned_data.get('correo')

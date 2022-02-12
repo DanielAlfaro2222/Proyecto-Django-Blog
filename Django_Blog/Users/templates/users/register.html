@@ -37,11 +37,17 @@
                 <label class="container-label-register">
                     Correo
                     {{formulario.correo}}
+                    {% if formulario.correo.errors %}
+                        {{formulario.correo.errors}}
+                    {% endif %}
                 </label>
     
                 <label class="container-label-register">
                     Contraseña
                     {{formulario.contrasena}}
+                    {% if formulario.contrasena.errors %}
+                        {{formulario.contrasena.errors}}
+                    {% endif %}
                 </label>
     
     

@@ -19,5 +19,9 @@ class ArticleAdmin(admin.ModelAdmin):
         'create', 
         'modified'
     ]
+    list_per_page = 15
 
-admin.site.register(Comment)
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['id_comment', 'state', 'author', 'article', 'create', 'modified']
+    list_per_page = 15

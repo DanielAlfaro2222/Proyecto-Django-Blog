@@ -14,6 +14,22 @@
 {% block content %}
     <main class="main main-index">
         <article class="container-detail-article">
+            {% if messages %}
+                {% for mensaje in messages %}
+                    {% if mensaje.tags == 'error' %}
+                        <p class="mensaje_error">
+                            <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
+                            {{mensaje}}
+                        </p>
+                    {% else %}
+                        <p class="mensaje_exito">
+                            <i class="fa-solid fa-circle-exclamation mensaje_exito__icon"></i>
+                            {{mensaje}}
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
             <h2 class="container-detail-article__title">
                 Titulo: {{articulo.name}}
             </h2>
@@ -33,22 +49,6 @@
             </p>
 
             <section>
-                {% if messages %}
-                    {% for mensaje in messages %}
-                        {% if mensaje.tags == 'error' %}
-                            <p class="mensaje_error">
-                                <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
-                                {{mensaje}}
-                            </p>
-                        {% else %}
-                            <p class="mensaje_exito">
-                                <i class="fa-solid fa-circle-exclamation mensaje_exito__icon"></i>
-                                {{mensaje}}
-                            </p>
-                        {% endif %}
-                    {% endfor %}
-                {% endif %}
-
                 <form action="{% url 'Blog:agregar_comentario' articulo.slug %}" method="POST" class="container-add-comment">
                     {% csrf_token %}
                     <textarea name="comentario" id="" cols="30" rows="10" class="container-add-comment__textarea"></textarea>
@@ -60,21 +60,46 @@
                 {% for comentario in comentarios %}
                     <article class="container-commentary">
                         <p class="container-author-commentary">
-                            <img src="{{comentario.author.image.url}}" alt="Foto de perfil usuario" class="container-author-commentary__img">
+                            {% if comentario.author.image %} 
+                                <img src="{{comentario.author.image.url}}" alt="Foto de perfil usuario" class="container-author-commentary__img" loading="lazy">
+                            {% else %}
+                                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp" alt="Foto de perfil usuario" class="container-author-commentary__img" loading="lazy">
+                            {% endif %}
+                            
                             {{ comentario.author.first_name.split | first }}
                             {{ comentario.author.last_name.split | first }}
                         </p>
-                        <p>{{comentario.content}}</p>
-                        <p class="container-commentary__paragraph">{{comentario.modified | date:"j F Y"}}</p>
+
                         {% if comentario.author == request.user %}
-                            <p class="container-actions-commentary">
-                                <a href="#" class="container-actions-commentary__link">
-                                    Editar
-                                </a>
-                                <a href="#" class="container-actions-commentary__link container-actions-commentary__link--color">
-                                    Eliminar
-                                </a>
-                            </p>
+                            {% if request.GET.editar %}
+                                <form action="{% url 'Blog:editar_comentario' articulo.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
+                                    <textarea name="comentario" id="" cols="30" rows="10">
+                                        {{comentario.content}}
+                                    </textarea>
+                                    <button class="container-actions-commentary__link">Editar</button>
+                                </form>
+
+                            {% else %}
+                                <p>{{comentario.content}}</p>
+
+                                <p class="container-actions-commentary">
+                                    <a href="?editar=true" class="container-actions-commentary__link">
+                                        Editar
+                                    </a>
+                            
+                                    <form action="{% url 'Blog:eliminar_comentario' articulo.slug %}" method="POST">
+                                        {% csrf_token %}
+                                        <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
+                                        <button class="container-actions-commentary__link container-actions-commentary__link--color">Eliminar</button>
+                                    </form>
+                                </p>
+
+                                <p class="container-commentary__paragraph">
+                                    {{comentario.modified | date:"j F Y"}}
+                                </p>
+                            {% endif %}
                         {% endif %}
                     </article>
                 {% empty %}

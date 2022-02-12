@@ -233,6 +233,7 @@ body {
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
     margin-right: .6em;
+    background-color: white;
 }
 
 /* ------------------------ESTILOS DEL FOOTER------------------------ */
