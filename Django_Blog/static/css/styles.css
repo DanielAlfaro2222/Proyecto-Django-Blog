@@ -99,6 +99,11 @@ body {
 .container-article-author, .container-article__paragraph {
     font-size: 1rem;
 }
+
+.container-article-author a {
+    color: inherit;
+}
+
 .container-article-author__span {
     font-weight: 700;
 }
@@ -154,7 +159,7 @@ body {
     width: 100px;
     height: 40px;
     color: white;
-    background-color: lime;
+    background-color: var(--bgcolor);
     border-radius: 1em;
     -webkit-border-radius: 1em;
     -moz-border-radius: 1em;
@@ -251,6 +256,11 @@ body {
     line-height: 57px;
     margin: 0;
 }
+
+.main-footer__paragraph a {
+    color: inherit;
+}
+
 .container-footer-link {
     display: flex;
     justify-content: center;

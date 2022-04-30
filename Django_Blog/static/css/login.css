@@ -19,7 +19,7 @@
     margin-top: 1.2em;
     border: none;
     outline: none;
-    background-color: rgb(231, 224, 224);
+    background-color: rgba(231, 224, 224, 0.454);
     padding-left: .8em;
 }
 .container-links-login {

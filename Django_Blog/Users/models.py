@@ -3,6 +3,9 @@ from django.contrib.auth.models import AbstractBaseUser
 from django.contrib.auth.models import BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.core import validators
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
+import uuid
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
@@ -58,10 +61,9 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length = 19
     )
     linkedin = models.URLField('Linkedin', null = True, blank = True)
-
-
     is_staff = models.BooleanField('Administrador', default = False)
     is_active = models.BooleanField('Activo', default = True)
+    slug = models.SlugField('Url', null = True, blank = True)
 
     # Especificar que campo sera el username
     USERNAME_FIELD = 'email'
@@ -74,7 +76,36 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_full_name(self):
         return f'{self.first_name} {self.last_name}'
 
+    def get_short_name(self):
+        return f'{self.first_name.split()[0]} {self.last_name.split()[0]}'
+
+    def get_quantity_articles(self):
+        return self.article_set.filter(state = True).count()
+
+    def has_biography(self):
+        return True if self.biography else False
+
+    def has_linkedin(self):
+        return True if self.linkedin else False
+
+    def has_image(self):
+        return True if self.image else False
+
     class Meta:
         verbose_name = 'Usuario'
         verbose_name_plural = 'Usuarios'
 
+def set_slug_user(sender, instance, *args, **kwargs):
+    if instance.first_name and not instance.slug:
+        slug = slugify(
+            f'{instance.first_name.split()[0]} {instance.last_name.split()[0]}'
+        )
+
+        while User.objects.filter(slug = slug).exists():
+            slug = slugify(
+                f'{instance.first_name[0]}-{instance.last_name.split()[0]}-{str(uuid.uuid4())[:5]}'
+            )
+
+        instance.slug = slug
+
+pre_save.connect(set_slug_user, sender = User)

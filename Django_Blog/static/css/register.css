@@ -16,7 +16,7 @@
     -ms-border-radius: 1em;
     -o-border-radius: 1em;
     padding-left: .8em;
-    background-color: rgb(231, 224, 224);
+    background-color: rgba(231, 224, 224, 0.454);
 }
 
 .container-form-register__btn {

@@ -4,10 +4,12 @@
             {{articulo.name}}
         </a>
     </h3>
-    <img src="{{articulo.image.url}}" class="container-article__img" loading="lazy">
+    <img src="{{articulo.image.url}}" class="container-article__img" loading="lazy" decoding="async">
     <p class="container-article-author">
         <span class="container-article-author__span">Autor: </span>
-        {{articulo.author.first_name}} {{articulo.author.last_name}}
+        <a href="{% url 'Users:author' articulo.author.slug %}">
+            {{articulo.author.get_short_name}}
+        </a>
     </p>
     <p class="container-article__paragraph">{{articulo.content}}</p>
     <a href="{% url 'Blog:articulo' articulo.slug %}" class="container-article__link">Leer mas</a>

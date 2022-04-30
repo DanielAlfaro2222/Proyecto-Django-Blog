@@ -29,19 +29,39 @@
                 {% if request.user.is_authenticated %}
                     <li class="container-element-nav">
                         <a href="#" class="container-nav-link">
-                            {% if request.user.image %}
-                                <img src="{{request.user.image.url}}" alt="Foto de perfil del usuario" class="container-nav-link__img">
+                            {% if request.user.has_image %}
+                                <img src="{{request.user.image.url}}" alt="Foto {{request.user.get_short_name}}" class="container-nav-link__img" loading="lazy" decoding="async">
                             {% else %}
-                                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp" alt="Foto de perfil del usuario" class="container-nav-link__img">
+                                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp" alt="Foto {{request.user.get_short_name}" class="container-nav-link__img" loading="lazy" decoding="async">
                             {% endif %}
                             
-                            {{request.user.first_name.split | first}}
-                            {{request.user.last_name.split | first}}
+                            {{request.user.get_short_name}}
+                            <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
+
+                            <ul>
+                                <li>
+                                    <a href="#">
+                                        Mi cuenta
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Panel de administracion
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'Users:logout' %}">
+                                        Cerrar sesion
+                                    </a>
+                                </li>
+                            </ul>
                         </a>
                     </li>
                     {% else %}
                     <li class="container-element-nav">
-                        <a href="{% url 'Users:login' %}" class="container-nav-link">Iniciar sesion</a>
+                        <a href="{% url 'Users:login' %}" class="container-nav-link">
+                            Iniciar sesion
+                        </a>
                     </li>
                 {% endif %}
             </ul>
@@ -53,7 +73,10 @@
     {% block content %} {% endblock %}
 
     <footer class="main-footer">
-        <p class="main-footer__paragraph">&copy; Diseñado por Daniel Alfaro {% now "Y" %}</p>
+        <p class="main-footer__paragraph">
+            &copy; Diseñado por 
+            <a href="https://github.com/DanielAlfaro2222">Daniel Alfaro</a> {% now "Y" %}
+        </p>
         <a href="#header" class="container-footer-link">
             <i class="fas fa-chevron-up container-footer-link__icon" aria-hidden="true"></i>
         </a>

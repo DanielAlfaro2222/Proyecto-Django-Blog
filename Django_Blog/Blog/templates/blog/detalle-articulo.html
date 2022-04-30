@@ -18,12 +18,12 @@
                 {% for mensaje in messages %}
                     {% if mensaje.tags == 'error' %}
                         <p class="mensaje_error">
-                            <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
+                            <i class="fas fa-exclamation-circle mensaje_error__icon" aria-hidden="true"></i>
                             {{mensaje}}
                         </p>
                     {% else %}
                         <p class="mensaje_exito">
-                            <i class="fa-solid fa-circle-exclamation mensaje_exito__icon"></i>
+                            <i class="fa-solid fa-circle-exclamation mensaje_exito__icon" aria-hidden="true"></i>
                             {{mensaje}}
                         </p>
                     {% endif %}
@@ -33,10 +33,12 @@
             <h2 class="container-detail-article__title">
                 Titulo: {{articulo.name}}
             </h2>
-            <img src="{{articulo.image.url}}" width="300">
+            <img src="{{articulo.image.url}}" width="300" loading="lazy" decoding="async">
             <p>
                 <strong>Autor: </strong>
-                {{articulo.author.first_name}} {{articulo.author.last_name}}
+                <a href="{% url 'Users:author' articulo.author.slug %}">
+                    {{articulo.author.get_short_name}}
+                </a>
             </p>
             <p>
                 <strong>Fecha: </strong>{{articulo.modified}}

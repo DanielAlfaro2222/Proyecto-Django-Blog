@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Biografia | {{user.get_short_name}}</title>
+{% endblock %}
+
+{% block content %}
+    <main>
+        <section>
+            <h2>Articulos</h2>
+
+            {% for articulo in articulos %}
+                {% include 'snippets/articulo.html' %}
+            {% empty %}
+                <p>
+                    Lo siento, por ahora no hay articulos relacionados con este autor :(
+                </p>
+            {% endfor %}
+        </section>
+
+        <section>
+            <article>
+                <h2>Informacion del autor</h2>
+                <img src="{{autor.image.url}}" alt="Foto {{autor.get_short_name}}" loading="lazy" decoding="async">
+                <p>
+                    {{autor.get_full_name}}
+                </p>
+                <p>
+                    Cantidad articulos escritos: {{autor.get_quantity_articles}}
+                </p>
+
+                {% if autor.has_biography %}
+                    <article>
+                        <h2>Biografia</h2>
+                        <p>
+                            {{autor.biography}}
+                        </p>
+                    </article>
+                {% endif %}
+                
+                {% if autor.has_linkedin %}
+                    <a href="{{autor.linkedin}}">
+                        <img src="https://icongr.am/devicon/linkedin-original.svg?size=128&color=currentColor" alt="Logo linkedin" loading="lazy" decoding="async">
+                    </a>
+                {% endif %}
+
+                <p>
+                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                    <a href="mailto:{{autor.email}}">{{autor.email}}</a>
+                </p>
+            </article>
+
+
+        </section>
+    </main>
+{% endblock %}

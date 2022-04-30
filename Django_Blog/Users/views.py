@@ -6,7 +6,10 @@ from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
 from .forms import RegisterForm
+from .models import User
+from Blog.models import Article
 # from django.template.loader import get_template
 # from django.conf import settings
 # from django.core.mail import EmailMultiAlternatives
@@ -102,3 +105,14 @@ def contact_view(request):
 # def send_mail(request):
 #     send_mail_prueba()
 #     return redirect('Users:contact')
+
+class AuthorDetailView(DetailView):
+    template_name = 'users/biografia-autor.html'
+    model = User
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['autor'] = context['object']
+        context['articulos'] = Article.objects.filter(author = context['autor'], state = True).order_by('-create')
+
+        return context

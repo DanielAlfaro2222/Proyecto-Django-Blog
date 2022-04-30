@@ -23,7 +23,7 @@ def category_view(request, slug):
             articulos = busqueda_articulos_por_categoria(request, parametro_busqueda, categoria)
 
     # Paginacion por cada 5 articulos
-    paginacion = Paginator(articulos, 1)
+    paginacion = Paginator(articulos, 8)
     num_pagina = request.GET.get('page')
     articulos = paginacion.get_page(num_pagina)
 
