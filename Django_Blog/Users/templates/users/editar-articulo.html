@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Nueva publicacion</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Editar publicacion</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>
+                Nombre del articulo
+                {{form.name}}
+            </label>
+
+            <label>
+                Imagen del articulo
+                {{form.image}}
+            </label>
+
+            <label>
+                Categoria del articulo
+                {{form.category}}
+            </label>
+
+            <label>
+                Descripcion del articulo
+                {{form.resume}}
+            </label>
+
+            <label>
+                Contenido del articulo
+                {{form.content}}
+            </label>
+
+            <label>
+                Estado
+                {{form.state}}
+            </label>
+
+            {{form.author}}
+
+            <button>Editar articulo</button>
+        </form>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
+{% endblock %}

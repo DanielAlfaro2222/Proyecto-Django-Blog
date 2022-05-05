@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .forms import LoginForm
 from .forms import ContactForm
 from django.contrib import messages
-from django.contrib.auth import login 
+from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
@@ -10,38 +10,71 @@ from django.views.generic import DetailView
 from .forms import RegisterForm
 from .models import User
 from Blog.models import Article
-# from django.template.loader import get_template
-# from django.conf import settings
-# from django.core.mail import EmailMultiAlternatives
-# from django.shortcuts import redirect
+from django.core.paginator import Paginator
+from django.shortcuts import HttpResponseRedirect
+from django.views.generic import TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView
+from django.views.generic import CreateView
+from django.views.generic import UpdateView
+from .forms import CreateArticleModelForm
+from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404
+
 
 def login_view(request):
+    """
+    Vista encargada del login.
+    """
+
     if request.user.is_authenticated:
         return redirect('index')
+
+    if request.GET.get('next'):
+        messages.error(request, 'Error debe iniciar sesion primero')
 
     formulario = LoginForm(request.POST or None)
 
     if request.method == 'POST' and formulario.is_valid():
         usuario = formulario.autenticar_usuario()
 
-        if usuario:
+        if User.objects.filter(email=request.POST.get('correo')).first() is None:
+            messages.error(
+                request, 'El usuario no esta registrado en el sistema')
+        elif usuario:
             login(request, usuario)
-            return redirect('index')
+
+            if request.GET.get('next'):
+                return HttpResponseRedirect(request.GET.get('next'))
+            elif usuario.is_staff:
+                return redirect('/admin/')
+            else:
+                return redirect('index')
         else:
             messages.error(request, 'Correo o contraseña incorrectos')
 
-    return render(request, 'users/login.html', context = {
+    return render(request, 'users/login.html', context={
         'formulario': formulario,
     })
 
 
 @login_required
 def logout_view(request):
+    """
+    Vista encargada del cierre de sesion.
+    """
+
     logout(request)
     messages.success(request, 'Sesion cerrada exitosamente')
     return redirect('Users:login')
 
+
 def register_view(request):
+    """
+    Vista encargada del registro de los usuarios.
+    """
+
     if request.user.is_authenticated:
         return redirect('index')
 
@@ -57,40 +90,17 @@ def register_view(request):
             login(request, usuario)
             return redirect('index')
 
-    return render(request, 'users/register.html', context = {
+    return render(request, 'users/register.html', context={
         'formulario': formulario,
     })
 
-# def create_email(subject, correo_destino, template, context):
-#     template = get_template(template)
-#     content = template.render(context)
-
-#     mail = EmailMultiAlternatives(
-#         subject = subject,
-#         body = '',
-#         from_email = settings.EMAIL_HOST_USER,
-#         to = [correo_destino],
-#         cc = [] # enviar una copia del email a otro correo
-#     )
-
-#     mail.attach_alternative(content, 'text/html')
-
-#     return mail
-
-# def send_mail_prueba():
-#     mail = create_email(
-#         'Correo de prueba con estilos',
-#         'kdalfaro45@misena.edu.co',
-#         'mails/correo.html',
-#         { 
-#             'mensaje': 'Este es un correo de prueba.'
-#         }
-#     )
-
-#     mail.send(fail_silently = False)
 
 def contact_view(request):
-    # formulario = ContactForm(request.POST or None)
+    """
+    Vista encargada del formulario de contacto.
+    """
+
+    formulario = ContactForm(request.POST or None)
 
     # if request.method == 'POST' and formulario.is_valid():
     #     if formulario.enviar_correo():
@@ -98,21 +108,113 @@ def contact_view(request):
     #     else:
     #         messages.error(request, 'El correo no se pudo enviar')
 
-
-    return render(request, 'users/contact.html', context = {
+    return render(request, 'users/contact.html', context={
+        'formulario': formulario,
     })
 
-# def send_mail(request):
-#     send_mail_prueba()
-#     return redirect('Users:contact')
 
 class AuthorDetailView(DetailView):
+    """
+    Vista encargada de mostrar el perfil de un usuario.
+    """
+
     template_name = 'users/biografia-autor.html'
     model = User
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['autor'] = context['object']
-        context['articulos'] = Article.objects.filter(author = context['autor'], state = True).order_by('-create')
+        context['registros'] = Article.objects.filter(
+            author=context['autor'], state=True).order_by('-create')
+        context['paginacion'] = Paginator(context['registros'], 5)
+        context['num_pagina'] = self.request.GET.get('page')
+        context['articulos'] = context['paginacion'].get_page(
+            context['num_pagina'])
 
         return context
+
+
+class AccountTemplateView(LoginRequiredMixin, TemplateView):
+    """
+    Vista encargada del template de mi cuenta de los usuarios.
+    """
+
+    template_name = 'users/mi-cuenta.html'
+
+
+def update_data_user(request):
+    formulario = RegisterForm({
+        'nombre': request.user.first_name,
+        'apellido': request.user.last_name,
+        'correo': request.user.email,
+        'genero': request.user.gender,
+        'imagen': request.user.image.url,
+        'ciudad': request.user.city,
+        'contrasena': request.user.password,
+        'linkedin': request.user.linkedin,
+        'twitter': request.user.twitter,
+        'biografia': request.user.biography,
+    })
+
+    return render(request, 'users/actualizar-datos.html', context={
+        'formulario': formulario,
+    })
+
+
+class PublicationsListView(ListView):
+    """
+    Vista encargada de listar las publicaciones de un autor.
+    """
+
+    template_name = 'users/mis-publicaciones.html'
+    model = Article
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['registros'] = Article.objects.filter(
+            author=self.request.user).order_by('-create')
+        context['paginacion'] = Paginator(context['registros'], 10)
+        context['num_pagina'] = self.request.GET.get('page')
+        context['articulos'] = context['paginacion'].get_page(
+            context['num_pagina'])
+
+        return context
+
+
+class CreateArticleView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    template_name = 'users/nuevo-articulo.html'
+    form_class = CreateArticleModelForm
+    success_url = reverse_lazy('Users:articles-user')
+    success_message = 'Articulo publicado exitosamente'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial={'author': self.request.user})
+        return render(request, self.template_name, {'form': form})
+
+
+class UpdateArticleView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'users/editar-articulo.html'
+    form_class = CreateArticleModelForm
+    success_url = reverse_lazy('Users:articles-user')
+    success_message = 'Articulo editado exitosamente'
+    slug_field = 'slug'
+
+    def get_queryset(self):
+        return Article.objects.filter(slug=self.kwargs.get('slug'))
+
+    def get(self, request, *args, **kwargs):
+        articulo = self.get_queryset().first()
+        form = self.form_class(initial={
+            'state': articulo.state,
+            'author': self.request.user,
+            'image': articulo.image,
+            'category': articulo.category,
+            'resume': articulo.resume,
+            'content': articulo.content,
+            'name': articulo.name
+        })
+        return render(request, self.template_name, {
+            'form': form,
+            'articulo': articulo
+        })

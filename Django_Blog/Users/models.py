@@ -7,6 +7,23 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 import uuid
 
+class City(models.Model):
+    id_city = models.AutoField("Id Ciudad", primary_key = True)
+    description = models.CharField("Descripcion", null = True, blank = True, max_length=45)
+    zip_code = models.CharField("Codigo postal", max_length = 6)
+    create = models.DateTimeField('Fecha de creacion', auto_now_add = True)
+    modified = models.DateTimeField('Fecha de modificacion', auto_now = True)
+    state = models.BooleanField('Estado', default = True)
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = "Ciudad"
+        verbose_name_plural = "Ciudades"
+        db_table = "city"
+        ordering = ['id_city']
+
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
@@ -51,7 +68,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         validators = [validators.EmailValidator()]
     )
     image = models.ImageField('Imagen de perfil', upload_to = 'users/profile_image', null = True, blank = True)
-    biography = models.TextField('Biografia', null = True, blank = True)
+    biography = models.CharField('Biografia', null = True, blank = True, max_length = 120)
     gender = models.CharField(
         'Genero', 
         choices = GENDER,
@@ -61,9 +78,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length = 19
     )
     linkedin = models.URLField('Linkedin', null = True, blank = True)
+    twitter = models.URLField('Twitter', null = True, blank = True)
     is_staff = models.BooleanField('Administrador', default = False)
     is_active = models.BooleanField('Activo', default = True)
     slug = models.SlugField('Url', null = True, blank = True)
+    city = models.ForeignKey(City, verbose_name="Ciudad", on_delete=models.CASCADE, null = True, blank = True)
 
     # Especificar que campo sera el username
     USERNAME_FIELD = 'email'
@@ -90,6 +109,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_image(self):
         return True if self.image else False
+
+    def has_twitter(self):
+        return True if self.twitter else False
 
     class Meta:
         verbose_name = 'Usuario'

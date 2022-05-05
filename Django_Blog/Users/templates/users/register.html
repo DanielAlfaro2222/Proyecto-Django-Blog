@@ -3,56 +3,77 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/register.css' %}">
-    <title>Registro</title>
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+<title>Registro</title>
 {% endblock %}
 
 {% block content %}
-    <main class="main">
-        <section class="container-section-register">
-            <h2 class="container-section-register__title">Registro</h2>
-            <form method="POST" enctype="multipart/form-data" class="container-form-register">
-                {% csrf_token %}
-    
-                <label class="container-label-register">
-                    Nombre
-                    {{formulario.nombre}}
-                </label>
-    
-                <label class="container-label-register">
-                    Apellido
-                    {{formulario.apellido}}
-                </label>
-    
-                <label class="container-label-register">
-                    Genero
-                    {{formulario.genero}}
-                </label>
-    
-                <label class="container-label-register">
-                    Imagen de perfil
-                    {{formulario.imagen}}
-                </label>
-    
-                <label class="container-label-register">
-                    Correo
-                    {{formulario.correo}}
-                    {% if formulario.correo.errors %}
-                        {{formulario.correo.errors}}
-                    {% endif %}
-                </label>
-    
-                <label class="container-label-register">
-                    Contraseña
-                    {{formulario.contrasena}}
-                    {% if formulario.contrasena.errors %}
-                        {{formulario.contrasena.errors}}
-                    {% endif %}
-                </label>
-    
-    
-                <button class="container-form-register__btn">Registrarse</button>
-            </form>
-        </section>
-    </main>
+<main class="main">
+    <section class="container-section-register">
+        <h2 class="container-section-register__title">Registro</h2>
+        <form method="POST" enctype="multipart/form-data" class="container-form-register">
+            {% csrf_token %}
+
+            <label class="container-label-register">
+                Nombre <span class="container-label-register__span">*</span>
+                {{formulario.nombre}}
+            </label>
+
+            <label class="container-label-register">
+                Apellido <span class="container-label-register__span">*</span>
+                {{formulario.apellido}}
+            </label>
+
+            <label class="container-label-register">
+                Genero <span class="container-label-register__span">*</span>
+                {{formulario.genero}}
+            </label>
+
+            <label class="container-label-register">
+                Imagen de perfil
+                {{formulario.imagen}}
+            </label>
+
+            <label class="container-label-register">
+                Ciudad <span class="container-label-register__span">*</span>
+                {{formulario.ciudad}}
+            </label>
+
+            <label class="container-label-register">
+                Biografia <span class="container-label-register__span">*</span>
+                {{formulario.biografia}}
+            </label>
+
+            <label class="container-label-register">
+                Linkedin
+                {{formulario.linkedin}}
+            </label>
+
+            <label class="container-label-register">
+                Twitter
+                {{formulario.twitter}}
+            </label>
+
+            <label class="container-label-register">
+                Correo <span class="container-label-register__span">*</span>
+                {{formulario.correo}}
+                {% if formulario.correo.errors %}
+                {{formulario.correo.errors}}
+                {% endif %}
+            </label>
+
+            <label class="container-label-register">
+                Contraseña <span class="container-label-register__span">*</span>
+                {{formulario.contrasena}}
+                {% if formulario.contrasena.errors %}
+                {{formulario.contrasena.errors}}
+                {% endif %}
+            </label>
+
+            <button class="container-form-register__btn">Registrarse</button>
+        </form>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
 {% endblock %}

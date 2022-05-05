@@ -1,0 +1,15 @@
+{% if messages %}
+    {% for mensaje in messages %}
+        {% if mensaje.tags == 'error' %}
+            <p class="mensaje_error">
+                <i class="fas fa-exclamation-circle mensaje_error__icon" aria-hidden="true"></i>
+                {{mensaje}}
+            </p>
+        {% else %}
+            <p class="mensaje_exito">
+                <i class="fa-solid fa-circle-exclamation mensaje_exito__icon" aria-hidden="true"></i>
+                {{mensaje}}
+            </p>
+        {% endif %}
+    {% endfor %}
+{% endif %}

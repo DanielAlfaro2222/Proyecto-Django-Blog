@@ -3,115 +3,115 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/articulo.css' %}">
-    <title>{{articulo.name}}</title>
+<link rel="stylesheet" href="{% static 'css/articulo.css' %}">
+<title>{{articulo.name}}</title>
 {% endblock %}
 
 {% block imagen_header %}
-    {% include 'snippets/imagen_header.html' with titulo=articulo.category %}
+{% include 'snippets/imagen_header.html' with titulo=articulo.category %}
 {% endblock %}
 
 {% block content %}
-    <main class="main main-index">
-        <article class="container-detail-article">
-            {% if messages %}
-                {% for mensaje in messages %}
-                    {% if mensaje.tags == 'error' %}
-                        <p class="mensaje_error">
-                            <i class="fas fa-exclamation-circle mensaje_error__icon" aria-hidden="true"></i>
-                            {{mensaje}}
-                        </p>
+<main class="main main-index">
+    <article class="container-detail-article">
+
+        {% include 'snippets/mensajes.html' %}
+
+        <h2 class="container-detail-article__title">
+            {{articulo.name}}
+        </h2>
+
+        <img src="{{articulo.image.url}}" alt="Imagen {{articulo.name}}" loading="lazy" decoding="async"
+            class="container-detail-article__img">
+
+        <p class="container-detail-article__paragraph container-detail-article__paragraph--font">
+            {{articulo.modified|date:"j F Y"}}
+        </p>
+
+        <p class="container-detail-article__paragraph">
+            Por
+            <a href="{% url 'Users:author' articulo.author.slug %}">
+                {{articulo.author.get_short_name}}
+            </a>
+        </p>
+        <p class="container-detail-article__paragraph">
+            {{articulo.resume}}
+        </p>
+        <p class="container-detail-article__paragraph">
+            {{articulo.content}}
+        </p>
+
+        <section class="container-list-commentaries">
+            <form action="{% url 'Blog:agregar_comentario' articulo.slug %}" method="POST"
+                class="container-add-comment">
+                {% csrf_token %}
+
+                <textarea name="comentario" cols="30" rows="10" class="container-add-comment__textarea"
+                    placeholder="Aqui va tu comentario..."></textarea>
+                <button class="container-add-comment__btn">Agregar comentario</button>
+            </form>
+
+            <h2>Comentarios</h2>
+
+            {% for comentario in comentarios %}
+            <article class="container-commentary">
+                <p class="container-author-commentary">
+                    {% if comentario.author.image %}
+                    <img src="{{comentario.author.image.url}}" alt="Foto de perfil usuario"
+                        class="container-author-commentary__img" loading="lazy">
                     {% else %}
-                        <p class="mensaje_exito">
-                            <i class="fa-solid fa-circle-exclamation mensaje_exito__icon" aria-hidden="true"></i>
-                            {{mensaje}}
-                        </p>
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp"
+                        alt="Foto de perfil usuario" class="container-author-commentary__img" loading="lazy">
                     {% endif %}
-                {% endfor %}
-            {% endif %}
 
-            <h2 class="container-detail-article__title">
-                Titulo: {{articulo.name}}
-            </h2>
-            <img src="{{articulo.image.url}}" width="300" loading="lazy" decoding="async">
-            <p>
-                <strong>Autor: </strong>
-                <a href="{% url 'Users:author' articulo.author.slug %}">
-                    {{articulo.author.get_short_name}}
-                </a>
-            </p>
-            <p>
-                <strong>Fecha: </strong>{{articulo.modified}}
-            </p>
-            <p>
-                <strong>Descripcion del articulo: </strong>{{articulo.resume}}
-            </p>
-            <p>
-                <strong>Contenido: </strong>{{articulo.content}}
-            </p>
+                    <a href="{% url 'Users:author' comentario.author.slug %}">
+                        {{ comentario.author.get_short_name }}
+                    </a>
+                </p>
 
-            <section>
-                <form action="{% url 'Blog:agregar_comentario' articulo.slug %}" method="POST" class="container-add-comment">
+                {% if comentario.author == request.user %}
+                {% if request.GET.editar %}
+                <form action="{% url 'Blog:editar_comentario' articulo.slug %}" method="POST">
                     {% csrf_token %}
-                    <textarea name="comentario" id="" cols="30" rows="10" class="container-add-comment__textarea"></textarea>
-                    <button class="container-add-comment__btn">Agregar comentario</button>
-                </form>
-
-                <h2>Comentarios</h2>
-
-                {% for comentario in comentarios %}
-                    <article class="container-commentary">
-                        <p class="container-author-commentary">
-                            {% if comentario.author.image %} 
-                                <img src="{{comentario.author.image.url}}" alt="Foto de perfil usuario" class="container-author-commentary__img" loading="lazy">
-                            {% else %}
-                                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp" alt="Foto de perfil usuario" class="container-author-commentary__img" loading="lazy">
-                            {% endif %}
-                            
-                            {{ comentario.author.first_name.split | first }}
-                            {{ comentario.author.last_name.split | first }}
-                        </p>
-
-                        {% if comentario.author == request.user %}
-                            {% if request.GET.editar %}
-                                <form action="{% url 'Blog:editar_comentario' articulo.slug %}" method="POST">
-                                    {% csrf_token %}
-                                    <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
-                                    <textarea name="comentario" id="" cols="30" rows="10">
+                    <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
+                    <textarea name="comentario" id="" cols="30" rows="10">
                                         {{comentario.content}}
                                     </textarea>
-                                    <button class="container-actions-commentary__link">Editar</button>
-                                </form>
+                    <button class="container-actions-commentary__link">Editar</button>
+                </form>
 
-                            {% else %}
-                                <p>{{comentario.content}}</p>
+                {% else %}
+                <p>{{comentario.content}}</p>
 
-                                <p class="container-actions-commentary">
-                                    <a href="?editar=true" class="container-actions-commentary__link">
-                                        Editar
-                                    </a>
-                            
-                                    <form action="{% url 'Blog:eliminar_comentario' articulo.slug %}" method="POST">
-                                        {% csrf_token %}
-                                        <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
-                                        <button class="container-actions-commentary__link container-actions-commentary__link--color">Eliminar</button>
-                                    </form>
-                                </p>
+                <p class="container-actions-commentary">
+                    <a href="?editar=true" class="container-actions-commentary__link">
+                        Editar
+                    </a>
 
-                                <p class="container-commentary__paragraph">
-                                    {{comentario.modified | date:"j F Y"}}
-                                </p>
-                            {% endif %}
-                        {% endif %}
-                    </article>
-                {% empty %}
-                    <p>No hay comentarios :(</p>
-                {% endfor %}
-            </section>
-        </article>
+                <form action="{% url 'Blog:eliminar_comentario' articulo.slug %}" method="POST">
+                    {% csrf_token %}
+                    <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
+                    <button
+                        class="container-actions-commentary__link container-actions-commentary__link--color">Eliminar</button>
+                </form>
+                </p>
 
-        <article class="container-categories">
-            {% include 'snippets/categorias.html' %}
-        </article>
-    </main>
+                <p class="container-commentary__paragraph">
+                    {{comentario.modified | date:"j F Y"}}
+                </p>
+                {% endif %}
+                {% endif %}
+            </article>
+            {% empty %}
+            <p>No hay comentarios relacionados con esta publicacion :(</p>
+            {% endfor %}
+        </section>
+    </article>
+
+    <article class="container-categories">
+        {% include 'snippets/categorias.html' %}
+    </article>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
 {% endblock %}

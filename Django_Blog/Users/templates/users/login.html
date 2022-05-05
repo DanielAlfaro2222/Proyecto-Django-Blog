@@ -11,21 +11,8 @@
     <main class="main">
         <section class="container-login">
             <h2 class="container-login__title">Iniciar sesion</h2>
-            {% if messages %}
-                {% for mensaje in messages %}
-                    {% if mensaje.tags == 'error' %}
-                        <p class="mensaje_error">
-                            <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
-                            {{mensaje}}
-                        </p>
-                    {% else %}
-                        <p class="mensaje_exito">
-                            <i class="fa-solid fa-circle-exclamation mensaje_exito__icon"></i>
-                            {{mensaje}}
-                        </p>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
+
+            {% include 'snippets/mensajes.html' %}
 
             <form method="POST" class="container-form-login">
                 {% csrf_token %}
@@ -38,7 +25,7 @@
                     <a href="{% url 'Users:register' %}" class="container-links-login__link">
                         Crear cuenta
                     </a>
-                    <a href="#" class="container-links-login__link">
+                    <a href="{% url 'reset_password' %}" class="container-links-login__link">
                         Recuperar contraseña
                     </a>
                 </div>
@@ -46,5 +33,7 @@
                 <button class="container-form-login__btn">Iniciar sesion</button>
             </form>
         </section>
+
+        {% include 'snippets/aside_contacto.html' %}
     </main>
 {% endblock %}

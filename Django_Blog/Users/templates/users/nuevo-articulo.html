@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Nueva publicacion</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Nueva publicacion</h2>
+        <form method="POST" action="{% url 'Users:new-article' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label>
+                Nombre del articulo
+                {{form.name}}
+            </label>
+
+            <label>
+                Imagen del articulo
+                {{form.image}}
+            </label>
+
+            <label>
+                Categoria del articulo
+                {{form.category}}
+            </label>
+
+            <label>
+                Descripcion del articulo
+                {{form.resume}}
+            </label>
+
+            <label>
+                Contenido del articulo
+                {{form.content}}
+            </label>
+
+            {{form.author}}
+
+            <button>Agregar nuevo articulo</button>
+        </form>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
+{% endblock %}

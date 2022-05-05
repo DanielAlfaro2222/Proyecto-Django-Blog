@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Mi cuenta</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Actualizar datos personales</h2>
+
+        <form action="{% url 'Users:update-data-user' %}" method="POST">
+            {% csrf_token %}
+
+            <label class="container-label-update-data-user">
+                Nombre <span class="container-label-update-data-user__span">*</span>
+                {{formulario.nombre}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Apellido <span class="container-label-update-data-user__span">*</span>
+                {{formulario.apellido}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Genero <span class="container-label-update-data-user__span">*</span>
+                {{formulario.genero}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Imagen de perfil
+                {{formulario.imagen}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Ciudad <span class="container-label-update-data-user__span">*</span>
+                {{formulario.ciudad}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Biografia <span class="container-label-update-data-user__span">*</span>
+                {{formulario.biografia}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Linkedin
+                {{formulario.linkedin}}
+            </label>
+
+            <label class="container-label-update-data-user">
+                Twitter
+                {{formulario.twitter}}
+            </label>
+
+            <label class="container-label-register">
+                Correo <span class="container-label-register__span">*</span>
+                {{formulario.correo}}
+                {% if formulario.correo.errors %}
+                {{formulario.correo.errors}}
+                {% endif %}
+            </label>
+
+            <button>Actualizar</button>
+        </form>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
+{% endblock %}

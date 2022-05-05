@@ -3,41 +3,54 @@
 {% load static %}
 
 {% block head %}
-    <title>Contacto</title>
+<link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+<title>Contacto</title>
 {% endblock %}
 
 {% block content %}
-    <main class="main">
+<main class="main">
+    {% include 'snippets/mensajes.html' %}
+
+    <section class="container-section-contact">
         <h2>Contacto</h2>
 
-        <!-- {% if messages %}
-            {% for mensaje in messages %}
-                <p>{{mensaje}}</p>
-            {% endfor %}
-        {% endif %}
-
-        <form method="POST">
+        <form method="POST" class="container-form-contact">
             {% csrf_token %}
 
-            <label>
+            <label class="container-label-contact">
+                Nombres <span class="container-label-contact__span">*</span>
                 {{formulario.nombre}}
+                {% if formulario.nombre.errors %}
+                {{formulario.nombre.errors}}
+                {% endif %}
             </label>
-            
-            <label>
+
+            <label class="container-label-contact">
+                Asunto <span class="container-label-contact__span">*</span>
                 {{formulario.asunto}}
+                {% if formulario.asunto.errors %}
+                {{formulario.asunto.errors}}
+                {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-contact">
+                Correo <span class="container-label-contact__span">*</span>
                 {{formulario.correo}}
+                {% if formulario.correo.errors %}
+                {{formulario.correo.errors}}
+                {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-contact">
+                Mensaje <span class="container-label-contact__span">*</span>
                 {{formulario.mensaje}}
+                {% if formulario.mensaje.errors %}
+                {{formulario.mensaje.errors}}
+                {% endif %}
             </label>
 
-            <button>Enviar</button>
-        </form> -->
-
-        <a href="{% url 'Users:send_mail' %}">Enviar correo</a>
-    </main>
+            <button class="container-form-contact__btn">Enviar</button>
+        </form>
+    </section>
+</main>
 {% endblock %}

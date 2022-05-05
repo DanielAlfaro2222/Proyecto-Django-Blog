@@ -3,57 +3,68 @@
 {% load static %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-    <title>Biografia | {{user.get_short_name}}</title>
+<link rel="stylesheet" href="{% static 'css/autor.css' %}">
+<title>Biografia | {{user.get_short_name}}</title>
 {% endblock %}
 
 {% block content %}
-    <main>
-        <section>
-            <h2>Articulos</h2>
+<main class="main">
+    <section class="container-info-author">
+        <article class="container-biography-author">
+            <img src="{{autor.image.url}}" alt="Foto {{autor.get_short_name}}" loading="lazy" decoding="async"
+                class="container-biography-author__img">
+            <h2 class="container-biography-author__title">
+                {{autor.get_full_name}}
+            </h2>
+            <p class="container-biography-author__paragraph">
+                {{autor.biography}}
+            </p>
 
-            {% for articulo in articulos %}
-                {% include 'snippets/articulo.html' %}
-            {% empty %}
-                <p>
-                    Lo siento, por ahora no hay articulos relacionados con este autor :(
-                </p>
-            {% endfor %}
-        </section>
+            <p class="container-biography-author__paragraph">
+                {{autor.city}}
+            </p>
 
-        <section>
-            <article>
-                <h2>Informacion del autor</h2>
-                <img src="{{autor.image.url}}" alt="Foto {{autor.get_short_name}}" loading="lazy" decoding="async">
-                <p>
-                    {{autor.get_full_name}}
-                </p>
-                <p>
-                    Cantidad articulos escritos: {{autor.get_quantity_articles}}
-                </p>
+            <p class="container-biography-author__paragraph container-biography-author__paragraph--font">
+                {{autor.get_quantity_articles}} articulos
+            </p>
+        </article>
 
-                {% if autor.has_biography %}
-                    <article>
-                        <h2>Biografia</h2>
-                        <p>
-                            {{autor.biography}}
-                        </p>
-                    </article>
-                {% endif %}
-                
-                {% if autor.has_linkedin %}
-                    <a href="{{autor.linkedin}}">
-                        <img src="https://icongr.am/devicon/linkedin-original.svg?size=128&color=currentColor" alt="Logo linkedin" loading="lazy" decoding="async">
-                    </a>
-                {% endif %}
+        <article class="container-contact-author">
+            {% if autor.has_linkedin %}
+            <a href="{{autor.linkedin}}" class="container-link-contact-author" rel="noopener" target="_blank">
+                <img src="https://icongr.am/devicon/linkedin-original.svg?size=128&color=currentColor"
+                    alt="Logo linkedin" loading="lazy" decoding="async" class="container-link-contact-author__img">
+            </a>
+            {% endif %}
 
-                <p>
-                    <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-                    <a href="mailto:{{autor.email}}">{{autor.email}}</a>
-                </p>
-            </article>
+            {% if autor.has_twitter %}
+            <a href="{{autor.twitter}}" class="container-link-contact-author" rel="noopener" target="_blank">
+                <img src="https://icongr.am/devicon/twitter-original.svg?size=128&color=currentColor" alt="Logo twitter"
+                    loading="lazy" decoding="async" class="container-link-contact-author__img">
+            </a>
+            {% endif %}
 
+            <a href="mailto:{{autor.email}}" class="container-link-contact-author" rel="noopener" target="_blank"
+                title="email">
+                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1651457981/Proyecto%20django-blog/email_h2hxoz.webp"
+                    alt="Logo email" loading="lazy" decoding="async" class="container-link-contact-author__img">
+            </a>
+        </article>
+    </section>
 
-        </section>
-    </main>
+    <section class="container-articles-author">
+        <h2 class="container-articles-author__title">Articulos</h2>
+
+        {% for articulo in articulos %}
+        {% include 'snippets/articulo.html' %}
+        {% empty %}
+        <p>
+            Lo siento, por ahora no hay articulos relacionados con este autor :(
+        </p>
+        {% endfor %}
+        {% include 'snippets/paginacion_articulos.html' %}
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
 {% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Mi cuenta</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>¡Bienvenido de nuevo, {{request.user.get_short_name}}!</h2>
+
+        <ul>
+            <li>
+                <a href="{% url 'Users:update-data-user' %}">
+                    Actualizar datos personales
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    Cambiar contraseña
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'Users:articles-user' %}">
+                    Mis publicaciones
+                </a>
+            </li>
+            <li>
+                <a href="#">Eliminar cuenta</a>
+            </li>
+        </ul>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
+{% endblock %}

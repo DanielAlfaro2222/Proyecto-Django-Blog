@@ -1,22 +1,48 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://res.cloudinary.com/dpxek6oka/raw/upload/v1643485116/normalize_ej2ndq.css">
-    <link rel="shortcut icon" href="https://res.cloudinary.com/dpxek6oka/image/upload/v1643933592/Proyecto%20django-blog/favicon_jjdf9m.ico" type="image/x-icon">
+    <link rel="shortcut icon"
+        href="https://res.cloudinary.com/dpxek6oka/image/upload/v1643933592/Proyecto%20django-blog/favicon_jjdf9m.ico"
+        type="image/x-icon">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,700;1,300;1,600;1,800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,200;0,300;0,700;1,300;1,600;1,800&display=swap"
+        rel="stylesheet">
     {% block head %} {% endblock %}
     <link rel="stylesheet" href="{% static 'css/media_queries/tablet.css' %}" media="(min-width: 700px)">
     <link rel="stylesheet" href="{% static 'css/media_queries/desktop.css' %}" media="(min-width: 1000px)">
 </head>
-<body>
+
+<body id="body" class="body">
+    <div class="container-loader container-loader--show" id="container-loader" aria-hidden="true">
+        <img src="https://icongr.am/devicon/django-original.svg?size=128&color=currentColor" alt="Logo django"
+            decoding="async">
+        <div class="lds-spinner">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+
+
     <header class="main-header" id="header">
         <nav class="nav-main">
             <ul class="container-nav-main">
@@ -27,42 +53,45 @@
                 </li>
 
                 {% if request.user.is_authenticated %}
-                    <li class="container-element-nav">
-                        <a href="#" class="container-nav-link">
-                            {% if request.user.has_image %}
-                                <img src="{{request.user.image.url}}" alt="Foto {{request.user.get_short_name}}" class="container-nav-link__img" loading="lazy" decoding="async">
-                            {% else %}
-                                <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp" alt="Foto {{request.user.get_short_name}" class="container-nav-link__img" loading="lazy" decoding="async">
-                            {% endif %}
-                            
-                            {{request.user.get_short_name}}
-                            <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
+                <li class="container-element-nav">
+                    <a href="#" class="container-nav-link">
+                        {% if request.user.has_image %}
+                        <img src="{{request.user.image.url}}" alt="Foto {{request.user.get_short_name}}"
+                            class="container-nav-link__img" loading="lazy" decoding="async">
+                        {% else %}
+                        <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp"
+                            alt="Foto {{request.user.get_short_name}" class="container-nav-link__img" loading="lazy"
+                            decoding="async">
+                        {% endif %}
 
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                        Mi cuenta
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        Panel de administracion
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{% url 'Users:logout' %}">
-                                        Cerrar sesion
-                                    </a>
-                                </li>
-                            </ul>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="container-element-nav">
-                        <a href="{% url 'Users:login' %}" class="container-nav-link">
-                            Iniciar sesion
-                        </a>
-                    </li>
+                        {{request.user.get_short_name}}
+                        <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
+
+                        <ul>
+                            <li>
+                                <a href="{% url 'Users:account' %}">
+                                    Mi cuenta
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    Panel de administracion
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'Users:logout' %}">
+                                    Cerrar sesion
+                                </a>
+                            </li>
+                        </ul>
+                    </a>
+                </li>
+                {% else %}
+                <li class="container-element-nav">
+                    <a href="{% url 'Users:login' %}" class="container-nav-link">
+                        Iniciar sesion
+                    </a>
+                </li>
                 {% endif %}
             </ul>
         </nav>
@@ -74,12 +103,16 @@
 
     <footer class="main-footer">
         <p class="main-footer__paragraph">
-            &copy; Diseñado por 
-            <a href="https://github.com/DanielAlfaro2222">Daniel Alfaro</a> {% now "Y" %}
+            &copy; Diseñado por
+            <a href="https://github.com/DanielAlfaro2222" rel="noopener" target="_blank">Daniel Alfaro</a> {% now "Y" %}
         </p>
         <a href="#header" class="container-footer-link">
             <i class="fas fa-chevron-up container-footer-link__icon" aria-hidden="true"></i>
         </a>
     </footer>
+
+    <script src="{% static 'js/index.js' %}"></script>
+    <script src="{% static 'js/loader.js' %}"></script>
 </body>
+
 </html>

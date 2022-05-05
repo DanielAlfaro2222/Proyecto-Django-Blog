@@ -2,122 +2,183 @@
     .container-img-header {
         height: 370px;
     }
+
     .main {
         padding: 1.9em;
     }
+
     .main-index {
         display: flex;
         gap: 2em;
     }
+
     .container-left-index {
         width: 85%;
         border-right: 1px solid rgb(195, 195, 195);
         padding-right: 3em;
     }
-    .container-left-index__title, .container-categories__title {
+
+    .container-left-index__title,
+    .container-categories__title {
         margin-top: 0;
         margin-bottom: 1.3em;
     }
+
     .container-article {
         display: grid;
         grid-template-columns: 65% 35%;
         grid-template-rows: repeat(2, 35px) 1fr 1fr;
         -moz-column-gap: 1em;
-             column-gap: 1em;
+        column-gap: 1em;
         row-gap: .5em;
         height: 260px;
         border-bottom: none;
         margin-bottom: 3em;
     }
+
     .container-article__img {
         width: 90%;
         min-height: 230px;
         max-height: 250px;
         grid-row: span 4;
     }
-    .container-element-list-categories__link, .container-form-search-article__btn, .container-article__link {
+
+    .container-element-list-categories__link,
+    .container-form-search-article__btn,
+    .container-article__link {
         font-size: 1rem;
     }
-    .container-title-article__link{
+
+    .container-title-article__link {
         font-size: 1.2rem;
     }
-    .container-title-article{
+
+    .container-title-article {
         margin: 0;
     }
-    .container-article-author, .container-article__paragraph {
+
+    .container-article-author,
+    .container-article__paragraph {
         font-size: 1rem;
     }
+
     .container-form-search-article {
         margin-top: 1.7em;
     }
-    .container-article-author, .container-article__paragraph {
+
+    .container-article-author,
+    .container-article__paragraph {
         margin-top: 0;
     }
+
     .container-article__link {
         margin-bottom: 0;
     }
+
     .mensaje_error {
         font-size: 1.2rem;
         padding: .8em;
     }
-    .container-form-login__input, .container-form-login__btn {
+
+    .container-form-login__input,
+    .container-form-login__btn {
         height: 48px;
     }
+
     .mensaje_exito {
         font-size: 1.1rem;
     }
-    .container-section-register {
+
+    .container-section-register,
+    .container-section-contact {
         width: 400px;
         margin-left: auto;
         margin-right: auto;
     }
+
     .container-paginator-articles {
         height: 44px;
     }
+
     .container-list-paginator-articles {
         font-size: 1rem;
     }
+
     .container-element-list-paginator {
         width: 35px;
     }
+
     .container-element-list-paginator--width {
         width: 90px;
     }
+
     .container-commentary {
         font-size: 1.1rem;
         padding: 1.4em;
         position: relative;
     }
+
     .container-actions-commentary {
         position: absolute;
         top: 0;
         right: 5px;
     }
+
     .container-commentary__paragraph {
         margin-bottom: 0;
     }
+
     .container-author-commentary__img {
         width: 53px;
         height: 53px;
     }
+
     .container-actions-commentary__link {
         height: 37px;
         line-height: 37px;
         font-size: 1rem;
     }
+
     .container-add-comment__btn {
         font-size: 1rem;
         width: 175px;
     }
+
     .container-detail-article {
         width: 75%;
         padding-right: 2em;
     }
+
     .container-section-register__title {
         margin-top: 0;
     }
+
     .errorlist {
         font-size: .9rem;
+    }
+
+    .container-detail-article {
+        border-right: 1px solid rgb(195, 195, 195);
+        padding-right: 3em;
+    }
+
+    .container-list-commentaries {
+        margin-top: 3em;
+    }
+
+    .container-articles-author {
+        width: 65%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container-articles-author {
+        margin-top: 4em;
+    }
+
+    .container-aside {
+        bottom: 6em;
+        width: 57px;
     }
 }
 
@@ -125,13 +186,16 @@
     .container-article {
         grid-template-columns: 70% 30%;
     }
+
     .container-article {
         -moz-column-gap: 1em;
-             column-gap: 1em;
+        column-gap: 1em;
     }
+
     .container-article__img {
         width: 100%;
     }
+
     .container-left-index {
         width: 74%;
     }

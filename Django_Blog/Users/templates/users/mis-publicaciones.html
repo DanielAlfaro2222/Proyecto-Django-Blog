@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Mis publicaciones</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    {% include 'snippets/mensajes.html' %}
+
+    <section>
+        <h2>Mis publicaciones</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Estado</th>
+                    <th>Fecha de publicacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for articulo in articulos %}
+                <tr>
+                    <td>
+                        <a href="{% url 'Users:edit-article' articulo.slug %}" title="Editar articulo">
+                            {{ forloop.counter }}
+                        </a>
+                    </td>
+                    <td>{{ articulo }}</td>
+                    <td>{{ articulo.state }}</td>
+                    <td>{{ articulo.create | date:"j F Y" }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td>No hay articulos publicados</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% include 'snippets/paginacion_articulos.html' %}
+
+        <a href="{% url 'Users:new-article' %}">Publicar un nuevo articulo</a>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
+{% endblock %}
