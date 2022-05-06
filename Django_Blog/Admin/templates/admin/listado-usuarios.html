@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Gestionar usuarios</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Gestionar usuarios</h2>
+
+    <a href="#">Agregar nuevo usuario</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Activo</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>
+                    <a href="#">{{forloop.counter}}</a>
+                </td>
+                <td>{{usuario.get_full_name}}</td>
+                <td>{{usuario}}</td>
+                <td>{{usuario.is_active}}</td>
+                <td>{{usuario.groups.first}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

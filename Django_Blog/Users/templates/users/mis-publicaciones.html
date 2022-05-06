@@ -8,10 +8,12 @@
 
 {% block content %}
 <main class="main">
-    {% include 'snippets/mensajes.html' %}
-
     <section>
         <h2>Mis publicaciones</h2>
+
+        {% include 'snippets/mensajes.html' %}
+
+        <a href="{% url 'Users:new-article' %}">Publicar un nuevo articulo</a>
 
         <table>
             <thead>
@@ -43,8 +45,6 @@
         </table>
 
         {% include 'snippets/paginacion_articulos.html' %}
-
-        <a href="{% url 'Users:new-article' %}">Publicar un nuevo articulo</a>
     </section>
 
     {% include 'snippets/aside_contacto.html' %}

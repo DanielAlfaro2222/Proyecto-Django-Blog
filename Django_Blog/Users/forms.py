@@ -243,5 +243,16 @@ class CreateArticleModelForm(forms.ModelForm):
             'resume': forms.TextInput(attrs={'class': ''}),
             'content': forms.Textarea(attrs={'class': ''}),
             'category': forms.Select(attrs={'class': ''}),
-            'author': forms.Select(attrs={'hidden': 'true'})
+            'author': forms.Select(attrs={'hidden': 'true'}),
+            'state': forms.CheckboxInput(attrs={'class': ''})
+        }
+
+
+class UserModelForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email', 'biography',
+                  'image', 'gender', 'linkedin', 'twitter', 'city']
+        widgets = {
+            'biography': forms.Textarea(attrs={'class': ''}),
         }

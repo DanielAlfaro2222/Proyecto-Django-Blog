@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block head %}
-<title>Mi cuenta</title>
+<title>Actualizar datos</title>
 {% endblock %}
 
 {% block content %}
@@ -11,54 +11,80 @@
     <section>
         <h2>Actualizar datos personales</h2>
 
-        <form action="{% url 'Users:update-data-user' %}" method="POST">
+        {% include 'snippets/mensajes.html' %}
+
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
             <label class="container-label-update-data-user">
                 Nombre <span class="container-label-update-data-user__span">*</span>
-                {{formulario.nombre}}
+                {{formulario.first_name}}
+                {% if formulario.first_name.errors %}
+                {{formulario.first_name.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Apellido <span class="container-label-update-data-user__span">*</span>
-                {{formulario.apellido}}
+                {{formulario.last_name}}
+                {% if formulario.last_name.errors %}
+                {{formulario.last_name.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Genero <span class="container-label-update-data-user__span">*</span>
-                {{formulario.genero}}
+                {{formulario.gender}}
+                {% if formulario.gender.errors %}
+                {{formulario.gender.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Imagen de perfil
-                {{formulario.imagen}}
+                {{formulario.image}}
+                {% if formulario.image.errors %}
+                {{formulario.image.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Ciudad <span class="container-label-update-data-user__span">*</span>
-                {{formulario.ciudad}}
+                {{formulario.city}}
+                {% if formulario.city.errors %}
+                {{formulario.city.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Biografia <span class="container-label-update-data-user__span">*</span>
-                {{formulario.biografia}}
+                {{formulario.biography}}
+                {% if formulario.biography.errors %}
+                {{formulario.biography.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Linkedin
                 {{formulario.linkedin}}
+                {% if formulario.linkedin.errors %}
+                {{formulario.linkedin.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">
                 Twitter
                 {{formulario.twitter}}
+                {% if formulario.twitter.errors %}
+                {{formulario.twitter.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
                 Correo <span class="container-label-register__span">*</span>
-                {{formulario.correo}}
-                {% if formulario.correo.errors %}
-                {{formulario.correo.errors}}
+                {{formulario.email}}
+                {% if formulario.email.errors %}
+                {{formulario.email.errors}}
                 {% endif %}
             </label>
 

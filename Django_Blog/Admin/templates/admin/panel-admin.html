@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Administracion</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Panel de administracion</h2>
+
+    <ul>
+        <li>
+            <a href="{% url 'Admin:users' %}">Gestionar usuarios</a>
+        </li>
+        <li>
+            <a href="{% url 'Admin:articles' %}">Gestionar articulos</a>
+        </li>
+        <li>
+            <a href="{% url 'Admin:cities' %}">Gestionar ciudades</a>
+        </li>
+        <li>
+            <a href="{% url 'Admin:categories' %}">Gestionar categorias</a>
+        </li>
+        <li>
+            <a href="#">Gestionar comentarios</a>
+        </li>
+    </ul>
+</main>
+{% endblock %}

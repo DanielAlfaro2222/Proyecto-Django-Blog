@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Gestionar ciudades</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Gestionar ciudades</h2>
+
+    <a href="#">Agregar nueva ciudad</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Codigo postal</th>
+                <th>Activo</th>
+                <th>Fecha de modificacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ciudad in ciudades %}
+            <tr>
+                <td>
+                    <a href="#">{{forloop.counter}}</a>
+                </td>
+                <td>{{ciudad}}</td>
+                <td>{{ciudad.zip_code}}</td>
+                <td>{{ciudad.state}}</td>
+                <td>{{ciudad.modified | date:"j F Y"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

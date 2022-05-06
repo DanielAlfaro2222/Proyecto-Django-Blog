@@ -11,9 +11,11 @@
     <section>
         <h2>¡Bienvenido de nuevo, {{request.user.get_short_name}}!</h2>
 
+        {% include 'snippets/mensajes.html' %}
+
         <ul>
             <li>
-                <a href="{% url 'Users:update-data-user' %}">
+                <a href="{% url 'Users:update-data-user' request.user.slug %}">
                     Actualizar datos personales
                 </a>
             </li>
@@ -27,9 +29,11 @@
                     Mis publicaciones
                 </a>
             </li>
+            {% if not request.user.is_staff %}
             <li>
                 <a href="#">Eliminar cuenta</a>
             </li>
+            {% endif %}
         </ul>
     </section>
 

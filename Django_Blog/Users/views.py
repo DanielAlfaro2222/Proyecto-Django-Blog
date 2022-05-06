@@ -21,6 +21,7 @@ from django.views.generic import UpdateView
 from .forms import CreateArticleModelForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
+from .forms import UserModelForm
 
 
 def login_view(request):
@@ -48,7 +49,7 @@ def login_view(request):
             if request.GET.get('next'):
                 return HttpResponseRedirect(request.GET.get('next'))
             elif usuario.is_staff:
-                return redirect('/admin/')
+                return redirect(reverse_lazy('Admin:admin'))
             else:
                 return redirect('index')
         else:
@@ -142,23 +143,41 @@ class AccountTemplateView(LoginRequiredMixin, TemplateView):
     template_name = 'users/mi-cuenta.html'
 
 
-def update_data_user(request):
-    formulario = RegisterForm({
-        'nombre': request.user.first_name,
-        'apellido': request.user.last_name,
-        'correo': request.user.email,
-        'genero': request.user.gender,
-        'imagen': request.user.image.url,
-        'ciudad': request.user.city,
-        'contrasena': request.user.password,
-        'linkedin': request.user.linkedin,
-        'twitter': request.user.twitter,
-        'biografia': request.user.biography,
-    })
+class UpdateDataUserView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    Vista encargada de actualizar los datos personales de los usuarios.
+    """
 
-    return render(request, 'users/actualizar-datos.html', context={
-        'formulario': formulario,
-    })
+    template_name = 'users/actualizar-datos.html'
+    form_class = UserModelForm
+    success_url = reverse_lazy('Users:account')
+    success_message = 'Informacion actualizada exitosamente'
+    slug_field = 'slug'
+
+    def get_queryset(self):
+        return User.objects.filter(slug=self.kwargs.get('slug'))
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial={
+            'first_name': self.request.user.first_name,
+            'last_name': self.request.user.last_name,
+            'email': self.request.user.email,
+            'gender': self.request.user.gender,
+            'image': self.request.user.image,
+            'city': self.request.user.city,
+            'linkedin': self.request.user.linkedin,
+            'twitter': self.request.user.twitter,
+            'biography': self.request.user.biography,
+        })
+
+        return render(request, self.template_name, {
+            'formulario': form,
+        })
+
+    def post(self, request, *args, **kwargs):
+        print(self.request.POST)
+        self.object = self.get_object()
+        return super().post(request, *args, **kwargs)
 
 
 class PublicationsListView(ListView):

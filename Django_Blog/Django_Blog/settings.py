@@ -23,7 +23,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'admin_interface',
     'colorfield',
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -31,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Users',
     'Blog',
+    'Admin'
 ]
 
 MIDDLEWARE = [
