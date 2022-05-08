@@ -6,6 +6,7 @@ from django.core import validators
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 import uuid
+from Django_Blog.utils import validate_image
 
 
 class City(models.Model):
@@ -72,7 +73,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         validators=[validators.EmailValidator()]
     )
     image = models.ImageField(
-        'Imagen de perfil', upload_to='users/profile_image', null=True, blank=True)
+        'Imagen de perfil', upload_to='users/profile_image', null=True, blank=True, validators=[validate_image])
     biography = models.CharField(
         'Biografia', null=True, blank=True, max_length=120)
     gender = models.CharField(

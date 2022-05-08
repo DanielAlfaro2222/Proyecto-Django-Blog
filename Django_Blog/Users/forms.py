@@ -135,6 +135,16 @@ class RegisterForm(forms.Form):
 
         return correo
 
+    def clean_imagen(self):
+        imagen = self.cleaned_data.get('imagen')
+        limite = 1024*1024
+
+        if imagen is not None and len(imagen) > limite:
+            raise forms.ValidationError(
+                'El tamaño maximo del archivo debe ser de 1mb')
+
+        return imagen
+
     def clean_contrasena(self):
         contrasena = self.cleaned_data.get('contrasena')
 

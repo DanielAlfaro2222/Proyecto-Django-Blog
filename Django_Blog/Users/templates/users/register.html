@@ -32,6 +32,9 @@
             <label class="container-label-register">
                 Imagen de perfil
                 {{formulario.imagen}}
+                {% if formulario.imagen.errors %}
+                {{formulario.imagen.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">

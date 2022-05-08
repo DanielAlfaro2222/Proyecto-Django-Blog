@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Editar articulo</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Editar articulo</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label>
+            Nombre del articulo <span>*</span>
+            {{form.name}}
+            {% if form.name.errors %}
+            {{form.name.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Descripcion del articulo <span>*</span>
+            {{form.resume}}
+            {% if form.resume.errors %}
+            {{form.resume.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Contenido del articulo <span>*</span>
+            {{form.content}}
+            {% if form.content.errors %}
+            {{form.content.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Autor del articulo <span>*</span>
+            {{form.author}}
+            {% if form.author.errors %}
+            {{form.author.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Categoria del articulo <span>*</span>
+            {{form.category}}
+            {% if form.category.errors %}
+            {{form.category.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Imagen del articulo <span>*</span>
+            {{form.image}}
+            {% if form.image.errors %}
+            {{form.image.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Estado del articulo <span>*</span>
+            {{form.state}}
+            {% if form.state.errors %}
+            {{form.state.errors}}
+            {% endif %}
+        </label>
+
+        <button>Editar articulo</button>
+    </form>
+</main>
+{% endblock %}

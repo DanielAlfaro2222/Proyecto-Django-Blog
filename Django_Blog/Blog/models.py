@@ -3,6 +3,7 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from Users.models import User
 import uuid
+from Django_Blog.utils import validate_image
 
 
 class Category(models.Model):
@@ -26,7 +27,8 @@ class Category(models.Model):
 class Article(models.Model):
     id_article = models.AutoField('Id articulo', primary_key=True)
     name = models.CharField('Nombre', max_length=55, unique=True)
-    image = models.ImageField('Imagen', upload_to='article/images')
+    image = models.ImageField(
+        'Imagen', upload_to='article/images', validators=[validate_image])
     content = models.TextField('Contenido')
     resume = models.CharField('Descripcion del articulo', max_length=150)
     create = models.DateTimeField('Fecha de creacion', auto_now_add=True)

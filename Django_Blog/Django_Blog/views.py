@@ -19,7 +19,7 @@ def index_view(request):
             articulos = busqueda_articulos(request, request.GET.get('q'))
 
     # Paginacion por cada 5 articulos
-    paginacion = Paginator(articulos, 5)
+    paginacion = Paginator(articulos, 8)
     num_pagina = request.GET.get('page')
     articulos = paginacion.get_page(num_pagina)
 

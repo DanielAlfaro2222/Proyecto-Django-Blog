@@ -79,7 +79,7 @@ def register_view(request):
     if request.user.is_authenticated:
         return redirect('index')
 
-    formulario = RegisterForm(request.POST or None)
+    formulario = RegisterForm(request.POST or None, request.FILES or None)
 
     if request.method == 'POST' and formulario.is_valid():
         usuario = formulario.save()

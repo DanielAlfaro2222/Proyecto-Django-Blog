@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Gestionar articulos</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Gestionar articulos</h2>
+
+    <a href="{% url 'Admin:new-article' %}">Agregar nuevo articulo</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Autor</th>
+                <th>Activo</th>
+                <th>Fecha de publicacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for articulo in articulos %}
+            <tr>
+                <td>
+                    <a href="{% url 'Admin:edit-article' articulo.slug %}">
+                        {{forloop.counter}}
+                    </a>
+                </td>
+                <td>{{articulo}}</td>
+                <td>{{articulo.author.get_short_name}}</td>
+                <td>{{articulo.state}}</td>
+                <td>{{articulo.create | date:"j F Y"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}
