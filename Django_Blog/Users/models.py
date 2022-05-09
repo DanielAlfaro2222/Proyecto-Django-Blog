@@ -7,6 +7,7 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 import uuid
 from Django_Blog.utils import validate_image
+from Django_Blog.utils import ESTADO
 
 
 class City(models.Model):
@@ -16,7 +17,8 @@ class City(models.Model):
     zip_code = models.CharField("Codigo postal", max_length=6)
     create = models.DateTimeField('Fecha de creacion', auto_now_add=True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
-    state = models.BooleanField('Estado', default=True)
+    state = models.CharField('Estado', choices=ESTADO,
+                             default='Activo', max_length=10)
 
     def __str__(self):
         return self.description
@@ -24,7 +26,7 @@ class City(models.Model):
     class Meta:
         verbose_name = "Ciudad"
         verbose_name_plural = "Ciudades"
-        db_table = "city"
+        db_table = "Ciudad"
         ordering = ['id_city']
 
 
@@ -87,7 +89,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     linkedin = models.URLField('Linkedin', null=True, blank=True)
     twitter = models.URLField('Twitter', null=True, blank=True)
     is_staff = models.BooleanField('Administrador', default=False)
-    is_active = models.BooleanField('Activo', default=True)
+    state = models.CharField('Estado', choices=ESTADO,
+                             default='Activo', max_length=10)
     slug = models.SlugField('Url', null=True, blank=True, unique=True)
     city = models.ForeignKey(City, verbose_name="Ciudad",
                              on_delete=models.CASCADE, null=True, blank=True)
@@ -107,7 +110,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f'{self.first_name.split()[0]} {self.last_name.split()[0]}'
 
     def get_quantity_articles(self):
-        return self.article_set.filter(state=True).count()
+        return self.article_set.filter(state='Activo').count()
 
     def has_biography(self):
         return True if self.biography else False
@@ -120,6 +123,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def has_twitter(self):
         return True if self.twitter else False
+
+    def is_active(self):
+        return True if self.state == 'Activo' else False
 
     class Meta:
         verbose_name = 'Usuario'

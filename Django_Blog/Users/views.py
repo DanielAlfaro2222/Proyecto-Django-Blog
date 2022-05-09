@@ -126,7 +126,7 @@ class AuthorDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['autor'] = context['object']
         context['registros'] = Article.objects.filter(
-            author=context['autor'], state=True).order_by('-create')
+            author=context['autor'], state='Activo').order_by('-create')
         context['paginacion'] = Paginator(context['registros'], 5)
         context['num_pagina'] = self.request.GET.get('page')
         context['articulos'] = context['paginacion'].get_page(

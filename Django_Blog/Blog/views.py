@@ -14,7 +14,7 @@ from django.urls import reverse
 def category_view(request, slug):
     categoria = Category.objects.get(slug=slug)
     articulos = Article.objects.filter(
-        category=categoria, state=True).order_by('-id_article')
+        category=categoria, state='Activo').order_by('-id_article')
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')
@@ -46,7 +46,7 @@ class ArticleDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['articulo'] = context['object']
         context['comentarios'] = Comment.objects.filter(
-            article=context['articulo'], state=True).order_by('-modified')
+            article=context['articulo'], state='Activo').order_by('-modified')
 
         return context
 

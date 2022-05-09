@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Gestionar categorias</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Gestionar categorias</h2>
+
+    {% include 'snippets/mensajes.html' %}
+
+    <a href="{% url 'Admin:new-category' %}">Agregar nueva categoria</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Fecha de modificacion</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in categorias %}
+            <tr>
+                <td>
+                    <a href="{% url 'Admin:edit-category' categoria.slug %}">{{forloop.counter}}</a>
+                </td>
+                <td>{{categoria}}</td>
+                <td>{{categoria.state}}</td>
+                <td>{{categoria.modified | date:"j F Y"}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

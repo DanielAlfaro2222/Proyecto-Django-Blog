@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Gestionar usuarios</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Gestionar usuarios</h2>
+
+    {% include 'snippets/mensajes.html' %}
+
+    <a href="{% url 'Admin:new-user' %}">Agregar nuevo usuario</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Estado</th>
+                <th>Rol</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>
+                    <a href="{% url 'Admin:edit-user' usuario.slug %}">{{forloop.counter}}</a>
+                </td>
+                <td>{{usuario.get_full_name}}</td>
+                <td>{{usuario}}</td>
+                <td>{{usuario.state}}</td>
+                <td>{{usuario.groups.first}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+{% endblock %}

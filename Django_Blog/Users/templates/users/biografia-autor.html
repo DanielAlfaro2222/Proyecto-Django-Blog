@@ -11,7 +11,8 @@
 <main class="main">
     <section class="container-info-author">
         <article class="container-biography-author">
-            <img src="{{autor.image.url}}" alt="Foto {{autor.get_short_name}}" loading="lazy" decoding="async"
+            <img src="{% if autor.has_image %} {{autor.image.url}} {% else %} https://res.cloudinary.com/dpxek6oka/image/upload/v1644695127/Proyecto%20django-blog/perfil_pevww3.webp{% endif %}"
+                alt="Foto {{autor.get_short_name}}" loading="lazy" decoding="async"
                 class="container-biography-author__img">
             <h2 class="container-biography-author__title">
                 {{autor.get_full_name}}

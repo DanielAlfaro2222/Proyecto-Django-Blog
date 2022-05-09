@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Editar ciudad</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Editar ciudad</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>
+            Nombre ciudad <span>*</span>
+            {{form.description}}
+            {% if form.description.errors %}
+            {{form.description.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Codigo postal <span>*</span>
+            {{form.zip_code}}
+            {% if form.zip_code.errors %}
+            {{form.zip_code}}
+            {% endif %}
+        </label>
+
+        <label>
+            Estado de la ciudad
+            {{form.state}}
+            {% if form.state.errors %}
+            {{form.state.errors}}
+            {% endif %}
+        </label>
+
+        <button>Editar ciudad</button>
+    </form>
+</main>
+{% endblock %}

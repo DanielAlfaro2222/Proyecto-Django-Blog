@@ -7,7 +7,11 @@ from django.views.generic import TemplateView
 
 
 def index_view(request):
-    articulos = Article.objects.filter(state=True).order_by('-id_article')
+    """
+    """
+
+    articulos = Article.objects.filter(
+        state='Activo').order_by('-id_article')
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')
@@ -30,18 +34,30 @@ def index_view(request):
 
 
 class Error400TemplateView(TemplateView):
+    """
+    """
+
     template_name = 'codigos_error/400.html'
 
 
 class Error403TemplateView(TemplateView):
+    """
+    """
+
     template_name = 'codigos_error/403.html'
 
 
 class Error404TemplateView(TemplateView):
+    """
+    """
+
     template_name = 'codigos_error/404.html'
 
 
 class Error500TemplateView(TemplateView):
+    """
+    """
+
     template_name = 'codigos_error/500.html'
 
     @classmethod

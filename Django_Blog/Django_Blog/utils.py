@@ -11,3 +11,9 @@ def validate_image(fieldfile_obj):
     if filesize > megabyte_limit*1024*1024:
         raise ValidationError(
             f"El tamaño maximo del archivo debe ser {megabyte_limit}MB")
+
+
+ESTADO = (
+    ('Activo', 'Activo'),
+    ('Desactivo', 'Desactivo')
+)

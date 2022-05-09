@@ -98,7 +98,7 @@ class RegisterForm(forms.Form):
         widget=forms.Select(attrs={
             'class': 'container-label-register__select',
         }),
-        queryset=City.objects.filter(state=True),
+        queryset=City.objects.filter(state='Activo'),
         empty_label="--",
     )
 

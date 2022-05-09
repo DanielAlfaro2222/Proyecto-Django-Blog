@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from Users.models import User
 import uuid
 from Django_Blog.utils import validate_image
+from Django_Blog.utils import ESTADO
 
 
 class Category(models.Model):
@@ -12,7 +13,8 @@ class Category(models.Model):
     slug = models.SlugField('Url', null=True, blank=True)
     create = models.DateTimeField('Fecha de creacion', auto_now_add=True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
-    state = models.BooleanField('Estado', default=True)
+    state = models.CharField('Estado', choices=ESTADO,
+                             default='Activo', max_length=10)
 
     def __str__(self):
         return self.name
@@ -38,7 +40,8 @@ class Article(models.Model):
     category = models.ForeignKey(
         Category, verbose_name='Categoria', on_delete=models.DO_NOTHING)
     slug = models.SlugField('Url', null=True, blank=True)
-    state = models.BooleanField('Estado', default=True)
+    state = models.CharField('Estado', choices=ESTADO,
+                             default='Activo', max_length=10)
 
     def __str__(self):
         return self.name
@@ -94,7 +97,8 @@ class Comment(models.Model):
     content = models.TextField('Contenido')
     create = models.DateTimeField('Fecha de creacion', auto_now_add=True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
-    state = models.BooleanField('Estado', default=True)
+    state = models.CharField('Estado', choices=ESTADO,
+                             default='Activo', max_length=10)
 
     def __str__(self):
         return f'{self.id_comment}-{self.article}'

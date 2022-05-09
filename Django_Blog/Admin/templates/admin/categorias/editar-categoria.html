@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Editar categoria</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <h2>Editar categoria</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label>
+            Nombre categoria <span>*</span>
+            {{form.name}}
+            {% if form.name.errors %}
+            {{form.name.errors}}
+            {% endif %}
+        </label>
+
+        <label>
+            Estado de la categoria
+            {{form.state}}
+            {% if form.state.errors %}
+            {{form.state.errors}}
+            {% endif %}
+        </label>
+
+        <button>Editar categoria</button>
+    </form>
+</main>
+{% endblock %}
