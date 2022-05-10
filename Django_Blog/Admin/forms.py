@@ -38,8 +38,18 @@ class UserModelForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'biography',
                   'image', 'gender', 'linkedin', 'twitter', 'city', 'groups', 'state', 'password']
         widgets = {
-            'biography': forms.Textarea(attrs={'class': ''}),
-            'password': forms.PasswordInput(attrs={'class': ''})
+            'first_name': forms.TextInput(attrs={'class': 'container-label-users__input'}),
+            'last_name': forms.TextInput(attrs={'class': 'container-label-users__input'}),
+            'email': forms.EmailInput(attrs={'class': 'container-label-users__input'}),
+            'gender': forms.Select(attrs={'class': 'container-label-users__select'}),
+            'linkedin': forms.TextInput(attrs={'class': 'container-label-users__input'}),
+            'twitter': forms.TextInput(attrs={'class': 'container-label-users__input'}),
+            'city': forms.Select(attrs={'class': 'container-label-users__select'}),
+            'state': forms.Select(attrs={'class': 'container-label-users__select'}),
+            'biography': forms.Textarea(attrs={'class': 'container-label-users__textarea'}),
+            'password': forms.PasswordInput(attrs={'class': 'container-label-users__input'}),
+            'image': forms.FileInput(attrs={'class': 'container-label-users__image'}),
+            'groups': forms.SelectMultiple(attrs={'class': 'container-label-users__select'}),
         }
 
     def clean_password(self):

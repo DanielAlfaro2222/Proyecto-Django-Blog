@@ -1,0 +1,45 @@
+@use '../mixins/mixins.scss' as Mixin;
+@use '../base/base.scss' as Base;
+
+.main {
+    height: 80vh;
+    @include Mixin.flex(null, center, center);
+}
+
+.container-login {
+    width: 100%;
+}
+
+.container-login__title {
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.container-form-login__input {
+    @include Mixin.input-formulario();
+}
+
+.container-links-login {
+    width: 100%;
+    font-size: .8rem;
+    margin-top: .5em;
+    @include Mixin.flex(null, space-between);
+}
+
+.container-links-login__link {
+    color: black;
+}
+
+.container-form-login__btn {
+    @include Mixin.boton-formulario();
+}
+
+.container-form-login__btn:hover,
+.container-links-login__link:hover {
+    color: Base.$font-color-hover;
+}
+
+.mensaje_error,
+.mensaje_exito {
+    margin-bottom: 0;
+}

@@ -1,0 +1,39 @@
+@use '../mixins/mixins.scss' as Mixin;
+
+.container-label-users {
+    @include Mixin.label-formulario();
+}
+
+.container-form-users__btn {
+    @include Mixin.boton-formulario();
+}
+
+.container-form-users__btn:hover {
+    @include Mixin.boton-formulario-hover();
+}
+
+.container-label-users__input,
+.container-label-users__select,
+.container-label-users__textarea {
+    @include Mixin.input-formulario();
+}
+
+.container-label-users__textarea {
+    @include Mixin.textarea();
+}
+
+.container-label-users__image {
+    @include Mixin.label-file-formulario();
+}
+
+.container-label-users__img {
+    display: block;
+    width: 100px;
+    height: 100px;
+    margin-top: 1em;
+}
+
+.container-label-users__paragraph {
+    font-style: italic;
+    color: rgba(231, 224, 224, 0.454);
+}

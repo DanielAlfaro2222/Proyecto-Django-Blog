@@ -1,0 +1,33 @@
+@use '../mixins/mixins.scss' as Mixin;
+
+.container-label-register {
+    @include Mixin.label-formulario();
+}
+
+.container-label-register__input,
+.container-label-register__select,
+.container-label-register__textarea {
+    @include Mixin.input-formulario();
+}
+
+.container-label-register__textarea {
+    @include Mixin.textarea();
+}
+
+.container-form-register__btn {
+    @include Mixin.boton-formulario();
+}
+
+.container-form-register__btn:hover {
+    @include Mixin.boton-formulario-hover();
+}
+
+.container-label-register__image {
+    @include Mixin.label-file-formulario();
+}
+
+.container-label-register__span {
+    font-size: 1.8rem;
+    position: relative;
+    top: .4em;
+}

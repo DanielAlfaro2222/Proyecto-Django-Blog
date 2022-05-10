@@ -1,0 +1,71 @@
+@use '../base/base.scss' as Base;
+
+@mixin flex($flex-direction: row, $justify-content: initial, $align-items: initial, $flex-wrap: nowrap) {
+    display: flex;
+
+    @if $flex-direction  !=row {
+        flex-direction: $flex-direction;
+    }
+
+    @if $flex-wrap  !=nowrap {
+        flex-wrap: $flex-wrap;
+    }
+
+    @if $justify-content  !=initial {
+        justify-content: $justify-content;
+    }
+
+    @if $align-items  !=initial {
+        align-items: $align-items;
+    }
+}
+
+@mixin boton-formulario($width: 100%, $height: 40px, $border-radius: 1em, $color: white, $font-size: .9rem, $margin-top: 1em, $margin-bottom: 1em) {
+    width: $width;
+    height: $height;
+    border: none;
+    border-radius: $border-radius;
+    color: $color;
+    background-color: Base.$bg-color-header;
+    margin-bottom: $margin-bottom;
+    margin-top: $margin-top;
+    font-weight: 500;
+    font-size: $font-size;
+    cursor: pointer;
+}
+
+@mixin boton-formulario-hover() {
+    color: Base.$font-color-hover;
+}
+
+@mixin input-formulario($display: block, $width: 100%, $height: 40px, $margin-top: 1em, $border-radius: 1em, $padding-left: .8em, $bg-color: Base.$bg-color-input-form) {
+    display: $display;
+    width: $width;
+    height: $height;
+    margin-top: $margin-top;
+    outline: none;
+    border: none;
+    border-radius: $border-radius;
+    padding-left: $padding-left;
+    background-color: $bg-color;
+}
+
+@mixin textarea($width: 100%, $height: 150px, $padding: 1em) {
+    resize: none;
+    height: $height;
+    width: $width;
+    padding: $padding;
+}
+
+@mixin label-formulario($display: block, $margin-bottom: 1em, $font-size: .9rem) {
+    display: $display;
+    margin-bottom: $margin-bottom;
+    font-size: $font-size;
+}
+
+@mixin label-file-formulario($width: 100%, $font-size: .9rem, $margin-top: 1em, $margin-bottom: 1em) {
+    width: $width;
+    font-size: $font-size;
+    margin-top: $margin-top;
+    margin-bottom: $margin-bottom;
+}

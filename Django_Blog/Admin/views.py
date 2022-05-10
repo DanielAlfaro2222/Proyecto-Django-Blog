@@ -131,6 +131,7 @@ class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, Up
     form_class = UserModelForm
     success_url = reverse_lazy('Admin:users')
     success_message = 'Usuario editado exitosamente'
+    context_object_name = 'usuario'
 
     def get_queryset(self):
         return User.objects.filter(slug=self.kwargs.get('slug'))

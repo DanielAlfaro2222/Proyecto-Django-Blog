@@ -3,114 +3,129 @@
 {% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/users.css' %}">
 <title>Editar usuario</title>
 {% endblock %}
 
 {% block content %}
 <main class="main">
-    <h2>Editar usuario</h2>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+    <section>
+        <h2>Editar usuario</h2>
 
-        <label>
-            Nombres <span>*</span>
-            {{form.first_name}}
-            {% if form.first_name.errors %}
-            {{form.first_name.errors}}
-            {% endif %}
-        </label>
+        <form method="post" enctype="multipart/form-data" class="container-form-users">
+            {% csrf_token %}
 
-        <label>
-            Apellidos <span>*</span>
-            {{form.last_name}}
-            {% if form.last_name.errors %}
-            {{form.last_name.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Nombres <span>*</span>
+                {{form.first_name}}
+                {% if form.first_name.errors %}
+                {{form.first_name.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Genero <span>*</span>
-            {{form.gender}}
-            {% if form.gender.errors %}
-            {{form.gender.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Apellidos <span>*</span>
+                {{form.last_name}}
+                {% if form.last_name.errors %}
+                {{form.last_name.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Foto de perfil
-            {{form.image}}
-            {% if form.image.errors %}
-            {{form.image.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Genero <span>*</span>
+                {{form.gender}}
+                {% if form.gender.errors %}
+                {{form.gender.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Ciudad <span>*</span>
-            {{form.city}}
-            {% if form.city.errors %}
-            {{form.city.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Foto de perfil
+                {{form.image}}
+                {% if form.image.errors %}
+                {{form.image.errors}}
+                {% endif %}
 
-        <label>
-            Biografia <span>*</span>
-            {{form.biography}}
-            {% if form.biography.errors %}
-            {{form.biography.errors}}
-            {% endif %}
-        </label>
+                Foto actual
 
-        <label>
-            Linkedin
-            {{form.linkedin}}
-            {% if form.linkedin.errors %}
-            {{form.linkedin.errors}}
-            {% endif %}
-        </label>
+                {% if usuario.has_image %}
+                <img src="{{usuario.image.url}}" alt="Foto de {{usuario.get_short_name}}" loading="lazy"
+                    decoding="async" class="container-label-users__img">
+                {% else %}
+                <p class="container-label-users__paragraph">Sin foto de perfil</p>
+                {% endif %}
+            </label>
 
-        <label>
-            Twitter
-            {{form.twitter}}
-            {% if form.twitter.errors %}
-            {{form.twitter.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Ciudad <span>*</span>
+                {{form.city}}
+                {% if form.city.errors %}
+                {{form.city.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Correo <span>*</span>
-            {{form.email}}
-            {% if form.email.errors %}
-            {{form.email.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Biografia <span>*</span>
+                {{form.biography}}
+                {% if form.biography.errors %}
+                {{form.biography.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Contraseña
-            <input type="password" name="password" value="{{usuario.password}}">
-            {% if form.password.errors %}
-            {{form.password.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Linkedin
+                {{form.linkedin}}
+                {% if form.linkedin.errors %}
+                {{form.linkedin.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Rol <span>*</span>
-            {{form.groups}}
-            {% if form.groups.errors %}
-            {{form.groups.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Twitter
+                {{form.twitter}}
+                {% if form.twitter.errors %}
+                {{form.twitter.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Estado <span>*</span>
-            {{form.state}}
-            {% if form.state.errors %}
-            {{form.state.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-users">
+                Correo <span>*</span>
+                {{form.email}}
+                {% if form.email.errors %}
+                {{form.email.errors}}
+                {% endif %}
+            </label>
 
-        <button>Editar usuario</button>
-    </form>
+            <label class="container-label-users">
+                Contraseña
+                <input type="password" name="password" value="{{usuario.password}}"
+                    class="container-label-users__input">
+                {% if form.password.errors %}
+                {{form.password.errors}}
+                {% endif %}
+            </label>
 
+            <label class="container-label-users">
+                Rol <span>*</span>
+                {{form.groups}}
+                {% if form.groups.errors %}
+                {{form.groups.errors}}
+                {% endif %}
+            </label>
+
+            <label class="container-label-users">
+                Estado <span>*</span>
+                {{form.state}}
+                {% if form.state.errors %}
+                {{form.state.errors}}
+                {% endif %}
+            </label>
+
+            <button class="container-form-users__btn">
+                Editar usuario
+            </button>
+        </form>
+    </section>
 </main>
 {% endblock %}

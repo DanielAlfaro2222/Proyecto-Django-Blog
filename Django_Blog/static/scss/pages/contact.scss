@@ -1,0 +1,30 @@
+@use '../mixins/mixins.scss' as Mixin;
+
+.container-label-contact {
+    display: block;
+    margin-bottom: 1em;
+    font-size: .9rem;
+}
+
+.container-form-contact__btn {
+    @include Mixin.boton-formulario();
+}
+
+.container-form-contact__input,
+.container-form-contact__textarea {
+    @include Mixin.input-formulario();
+}
+
+.container-form-contact__textarea {
+    @include Mixin.textarea();
+}
+
+.container-form-contact {
+    margin-bottom: 1em;
+}
+
+.container-label-contact__span {
+    font-size: 1.8rem;
+    position: relative;
+    top: .4em;
+}
