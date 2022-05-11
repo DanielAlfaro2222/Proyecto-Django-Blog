@@ -4,27 +4,27 @@
     display: block;
     margin-bottom: 1em;
     font-size: .9rem;
-}
 
-.container-form-contact__btn {
-    @include Mixin.boton-formulario();
-}
-
-.container-form-contact__input,
-.container-form-contact__textarea {
-    @include Mixin.input-formulario();
-}
-
-.container-form-contact__textarea {
-    @include Mixin.textarea();
+    &__span {
+        font-size: 1.8rem;
+        position: relative;
+        top: .4em;
+    }
 }
 
 .container-form-contact {
     margin-bottom: 1em;
-}
 
-.container-label-contact__span {
-    font-size: 1.8rem;
-    position: relative;
-    top: .4em;
+    &__btn {
+        @include Mixin.boton-formulario();
+    }
+
+    &__input,
+    &__textarea {
+        @include Mixin.input-formulario();
+    }
+
+    &__textarea {
+        @include Mixin.textarea();
+    }
 }

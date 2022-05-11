@@ -69,6 +69,7 @@ class ArticleUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest,
 
         return render(request, self.template_name, {
             'form': form,
+            'articulo': articulo,
         })
 
 

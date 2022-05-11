@@ -46,6 +46,9 @@ class Article(models.Model):
     def __str__(self):
         return self.name
 
+    def has_image(self):
+        return True if self.image else False
+
     class Meta:
         verbose_name = 'Articulo'
         verbose_name_plural = 'Articulos'

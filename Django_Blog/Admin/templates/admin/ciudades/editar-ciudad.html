@@ -3,41 +3,45 @@
 {% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/cities_admin.css' %}">
 <title>Editar ciudad</title>
 {% endblock %}
 
 {% block content %}
 <main class="main">
-    <h2>Editar ciudad</h2>
 
-    <form method="post">
-        {% csrf_token %}
+    <section>
+        <h2>Editar ciudad</h2>
 
-        <label>
-            Nombre ciudad <span>*</span>
-            {{form.description}}
-            {% if form.description.errors %}
-            {{form.description.errors}}
-            {% endif %}
-        </label>
+        <form method="post" class="container-form-cities">
+            {% csrf_token %}
 
-        <label>
-            Codigo postal <span>*</span>
-            {{form.zip_code}}
-            {% if form.zip_code.errors %}
-            {{form.zip_code}}
-            {% endif %}
-        </label>
+            <label class="container-label-cities">
+                Nombre ciudad <span>*</span>
+                {{form.description}}
+                {% if form.description.errors %}
+                {{form.description.errors}}
+                {% endif %}
+            </label>
 
-        <label>
-            Estado de la ciudad
-            {{form.state}}
-            {% if form.state.errors %}
-            {{form.state.errors}}
-            {% endif %}
-        </label>
+            <label class="container-label-cities">
+                Codigo postal <span>*</span>
+                {{form.zip_code}}
+                {% if form.zip_code.errors %}
+                {{form.zip_code}}
+                {% endif %}
+            </label>
 
-        <button>Editar ciudad</button>
-    </form>
+            <label class="container-label-cities">
+                Estado de la ciudad
+                {{form.state}}
+                {% if form.state.errors %}
+                {{form.state.errors}}
+                {% endif %}
+            </label>
+
+            <button class="container-form-cities__btn">Editar ciudad</button>
+        </form>
+    </section>
 </main>
 {% endblock %}

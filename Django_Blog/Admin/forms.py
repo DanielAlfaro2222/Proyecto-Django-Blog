@@ -13,8 +13,26 @@ class ArticleModelForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(attrs={
                 'autofocus': 'true',
-                'class': '',
+                'class': 'container-label-articles__input',
             }),
+            'image': forms.FileInput(attrs={
+                'class': 'container-label-articles__file',
+            }),
+            'resume': forms.TextInput(attrs={
+                'class': 'container-label-articles__input',
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'container-label-articles__textarea',
+            }),
+            'author': forms.Select(attrs={
+                'class': 'container-label-articles__select',
+            }),
+            'category': forms.Select(attrs={
+                'class': 'container-label-articles__select',
+            }),
+            'state': forms.Select(attrs={
+                'class': 'container-label-articles__select',
+            })
         }
 
 
@@ -22,14 +40,29 @@ class CategoryModelForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name', 'state']
-        widgets = {}
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'container-label-categories__input',
+                'autofocus': 'true'
+            }),
+            'state': forms.Select(attrs={
+                'class': 'container-label-categories__select',
+            })
+        }
 
 
 class CityModelForm(forms.ModelForm):
     class Meta:
         model = City
         fields = ['description', 'zip_code', 'state']
-        widgets = {}
+        widgets = {
+            'description': forms.TextInput(attrs={
+                'class': 'container-label-cities__input',
+                'autofocus': 'true'
+            }),
+            'zip_code': forms.TextInput(attrs={'class': 'container-label-cities__input'}),
+            'state': forms.Select(attrs={'class': 'container-label-cities__select'})
+        }
 
 
 class UserModelForm(forms.ModelForm):
@@ -38,7 +71,10 @@ class UserModelForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'biography',
                   'image', 'gender', 'linkedin', 'twitter', 'city', 'groups', 'state', 'password']
         widgets = {
-            'first_name': forms.TextInput(attrs={'class': 'container-label-users__input'}),
+            'first_name': forms.TextInput(attrs={
+                'class': 'container-label-users__input',
+                'autofocus': 'true'
+            }),
             'last_name': forms.TextInput(attrs={'class': 'container-label-users__input'}),
             'email': forms.EmailInput(attrs={'class': 'container-label-users__input'}),
             'gender': forms.Select(attrs={'class': 'container-label-users__select'}),

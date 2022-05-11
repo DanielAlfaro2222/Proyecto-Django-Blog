@@ -1,4 +1,4 @@
-@use '../base/base.scss' as Base;
+@use '../base/base.scss' as *;
 
 @mixin flex($flex-direction: row, $justify-content: initial, $align-items: initial, $flex-wrap: nowrap) {
     display: flex;
@@ -26,7 +26,7 @@
     border: none;
     border-radius: $border-radius;
     color: $color;
-    background-color: Base.$bg-color-header;
+    background-color: $bg-color-header;
     margin-bottom: $margin-bottom;
     margin-top: $margin-top;
     font-weight: 500;
@@ -35,10 +35,10 @@
 }
 
 @mixin boton-formulario-hover() {
-    color: Base.$font-color-hover;
+    color: $font-color-hover;
 }
 
-@mixin input-formulario($display: block, $width: 100%, $height: 40px, $margin-top: 1em, $border-radius: 1em, $padding-left: .8em, $bg-color: Base.$bg-color-input-form) {
+@mixin input-formulario($display: block, $width: 100%, $height: 40px, $margin-top: 1em, $border-radius: 1em, $padding-left: .8em, $bg-color: $bg-color-input-form) {
     display: $display;
     width: $width;
     height: $height;

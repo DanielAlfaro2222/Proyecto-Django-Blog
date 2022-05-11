@@ -1,6 +1,6 @@
 @use '../mixins/mixins.scss' as *;
 
-.container-label-register {
+.container-label-articles {
     @include label-formulario();
 
     &__input,
@@ -13,18 +13,19 @@
         @include textarea();
     }
 
-    &__image {
+    &__file {
         @include label-file-formulario();
     }
 
-    &__span {
-        font-size: 1.8rem;
-        position: relative;
-        top: .4em;
+    &__img {
+        display: block;
+        width: 200px;
+        height: 150px;
+        margin-top: 1em;
     }
 }
 
-.container-form-register {
+.container-form-articles {
     &__btn {
         @include boton-formulario();
     }

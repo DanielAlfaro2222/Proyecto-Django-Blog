@@ -8,37 +8,39 @@
 
 {% block content %}
 <main class="main">
-    <h2>Gestionar ciudades</h2>
+    <section>
+        <h2>Gestionar ciudades</h2>
 
-    {% include 'snippets/mensajes.html' %}
+        {% include 'snippets/mensajes.html' %}
 
-    <a href="{% url 'Admin:new-city' %}">Agregar nueva ciudad</a>
+        <a href="{% url 'Admin:new-city' %}">Agregar nueva ciudad</a>
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Codigo postal</th>
-                <th>Estado</th>
-                <th>Fecha de modificacion</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for ciudad in ciudades %}
-            <tr>
-                <td>
-                    <a href="{% url 'Admin:edit-city' ciudad.id_city %}">
-                        {{forloop.counter}}
-                    </a>
-                </td>
-                <td>{{ciudad}}</td>
-                <td>{{ciudad.zip_code}}</td>
-                <td>{{ciudad.state}}</td>
-                <td>{{ciudad.modified | date:"j F Y"}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Codigo postal</th>
+                    <th>Estado</th>
+                    <th>Fecha de modificacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ciudad in ciudades %}
+                <tr>
+                    <td>
+                        <a href="{% url 'Admin:edit-city' ciudad.id_city %}">
+                            {{forloop.counter}}
+                        </a>
+                    </td>
+                    <td>{{ciudad}}</td>
+                    <td>{{ciudad.zip_code}}</td>
+                    <td>{{ciudad.state}}</td>
+                    <td>{{ciudad.modified | date:"j F Y"}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </main>
 {% endblock %}
