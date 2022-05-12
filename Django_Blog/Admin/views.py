@@ -18,6 +18,8 @@ from .forms import CityModelForm
 from .forms import UserModelForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from Blog.models import Comment
+from django.db.models import Count
 
 
 class AdminTemplateView(LoginRequiredMixin, AdminGroupTest, TemplateView):
@@ -261,3 +263,14 @@ class CategoryUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest
         return render(request, self.template_name, {
             'form': form,
         })
+
+
+class ListArticlesWithComments(LoginRequiredMixin, AdminGroupTest, TemplateView):
+    template_name = 'admin/comentarios/comentario-por-articulo.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['articulos'] = Comment.objects.values('article__name', 'article__slug', 'article__author__first_name', 'article__author__last_name').annotate(
+            total=Count('article')).order_by('-article_id')
+
+        return context

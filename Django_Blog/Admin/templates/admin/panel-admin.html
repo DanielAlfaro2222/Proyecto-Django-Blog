@@ -24,7 +24,9 @@
             <a href="{% url 'Admin:categories' %}">Gestionar categorias</a>
         </li>
         <li>
-            <a href="#">Gestionar comentarios</a>
+            <a href="{% url 'Admin:list-articles-with-comments' %}">
+                Gestionar comentarios
+            </a>
         </li>
     </ul>
 </main>
