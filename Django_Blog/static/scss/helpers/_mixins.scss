@@ -1,4 +1,4 @@
-@use '../base/base.scss' as *;
+@use '../config/config' as *;
 
 @mixin flex($flex-direction: row, $justify-content: initial, $align-items: initial, $flex-wrap: nowrap) {
     display: flex;

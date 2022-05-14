@@ -3,6 +3,7 @@ from Blog.models import Article
 from Blog.models import Category
 from Users.models import City
 from Users.models import User
+from Blog.models import Comment
 
 
 class ArticleModelForm(forms.ModelForm):
@@ -118,3 +119,9 @@ class UserModelForm(forms.ModelForm):
                 'El tamaño maximo del archivo debe ser de 1mb')
 
         return imagen
+
+
+class CommentModelForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['author', 'article', 'content', 'state']

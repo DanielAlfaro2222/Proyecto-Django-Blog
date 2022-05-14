@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Editar comentario</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Editar comentario</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label>
+                Autor
+                {{form.author}}
+            </label>
+
+            <label>
+                Articulo
+                {{form.article}}
+            </label>
+
+            <label>
+                Contenido
+                {{form.content}}
+            </label>
+
+            <label>
+                Estado
+                {{form.state}}
+            </label>
+
+            <button>Editar comentario</button>
+        </form>
+    </section>
+</main>
+{% endblock %}

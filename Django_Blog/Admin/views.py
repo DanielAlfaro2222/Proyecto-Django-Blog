@@ -20,6 +20,8 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from Blog.models import Comment
 from django.db.models import Count
+from django.shortcuts import get_object_or_404
+from .forms import CommentModelForm
 
 
 class AdminTemplateView(LoginRequiredMixin, AdminGroupTest, TemplateView):
@@ -266,11 +268,59 @@ class CategoryUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest
 
 
 class ListArticlesWithComments(LoginRequiredMixin, AdminGroupTest, TemplateView):
-    template_name = 'admin/comentarios/comentario-por-articulo.html'
+    template_name = 'admin/comentarios/listado-articulos-con-comentarios.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articulos'] = Comment.objects.values('article__name', 'article__slug', 'article__author__first_name', 'article__author__last_name').annotate(
+        context['articulos'] = Comment.objects.values('article__name', 'article__slug', 'article__author__first_name', 'article__author__last_name', 'article__author__slug').annotate(
             total=Count('article')).order_by('-article_id')
 
         return context
+
+
+class ListCommentsByArticle(LoginRequiredMixin, AdminGroupTest, TemplateView):
+    template_name = 'admin/comentarios/comentarios-por-articulo.html'
+
+    def get(self, request, *args, **kwargs):
+        articulo = get_object_or_404(Article, slug=self.kwargs.get('slug'))
+        comentarios = Comment.objects.filter(
+            article=articulo).order_by('-modified')
+
+        return render(request, self.template_name, {
+            'articulo': articulo,
+            'comentarios': comentarios
+        })
+
+
+class CommentUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, UpdateView):
+    template_name = 'admin/comentarios/editar-comentario.html'
+    model = Comment
+    form_class = CommentModelForm
+    success_message = 'Comentario editado exitosamente'
+
+    def get_queryset(self):
+        return Comment.objects.filter(pk=self.kwargs.get('pk'))
+
+    def get(self, request, *args, **kwargs):
+        comentario = self.get_queryset().first()
+        form = self.form_class(instance=comentario)
+
+        return render(request, self.template_name, {
+            'form': form,
+        })
+
+    def form_valid(self, form):
+        self.object = self.get_queryset().first()
+        self.object.author = User.objects.get(
+            email=form.cleaned_data.get('author'))
+        self.object.article = Article.objects.get(
+            name=form.cleaned_data.get('article'))
+        self.object.content = form.cleaned_data.get('content')
+        self.object.state = form.cleaned_data.get('state')
+
+        self.object.save()
+
+        messages.success(
+            self.request, self.get_success_message(form.cleaned_data))
+
+        return HttpResponseRedirect(reverse_lazy('Admin:list-comments-by-article', kwargs={'slug': self.kwargs.get('article')}))

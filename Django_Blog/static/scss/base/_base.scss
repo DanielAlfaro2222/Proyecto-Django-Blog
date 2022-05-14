@@ -1,0 +1,10 @@
+@use '../helpers/mixins' as *;
+@use '../config/config' as *;
+
+body {
+    @include flex(column);
+    padding-top: 4em;
+    font-family: $font;
+    min-height: 100vh;
+    position: relative;
+}

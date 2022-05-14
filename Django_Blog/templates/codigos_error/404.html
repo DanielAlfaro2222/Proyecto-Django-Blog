@@ -1,9 +1,20 @@
 {% extends 'codigos_error/base_error.html' %}
+{% load static %}
 
 {% block head %}
+<link rel="stylesheet" href="{% static 'css/error_404.css' %}">
 {% endblock %}
 
 {% block content %}
-<h1>Error 404</h1>
-<a href="{% url 'index' %}">Index</a>
+<section class="container-section-404">
+    <h2 class="container-section-404__title">¿Te perdiste?</h2>
+    <p class="container-section-404__paragraph">
+        Lo siento, esta pagina no existe
+    </p>
+    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1652406617/Proyecto%20django-blog/404_movil_un4kdr.webp"
+        alt="" decoding="async" loading="lazy">
+    <a href="{% url 'index' %}" class="container-section-404__link">
+        Regresar a casa
+    </a>
+</section>
 {% endblock %}

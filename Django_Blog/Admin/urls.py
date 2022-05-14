@@ -20,6 +20,10 @@ urlpatterns = [
     path('articles/new/', views.ArticleCreateView.as_view(), name='new-article'),
     path('articles/edit/<slug:slug>',
          views.ArticleUpdateView.as_view(), name='edit-article'),
-    path('comments/articles', views.ListArticlesWithComments.as_view(),
+    path('articles-with-comments', views.ListArticlesWithComments.as_view(),
          name='list-articles-with-comments'),
+    path('comments/article/<slug:slug>',
+         views.ListCommentsByArticle.as_view(), name='list-comments-by-article'),
+    path('comment/edit/<int:pk>&<slug:article>',
+         views.CommentUpdateView.as_view(), name='edit-comment'),
 ]

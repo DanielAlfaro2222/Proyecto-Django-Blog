@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Comentarios</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Listado de articulos con comentarios</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Articulo</th>
+                    <th>Autor</th>
+                    <th>Comentarios</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for articulo in articulos %}
+                <tr>
+                    <td>
+                        <a href="{% url 'Admin:list-comments-by-article' articulo.article__slug %}">
+                            {{forloop.counter}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'Blog:articulo' articulo.article__slug %}">
+                            {{articulo.article__name}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'Users:author' articulo.article__author__slug %}">
+                            {{articulo.article__author__first_name.split | first}}
+                            {{articulo.article__author__last_name.split | first}}
+                        </a>
+                    </td>
+                    <td>{{articulo.total}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</main>
+{% endblock %}

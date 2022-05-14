@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Comentarios</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Comentarios articulo: {{articulo}}</h2>
+
+        {% include 'snippets/mensajes.html' %}
+
+        <p>
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            Para editar un comentario simplemente de clic en el numero del comentario
+        </p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Autor</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for comentario in comentarios %}
+                <tr>
+                    <td>
+                        <a href="{% url 'Admin:edit-comment' comentario.id_comment articulo.slug %}">
+                            {{forloop.counter}}
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{% url 'Users:author' comentario.author.slug %}">
+                            {{comentario.author.get_short_name}}
+                        </a>
+                    </td>
+                    <td>
+                        {{comentario.state}}
+                    </td>
+                    <td>{{comentario.create | date:"j F Y"}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</main>
+{% endblock %}

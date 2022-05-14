@@ -1,13 +1,6 @@
-@use 'mixins/mixins.scss' as *;
-@use 'base/base.scss' as *;
-
-body {
-    @include flex(column);
-    padding-top: 4em;
-    font-family: $font;
-    min-height: 100vh;
-    position: relative;
-}
+@use 'helpers/mixins' as *;
+@use 'base/base' as *;
+@use 'config/config' as *;
 
 /* ------------------------ESTILOS DEL HEADER------------------------ */
 .nav-main {
