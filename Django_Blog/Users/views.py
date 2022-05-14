@@ -22,6 +22,8 @@ from .forms import CreateArticleModelForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404
 from .forms import UserModelForm
+from django.http import Http404
+from django.contrib.sites.shortcuts import get_current_site
 
 
 def login_view(request):
@@ -103,11 +105,18 @@ def contact_view(request):
 
     formulario = ContactForm(request.POST or None)
 
-    # if request.method == 'POST' and formulario.is_valid():
-    #     if formulario.enviar_correo():
-    #         messages.success(request, 'Correo enviado con exito.')
-    #     else:
-    #         messages.error(request, 'El correo no se pudo enviar')
+    if request.method == 'POST' and formulario.is_valid():
+        protocolo = 'https' if request.is_secure() else 'http'
+
+        if formulario.enviar_correo(get_current_site(request).domain, protocolo):
+            messages.success(
+                request, 'Correo enviado con exito, un asesor se comunicara pronto contigo')
+
+            return redirect('Users:contact')
+
+        else:
+            messages.error(
+                request, 'Ocurrio un error el correo no se pudo enviar, intentalo de nuevo')
 
     return render(request, 'users/contact.html', context={
         'formulario': formulario,
@@ -131,6 +140,9 @@ class AuthorDetailView(DetailView):
         context['num_pagina'] = self.request.GET.get('page')
         context['articulos'] = context['paginacion'].get_page(
             context['num_pagina'])
+
+        if context['autor'].state == 'Desactivo' and not self.request.user.is_staff:
+            raise Http404()
 
         return context
 

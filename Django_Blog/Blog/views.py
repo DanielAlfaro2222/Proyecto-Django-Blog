@@ -9,10 +9,15 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.http import Http404
 
 
 def category_view(request, slug):
     categoria = Category.objects.get(slug=slug)
+
+    if categoria.state == 'Desactivo' and not request.user.is_staff:
+        raise Http404()
+
     articulos = Article.objects.filter(
         category=categoria, state='Activo').order_by('-id_article')
 
@@ -47,6 +52,9 @@ class ArticleDetailView(DetailView):
         context['articulo'] = context['object']
         context['comentarios'] = Comment.objects.filter(
             article=context['articulo'], state='Activo').order_by('-modified')
+
+        if context['articulo'].state == 'Desactivo' and not self.request.user.is_staff:
+            raise Http404()
 
         return context
 

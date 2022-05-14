@@ -1,0 +1,20 @@
+{% extends 'mails/base_email.html' %}
+
+{% block content %}
+<h2 style="font-size: 1rem;font-weight: 900; margin-top: 0;">
+    Nuevo mensaje de contacto
+</h2>
+
+<p style="font-size: .9rem;">
+    <span style="font-weight: 700;">Nombre: </span> {{nombre}}
+</p>
+<p style="font-size: .9rem;">
+    <span style="font-weight: 700;">Asunto: </span> {{asunto}}
+</p>
+<p style="font-size: .9rem;">
+    <span style="font-weight: 700;">Correo: </span> {{correo}}
+</p>
+<p style="font-size: .9rem;margin-bottom: 0;">
+    <span style="font-weight: 700;">Mensaje: </span> {{mensaje}}
+</p>
+{% endblock %}

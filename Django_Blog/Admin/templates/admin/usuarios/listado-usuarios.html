@@ -17,6 +17,8 @@
 
         <a href="{% url 'Admin:new-user' %}">Agregar nuevo usuario</a>
 
+        {% include 'admin/snippets/busqueda.html' %}
+
         <table>
             <thead>
                 <tr>
@@ -33,7 +35,11 @@
                     <td>
                         <a href="{% url 'Admin:edit-user' usuario.slug %}">{{forloop.counter}}</a>
                     </td>
-                    <td>{{usuario.get_full_name}}</td>
+                    <td>
+                        <a href="{% url 'Users:author' usuario.slug %}">
+                            {{usuario.get_full_name}}
+                        </a>
+                    </td>
                     <td>{{usuario}}</td>
                     <td>{{usuario.state}}</td>
                     <td>{{usuario.groups.first}}</td>

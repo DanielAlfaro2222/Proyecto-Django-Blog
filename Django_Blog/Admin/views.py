@@ -22,6 +22,7 @@ from Blog.models import Comment
 from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from .forms import CommentModelForm
+from django.db.models import Q
 
 
 class AdminTemplateView(LoginRequiredMixin, AdminGroupTest, TemplateView):
@@ -36,10 +37,23 @@ class ArticlesListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
 
     template_name = 'admin/articulos/listado-articulos.html'
-    context_object_name = 'articulos'
     model = Article
-    queryset = Article.objects.all().order_by('-modified')
-    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['articulos'] = Article.objects.all().order_by('-modified')
+
+        if self.request.GET.get('q'):
+            parametro_busqueda = self.request.GET.get('q')
+            context['articulos'] = Article.objects.filter(
+                Q(name__icontains=parametro_busqueda) | Q(content__icontains=parametro_busqueda) | Q(resume__icontains=parametro_busqueda))
+            context['resultado'] = context['articulos'].count()
+
+            if context['articulos'].count() == 0:
+                context['articulos'] = Article.objects.all().order_by(
+                    '-modified')
+
+        return context
 
 
 class ArticleCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
@@ -82,10 +96,22 @@ class UsersListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
 
     template_name = 'admin/usuarios/listado-usuarios.html'
-    context_object_name = 'usuarios'
     model = User
-    queryset = User.objects.all().order_by('-id_user')
-    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['usuarios'] = User.objects.all().order_by('-id_user')
+
+        if self.request.GET.get('q'):
+            parametro_busqueda = self.request.GET.get('q')
+            context['usuarios'] = User.objects.filter(
+                Q(first_name__icontains=parametro_busqueda) | Q(last_name__icontains=parametro_busqueda) | Q(email__icontains=parametro_busqueda))
+            context['resultado'] = context['usuarios'].count()
+
+            if context['usuarios'].count() == 0:
+                context['usuarios'] = User.objects.all().order_by('-id_user')
+
+        return context
 
 
 class UserCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
@@ -183,10 +209,22 @@ class CitiesListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
 
     template_name = 'admin/ciudades/listado-ciudades.html'
-    context_object_name = 'ciudades'
     model = City
-    queryset = City.objects.all().order_by('-modified')
-    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['ciudades'] = City.objects.all().order_by('-modified')
+
+        if self.request.GET.get('q'):
+            parametro_busqueda = self.request.GET.get('q')
+            context['ciudades'] = City.objects.filter(
+                description__icontains=parametro_busqueda)
+            context['resultado'] = context['ciudades'].count()
+
+            if context['ciudades'].count() == 0:
+                context['ciudades'] = City.objects.all().order_by('-modified')
+
+        return context
 
 
 class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
@@ -227,10 +265,23 @@ class CategoriesListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
 
     template_name = 'admin/categorias/listado-categorias.html'
-    context_object_name = 'categorias'
     model = Category
-    queryset = Category.objects.all().order_by('-modified')
-    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categorias'] = Category.objects.all().order_by('-modified')
+
+        if self.request.GET.get('q'):
+            parametro_busqueda = self.request.GET.get('q')
+            context['categorias'] = Category.objects.filter(
+                name__icontains=parametro_busqueda)
+            context['resultado'] = context['categorias'].count()
+
+            if context['categorias'].count() == 0:
+                context['categorias'] = Category.objects.all().order_by(
+                    '-modified')
+
+        return context
 
 
 class CategoriesCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
@@ -285,10 +336,22 @@ class ListCommentsByArticle(LoginRequiredMixin, AdminGroupTest, TemplateView):
         articulo = get_object_or_404(Article, slug=self.kwargs.get('slug'))
         comentarios = Comment.objects.filter(
             article=articulo).order_by('-modified')
+        resultado = 0
+
+        if self.request.GET.get('q'):
+            parametro_busqueda = self.request.GET.get('q')
+            comentarios = Comment.objects.filter(
+                Q(author__first_name__icontains=parametro_busqueda) | Q(author__last_name__icontains=parametro_busqueda), article=articulo).order_by('-modified')
+            resultado = comentarios.count()
+
+            if comentarios.count() == 0:
+                comentarios = Comment.objects.filter(
+                    article=articulo).order_by('-modified')
 
         return render(request, self.template_name, {
             'articulo': articulo,
-            'comentarios': comentarios
+            'comentarios': comentarios,
+            'resultado': resultado
         })
 
 

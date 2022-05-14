@@ -9,10 +9,10 @@
 
 {% block content %}
 <main class="main">
-    {% include 'snippets/mensajes.html' %}
-
     <section class="container-section-contact">
         <h2>Contacto</h2>
+
+        {% include 'snippets/mensajes.html' %}
 
         <form method="POST" class="container-form-contact">
             {% csrf_token %}

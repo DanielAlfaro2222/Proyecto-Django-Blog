@@ -14,6 +14,8 @@
 
     <a href="{% url 'Admin:new-category' %}">Agregar nueva categoria</a>
 
+    {% include 'admin/snippets/busqueda.html' %}
+
     <table>
         <thead>
             <tr>
@@ -29,7 +31,11 @@
                 <td>
                     <a href="{% url 'Admin:edit-category' categoria.slug %}">{{forloop.counter}}</a>
                 </td>
-                <td>{{categoria}}</td>
+                <td>
+                    <a href="{% url 'Blog:categoria' categoria.slug %}">
+                        {{categoria}}
+                    </a>
+                </td>
                 <td>{{categoria.state}}</td>
                 <td>{{categoria.modified | date:"j F Y"}}</td>
             </tr>

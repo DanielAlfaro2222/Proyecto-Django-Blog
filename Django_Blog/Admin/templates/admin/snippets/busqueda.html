@@ -1,0 +1,9 @@
+<form method="get">
+    <input type="text" name="q" value="{{request.GET.q}}">
+</form>
+
+{% if request.GET.q %}
+<p>
+    Resultados encontrados para {{request.GET.q}}: {{resultado}}
+</p>
+{% endif %}

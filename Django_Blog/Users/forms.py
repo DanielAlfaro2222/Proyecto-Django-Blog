@@ -3,9 +3,8 @@ from django.contrib.auth import authenticate
 from .models import User
 from .models import City
 from Blog.models import Article
-
-from django.core.mail import send_mail
-from django.conf import settings
+from Django_Blog.utils import send_email
+import threading
 
 
 class LoginForm(forms.Form):
@@ -225,18 +224,21 @@ class ContactForm(forms.Form):
         })
     )
 
-    def enviar_correo(self):
-        mensaje = f"""
-            Nombre: {self.cleaned_data.get('nombre')} Asunto: {self.cleaned_data.get('asunto')} Correo: {self.cleaned_data.get('correo')} Mensaje: {self.cleaned_data.get('mensaje')}
-        """
-
+    def enviar_correo(self, dominio, protocolo):
         try:
-            send_mail(
-                'Nuevo mensaje de contacto',
-                mensaje,
-                settings.EMAIL_HOST_USER,
-                ['kdalfaro45@misena.edu.co']
-            )
+            template = 'mails/email_contacto.html'
+            context = {
+                'nombre': self.cleaned_data.get('nombre').strip(),
+                'asunto': self.cleaned_data.get('asunto').strip(),
+                'correo': self.cleaned_data.get('correo').strip(),
+                'mensaje': self.cleaned_data.get('mensaje').strip(),
+                'dominio': dominio,
+                'protocolo': protocolo,
+            }
+            subject = 'Nuevo mensaje de contacto'
+            thread = threading.Thread(
+                target=send_email(template, context, subject))
+            thread.start()
             return True
         except:
             return False
