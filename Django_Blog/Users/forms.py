@@ -163,6 +163,8 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError(
                 'La contraseña debe tener minimo 8 caracteres y debe contener 1 mayuscula, 1 simbolo y 1 numero.')
 
+        return contrasena
+
     def clean_ciudad(self):
         ciudad = self.cleaned_data.get('ciudad')
 
@@ -172,16 +174,15 @@ class RegisterForm(forms.Form):
         return ciudad
 
     def save(self):
-        email = self.cleaned_data.get('correo')
-        password = self.cleaned_data.get('contrasena')
-
-        usuario = User.objects.create_user(email, password)
+        usuario = User.objects.create_user(email=self.cleaned_data.get(
+            'correo'), password=self.cleaned_data.get('contrasena'))
 
         usuario.first_name = self.cleaned_data.get('nombre').strip()
         usuario.last_name = self.cleaned_data.get('apellido').strip()
         usuario.gender = self.cleaned_data.get('genero')
         usuario.city = City.objects.get(
             description=self.cleaned_data.get('ciudad'))
+        usuario.groups.set('2')
         usuario.save()
 
         return usuario
@@ -256,7 +257,7 @@ class CreateArticleModelForm(forms.ModelForm):
             'content': forms.Textarea(attrs={'class': ''}),
             'category': forms.Select(attrs={'class': ''}),
             'author': forms.Select(attrs={'hidden': 'true'}),
-            'state': forms.CheckboxInput(attrs={'class': ''})
+            'state': forms.Select(attrs={'class': ''})
         }
 
 

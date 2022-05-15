@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block head %}
+<title>Cambiar contraseña</title>
+{% endblock %}
+
+{% block content %}
+<main class="main">
+    <section>
+        <h2>Cambiar contraseña</h2>
+
+        {% include 'snippets/mensajes.html' %}
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <label>
+                Contraseña antigua <span>*</span>
+                {{form.old_password}}
+                {% if form.old_password.errors %}
+                {{form.old_password.errors}}
+                {% endif %}
+            </label>
+
+            <label>
+                Contraseña nueva <span>*</span>
+                {{form.new_password1}}
+                {% if form.new_password1.errors %}
+                {{form.new_password1.errors}}
+                {% endif %}
+            </label>
+
+            <label>
+                Contraseña nueva (confirmación): <span>*</span>
+                {{form.new_password2}}
+                {% if form.new_password2.errors %}
+                {{form.new_password2.errors}}
+                {% endif %}
+            </label>
+
+            <button>Cambiar contraseña</button>
+        </form>
+    </section>
+
+    {% include 'snippets/aside_contacto.html' %}
+</main>
+{% endblock %}

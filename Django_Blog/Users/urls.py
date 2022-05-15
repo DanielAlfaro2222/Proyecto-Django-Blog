@@ -1,5 +1,6 @@
 from Users import views
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 app_name = 'Users'
 
@@ -15,5 +16,7 @@ urlpatterns = [
     path('articles/', views.PublicationsListView.as_view(), name='articles-user'),
     path('new-article/', views.CreateArticleView.as_view(), name='new-article'),
     path('edit-article/<slug:slug>',
-         views.UpdateArticleView.as_view(), name='edit-article')
+         views.UpdateArticleView.as_view(), name='edit-article'),
+    path('change-password/', views.change_password,
+         name='change-password'),
 ]

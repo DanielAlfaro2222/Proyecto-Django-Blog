@@ -14,15 +14,12 @@ urlpatterns = [
     path('', views.index_view, name='index'),
     path('users/', include('Users.urls')),
     path('blog/', include('Blog.urls')),
-    path('reset_password/', auth_views.PasswordResetView.as_view(),
-         name='reset_password'),
-    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(),
-         name='password_reset_done'),
-    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(),
+    path('reset_password/', views.reset_password, name='reset_password'),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name='recuperar-contraseña/formulario-recuperar-contraseña.html'),
          name='password_reset_confirm'),
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(),
          name='password_reset_complete'),
-    path('admin/', include('Admin.urls'))
+    path('admin/', include('Admin.urls')),
 ]
 
 # Configuracion para servir la media del aplicativo

@@ -17,16 +17,25 @@
             <label class="container-label-register">
                 Nombre <span class="container-label-register__span">*</span>
                 {{formulario.nombre}}
+                {% if formulario.nombre.errors %}
+                {{formulario.nombre.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
                 Apellido <span class="container-label-register__span">*</span>
                 {{formulario.apellido}}
+                {% if formulario.apellido.errors %}
+                {{formulario.apellido.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
                 Genero <span class="container-label-register__span">*</span>
                 {{formulario.genero}}
+                {% if formulario.genero.errors %}
+                {{formulario.genero.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
@@ -40,21 +49,33 @@
             <label class="container-label-register">
                 Ciudad <span class="container-label-register__span">*</span>
                 {{formulario.ciudad}}
+                {% if formulario.ciudad.errors %}
+                {{formulario.ciudad.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
                 Biografia <span class="container-label-register__span">*</span>
                 {{formulario.biografia}}
+                {% if formulario.biografia.errors %}
+                {{formulario.biografia.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
                 Linkedin
                 {{formulario.linkedin}}
+                {% if formulario.linkedin.errors %}
+                {{formulario.linkedin.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">
                 Twitter
                 {{formulario.twitter}}
+                {% if formulario.twitter.errors %}
+                {{formulario.twitter.errors}}
+                {% endif %}
             </label>
 
             <label class="container-label-register">

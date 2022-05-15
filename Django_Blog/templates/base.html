@@ -72,11 +72,14 @@
                                     Mi cuenta
                                 </a>
                             </li>
-                            <li>
-                                <a href="{% url 'Admin:admin' %}">
-                                    Panel de administracion
-                                </a>
-                            </li>
+                            {% if request.user.is_staff %}
+                                <li>
+                                    <a href="{% url 'Admin:admin' %}">
+                                        Panel de administracion
+                                    </a>
+                                </li>
+                            {% endif %}
+
                             <li>
                                 <a href="{% url 'Users:logout' %}">
                                     Cerrar sesion

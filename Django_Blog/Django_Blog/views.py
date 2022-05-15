@@ -4,6 +4,14 @@ from Blog.utils import busqueda_articulos
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.views.generic import TemplateView
+from django.contrib.auth.forms import PasswordResetForm
+from Users.models import User
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from .utils import send_email
+from django.shortcuts import redirect
 
 
 def index_view(request):
@@ -70,3 +78,44 @@ class Error500TemplateView(TemplateView):
             r.render()
             return r
         return view
+
+
+def reset_password(request):
+    """
+    """
+
+    form = PasswordResetForm(request.POST or None)
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = User.objects.filter(email=email).first()
+
+        if user:
+            try:
+                protocolo = 'https' if request.is_secure() else 'http'
+                template = 'mails/email_recuperar_contraseña.html'
+                context = {
+                    'usuario': user.get_short_name(),
+                    'dominio': get_current_site(request).domain,
+                    'uuid':  str(urlsafe_base64_encode(force_bytes(user.id_user))),
+                    'token': default_token_generator.make_token(user),
+                    'protocolo': protocolo,
+                }
+
+                send_email(template, context, 'Recuperar contraseña', email)
+
+                messages.success(
+                    request, 'Le enviamos las instrucciones por correo electrónico para configurar su nueva contraseña')
+
+                return redirect('reset_password')
+            except:
+                messages.error(
+                    request, 'Error no se pudo enviar el correo electronico, por favor intente mas tarde')
+
+        else:
+            messages.error(
+                request, 'Error el usuario no esta registrado en el sistema.')
+
+    return render(request, 'recuperar-contraseña/recuperar-contraseña.html', context={
+        'form': form
+    })

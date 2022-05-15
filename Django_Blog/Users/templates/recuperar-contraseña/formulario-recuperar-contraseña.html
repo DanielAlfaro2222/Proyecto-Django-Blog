@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Recuperar contraseña</title>
+{% endblock %}
+
+{% block content %}
+<h2>
+    Escriba la nueva contraseña
+</h2>
+<p>
+    Por favor, ingrese su contraseña nueva dos veces para verificar que la ha escrito correctamente.
+</p>
+
+{% include 'snippets/mensajes.html' %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>
+        Contraseña nueva
+        {{form.new_password1}}
+        {% if form.new_password1.errors %}
+            {{form.new_password1.errors}}
+        {% endif %}
+    </label>
+
+    <label>
+        Contraseña nueva (confirmación)
+        {{form.new_password2}}
+        {% if form.new_password2.errors %}
+        {{form.new_password2.errors}}
+        {% endif %}
+    </label>
+
+    <button>
+        Confirmar la nueva contraseña
+    </button>
+</form>
+
+{% include 'snippets/aside_contacto.html' %}
+{% endblock %}

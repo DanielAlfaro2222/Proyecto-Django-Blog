@@ -24,6 +24,11 @@ from django.shortcuts import get_object_or_404
 from .forms import UserModelForm
 from django.http import Http404
 from django.contrib.sites.shortcuts import get_current_site
+from Django_Blog.utils import send_email
+import threading
+from django.db.models import Q
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 
 def login_view(request):
@@ -69,7 +74,7 @@ def logout_view(request):
     """
 
     logout(request)
-    messages.success(request, 'Sesion cerrada exitosamente')
+    messages.success(request, 'Sesion finalizada exitosamente')
     return redirect('Users:login')
 
 
@@ -88,6 +93,18 @@ def register_view(request):
         imagen = request.FILES.get('imagen')
         usuario.image = imagen
         usuario.save()
+
+        template = 'mails/email_bienvenida.html'
+        protocolo = 'https' if request.is_secure() else 'http'
+        context = {
+            'dominio': get_current_site(request).domain,
+            'protocolo': protocolo,
+            'usuario': usuario.get_short_name(),
+        }
+
+        thread = threading.Thread(target=send_email(
+            template, context, 'Bienvenid@ a Django Blog', usuario.email))
+        thread.start()
 
         if usuario:
             login(request, usuario)
@@ -170,36 +187,25 @@ class UpdateDataUserView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         return User.objects.filter(slug=self.kwargs.get('slug'))
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class(initial={
-            'first_name': self.request.user.first_name,
-            'last_name': self.request.user.last_name,
-            'email': self.request.user.email,
-            'gender': self.request.user.gender,
-            'image': self.request.user.image,
-            'city': self.request.user.city,
-            'linkedin': self.request.user.linkedin,
-            'twitter': self.request.user.twitter,
-            'biography': self.request.user.biography,
-        })
+        usuario = self.get_queryset().first()
+        form = self.form_class(instance=usuario)
 
         return render(request, self.template_name, {
             'formulario': form,
         })
 
     def post(self, request, *args, **kwargs):
-        print(self.request.POST)
         self.object = self.get_object()
         return super().post(request, *args, **kwargs)
 
 
-class PublicationsListView(ListView):
+class PublicationsListView(LoginRequiredMixin, ListView):
     """
     Vista encargada de listar las publicaciones de un autor.
     """
 
     template_name = 'users/mis-publicaciones.html'
     model = Article
-    paginate_by = 10
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -207,6 +213,20 @@ class PublicationsListView(ListView):
             author=self.request.user).order_by('-create')
         context['paginacion'] = Paginator(context['registros'], 10)
         context['num_pagina'] = self.request.GET.get('page')
+        context['articulos'] = context['paginacion'].get_page(
+            context['num_pagina'])
+
+        if self.request.GET.get('q'):
+            parametro_busqueda = self.request.GET.get('q')
+            context['registros'] = Article.objects.filter(
+                Q(name__icontains=parametro_busqueda) | Q(content__icontains=parametro_busqueda) | Q(resume__icontains=parametro_busqueda), author=self.request.user)
+            context['resultado'] = context['registros'].count()
+
+            if context['registros'].count() == 0:
+                context['registros'] = Article.objects.filter(
+                    author=self.request.user).order_by('-create')
+
+        context['paginacion'] = Paginator(context['registros'], 10)
         context['articulos'] = context['paginacion'].get_page(
             context['num_pagina'])
 
@@ -236,16 +256,29 @@ class UpdateArticleView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         articulo = self.get_queryset().first()
-        form = self.form_class(initial={
-            'state': articulo.state,
-            'author': self.request.user,
-            'image': articulo.image,
-            'category': articulo.category,
-            'resume': articulo.resume,
-            'content': articulo.content,
-            'name': articulo.name
-        })
+        form = self.form_class(instance=articulo)
+
         return render(request, self.template_name, {
             'form': form,
             'articulo': articulo
         })
+
+
+@login_required
+def change_password(request):
+
+    form = PasswordChangeForm(user=request.user, data=request.POST or None)
+
+    if request.method == 'POST' and form.is_valid():
+        form.save()
+
+        update_session_auth_hash(request, form.user)
+
+        messages.success(
+            request, 'El cambio de contraseña se realizo de manera correcta')
+
+        return redirect('Users:account')
+
+    return render(request, 'users/cambiar-contraseña.html', {
+        'form': form,
+    })
