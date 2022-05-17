@@ -1,0 +1,20 @@
+@use '../helpers/placeholders' as *;
+
+.container-label-cities {
+    @extend %label-form-movil;
+
+    &__input,
+    &__select {
+        @extend %input-form-movil;
+    }
+}
+
+.container-form-cities {
+    &__btn {
+        @extend %btn-form-movil;
+    }
+
+    &__btn:hover {
+        @extend %btn-form-movil-hover;
+    }
+}

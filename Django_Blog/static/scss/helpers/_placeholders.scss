@@ -1,0 +1,25 @@
+@use '../helpers/mixins' as *;
+
+%btn-form-movil {
+    @include boton-formulario();
+}
+
+%btn-form-movil-hover {
+    @include boton-formulario-hover();
+}
+
+%input-form-movil {
+    @include input-formulario();
+}
+
+%textarea-form-movil {
+    @include textarea;
+}
+
+%label-form-movil {
+    @include label-formulario();
+}
+
+%label-form-file-movil {
+    @include label-file-formulario();
+}

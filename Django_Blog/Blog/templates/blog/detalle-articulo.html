@@ -70,36 +70,37 @@
                 </p>
 
                 {% if comentario.author == request.user %}
-                {% if request.GET.editar %}
-                <form action="{% url 'Blog:editar_comentario' articulo.slug %}" method="POST">
-                    {% csrf_token %}
-                    <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
-                    <textarea name="comentario" id="" cols="30" rows="10">
-                                        {{comentario.content}}
-                                    </textarea>
-                    <button class="container-actions-commentary__link">Editar</button>
-                </form>
+                    <form action="{% url 'Blog:editar_comentario' articulo.slug %}" method="POST" class="container-form-edit-commentary">
+                        {% csrf_token %}
+                        <input type="number" value="{{comentario.id_comment}}"  name="id" hidden="true">
+                        <textarea name="comentario" id="" cols="30" rows="10">
+                                            {{comentario.content}}
+                                        </textarea>
+                        <button class="container-actions-commentary__link">
+                            Editar comentairo
+                        </button>
+                    </form>
 
-                {% else %}
-                <p>{{comentario.content}}</p>
+                    <p>{{comentario.content}}</p>
 
-                <p class="container-actions-commentary">
-                    <a href="?editar=true" class="container-actions-commentary__link">
-                        Editar
-                    </a>
+                    <p class="container-actions-commentary">
+                        <button class="container-actions-commentary__link" onclick="editCommentary(this, this.parentNode.parentNode)">
+                            Editar
+                        </button>
 
-                <form action="{% url 'Blog:eliminar_comentario' articulo.slug %}" method="POST">
-                    {% csrf_token %}
-                    <input type="number" value="{{comentario.id_comment}}" style="display: none;" name="id">
-                    <button
-                        class="container-actions-commentary__link container-actions-commentary__link--color">Eliminar</button>
-                </form>
-                </p>
+                        <form action="{% url 'Blog:eliminar_comentario' articulo.slug %}" method="POST">
+                            {% csrf_token %}
+                            <input type="number" value="{{comentario.id_comment}}" name="id" hidden="true">
+                            <button
+                                class="container-actions-commentary__link container-actions-commentary__link--color">
+                                Eliminar
+                            </button>
+                        </form>
+                    </p>
 
-                <p class="container-commentary__paragraph">
-                    {{comentario.modified | date:"j F Y"}}
-                </p>
-                {% endif %}
+                    <p class="container-commentary__paragraph">
+                        {{comentario.modified | date:"j F Y"}}
+                    </p>
                 {% endif %}
             </article>
             {% empty %}
@@ -114,4 +115,6 @@
 
     {% include 'snippets/aside_contacto.html' %}
 </main>
+
+<script src="{% static 'js/index.js' %}"></script>
 {% endblock %}

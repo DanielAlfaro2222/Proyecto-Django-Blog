@@ -76,7 +76,7 @@ def add_comment(request, slug):
 def delete_comment(request, slug):
     if request.method == 'POST':
         comentario = Comment.objects.get(id_comment=request.POST.get('id'))
-        comentario.state = False
+        comentario.state = 'Desactivo'
         comentario.save()
 
         messages.success(request, 'Comentario eliminado con exito!')

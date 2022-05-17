@@ -195,7 +195,7 @@ class ContactForm(forms.Form):
             'autofocus': 'true',
             'tab-index': 1,
             'max_length': 30,
-            'class': 'container-form-contact__input'
+            'class': 'container-label-contact__input'
         })
     )
 
@@ -204,7 +204,7 @@ class ContactForm(forms.Form):
         widget=forms.TextInput(attrs={
             'tab-index': 2,
             'max_length': 45,
-            'class': 'container-form-contact__input'
+            'class': 'container-label-contact__input'
         })
     )
     correo = forms.EmailField(
@@ -213,7 +213,7 @@ class ContactForm(forms.Form):
             'tab-index': 3,
             'placeholder': 'ejemplo@gmail.com',
             'max_length': 25,
-            'class': 'container-form-contact__input'
+            'class': 'container-label-contact__input'
         })
     )
 
@@ -221,7 +221,7 @@ class ContactForm(forms.Form):
         required=True,
         widget=forms.Textarea(attrs={
             'tab-index': 4,
-            'class': 'container-form-contact__textarea'
+            'class': 'container-label-contact__textarea'
         })
     )
 

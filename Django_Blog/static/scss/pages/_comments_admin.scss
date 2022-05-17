@@ -1,0 +1,25 @@
+@use '../helpers/placeholders' as *;
+
+.container-label-edit-comment-admin {
+    @extend %label-form-movil;
+
+    &__input,
+    &__select,
+    &__textarea {
+        @extend %input-form-movil;
+    }
+
+    &__textarea {
+        @extend %textarea-form-movil;
+    }
+}
+
+.container-form-edit-comment-admin {
+    &__btn {
+        @extend %btn-form-movil;
+    }
+
+    &__btn:hover {
+        @extend %btn-form-movil-hover;
+    }
+}

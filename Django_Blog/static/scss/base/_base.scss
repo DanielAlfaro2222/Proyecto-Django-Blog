@@ -1,5 +1,6 @@
 @use '../helpers/mixins' as *;
 @use '../config/config' as *;
+@use '../blocks/header' as *;
 
 body {
     @include flex(column);

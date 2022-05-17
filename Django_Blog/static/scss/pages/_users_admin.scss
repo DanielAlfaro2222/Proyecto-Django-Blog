@@ -1,20 +1,20 @@
-@use '../mixins/mixins.scss' as *;
+@use '../helpers/placeholders' as *;
 
 .container-label-users {
-    @include label-formulario();
+    @extend %label-form-movil;
 
     &__input,
     &__select,
     &__textarea {
-        @include input-formulario();
+        @extend %input-form-movil;
     }
 
     &__textarea {
-        @include textarea();
+        @extend %textarea-form-movil;
     }
 
     &__image {
-        @include label-file-formulario();
+        @extend %label-form-file-movil;
     }
 
     &__img {
@@ -30,12 +30,12 @@
 }
 
 .container-form-users {
+
     &__btn {
-        @include boton-formulario();
+        @extend %btn-form-movil;
     }
 
     &__btn:hover {
-        @include boton-formulario-hover();
+        @extend %btn-form-movil-hover;
     }
-
 }

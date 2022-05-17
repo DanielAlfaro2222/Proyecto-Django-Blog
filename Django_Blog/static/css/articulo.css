@@ -121,3 +121,16 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.container-form-edit-commentary,
+.container-form-edit-commentary__input {
+    display: none;
+}
+
+.container-form-edit-commentary--show {
+    display: block;
+}
+
+.container-actions-commentary__link--hidden {
+    display: none;
+}

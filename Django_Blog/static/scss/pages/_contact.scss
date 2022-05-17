@@ -1,0 +1,33 @@
+@use '../helpers/placeholders' as *;
+
+.container-label-contact {
+    @extend %label-form-movil;
+
+    &__span {
+        font-size: 1.8rem;
+        position: relative;
+        top: .4em;
+    }
+
+    &__input,
+    &__select,
+    &__textarea {
+        @extend %input-form-movil;
+    }
+
+    &__textarea {
+        @extend %textarea-form-movil;
+    }
+}
+
+.container-form-contact {
+    margin-bottom: 1em;
+
+    &__btn {
+        @extend %btn-form-movil;
+    }
+
+    &__btn:hover {
+        @extend %btn-form-movil-hover;
+    }
+}

@@ -125,3 +125,17 @@ class CommentModelForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['author', 'article', 'content', 'state']
+        widgets = {
+            'author': forms.Select(attrs={
+                'class': 'container-label-edit-comment-admin__select'
+            }),
+            'article': forms.Select(attrs={
+                'class': 'container-label-edit-comment-admin__select'
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'container-label-edit-comment-admin__textarea'
+            }),
+            'state': forms.Select(attrs={
+                'class': 'container-label-edit-comment-admin__select'
+            }),
+        }
