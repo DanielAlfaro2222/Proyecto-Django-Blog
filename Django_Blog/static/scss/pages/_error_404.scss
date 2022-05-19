@@ -1,0 +1,27 @@
+@use '../helpers/placeholders' as *;
+@use '../config/config' as *;
+@use '../helpers/mixins' as *;
+
+
+.container-section-404 {
+    width: 100vw;
+    height: 100vh;
+    @include flex($flex-direction: column, $justify-content: center, $align-items: center);
+    padding: 1em;
+
+    &__title {
+        color: $bg-color-header;
+        font-size: 2.2rem;
+    }
+
+    &__paragraph {
+        margin-top: 0;
+    }
+
+    &__link {
+        display: block;
+        @include boton-formulario($width: 80%, $font-size: 1rem, $margin-top: 1.6em);
+        text-align: center;
+        line-height: 40px;
+    }
+}

@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-update-data-user">
     <section>
         <h2>Actualizar datos personales</h2>
 
         {% include 'snippets/mensajes.html' %}
 
-        <form method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data" class="container-form-data-user-update">
             {% csrf_token %}
 
             <label class="container-label-update-data-user">
@@ -88,7 +88,9 @@
                 {% endif %}
             </label>
 
-            <button>Actualizar</button>
+            <button class="container-form-data-user-update__btn">
+                Actualizar
+            </button>
         </form>
     </section>
 

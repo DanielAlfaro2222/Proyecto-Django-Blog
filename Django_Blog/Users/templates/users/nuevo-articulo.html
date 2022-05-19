@@ -7,13 +7,13 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-mis-publicaciones">
     <section>
         <h2>Nueva publicacion</h2>
-        <form method="POST" action="{% url 'Users:new-article' %}" enctype="multipart/form-data">
+        <form method="POST" action="{% url 'Users:new-article' %}" enctype="multipart/form-data" class="container-form-mis-publicaciones">
             {% csrf_token %}
 
-            <label>
+            <label class="container-label-mis-publicaciones">
                 Nombre del articulo
                 {{form.name}}
                 {% if form.name.errors %}
@@ -21,7 +21,7 @@
                 {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-mis-publicaciones">
                 Imagen del articulo
                 {{form.image}}
                 {% if form.image.errors %}
@@ -29,7 +29,7 @@
                 {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-mis-publicaciones">
                 Categoria del articulo
                 {{form.category}}
                 {% if form.category.errors %}
@@ -37,7 +37,7 @@
                 {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-mis-publicaciones">
                 Descripcion del articulo
                 {{form.resume}}
                 {% if form.resume.errors %}
@@ -45,7 +45,7 @@
                 {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-mis-publicaciones">
                 Contenido del articulo
                 {{form.content}}
                 {% if form.content.errors %}
@@ -53,7 +53,7 @@
                 {% endif %}
             </label>
 
-            <label>
+            <label class="container-label-mis-publicaciones">
                 Estado
                 {{form.state}}
                 {% if form.state.errors %}
@@ -63,7 +63,9 @@
 
             {{form.author}}
 
-            <button>Agregar nuevo articulo</button>
+            <button class="container-form-mis-publicaciones__btn">
+                Agregar nuevo articulo
+            </button>
         </form>
     </section>
 

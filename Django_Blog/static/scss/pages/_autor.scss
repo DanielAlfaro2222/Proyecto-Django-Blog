@@ -1,0 +1,33 @@
+@use '../helpers/mixins' as *;
+
+.main {
+    padding-bottom: 3em;
+}
+
+.container-biography-author {
+    text-align: center;
+    padding-top: 1.5em;
+
+    &__img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }
+
+    &__paragraph--font {
+        font-style: italic;
+    }
+}
+
+.container-contact-author {
+    @include flex($justify-content: center);
+    gap: .7em;
+}
+
+.container-link-contact-author__img {
+    width: 38px;
+}
+
+.container-articles-author {
+    margin-top: 3em;
+}

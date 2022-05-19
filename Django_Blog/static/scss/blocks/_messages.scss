@@ -1,0 +1,30 @@
+@use '../config/config' as *;
+@use '../helpers/mixins' as *;
+
+.mensaje_error,
+.mensaje_exito {
+    @include flex(null, initial, center);
+    width: 100%;
+    height: 70px;
+    font-size: .9rem;
+    border-radius: 0.7em;
+    padding: .5em;
+}
+
+.mensaje_error {
+    background-color: $bg-color-error;
+    border-color: $border-color-error;
+    color: $font-color-error;
+}
+
+.mensaje_exito {
+    color: $font-color-success;
+    background-color: $bg-color-success;
+    border-color: $border-color-success;
+}
+
+.mensaje_error__icon,
+.mensaje_exito__icon {
+    margin-right: .4em;
+    font-size: 1.8rem;
+}

@@ -5,6 +5,16 @@
 .main-login {
     height: 80vh;
     @include flex($justify-content: center, $align-items: center);
+
+    @include media-query(600px) {
+        width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @include media-query(600px) {
+        width: 520px;
+    }
 }
 
 .container-login {
@@ -27,6 +37,19 @@
 
     &__btn:hover {
         @extend %btn-form-movil-hover;
+    }
+
+    @include media-query(1000px) {
+
+        &__input,
+        &__btn {
+            margin-top: 1.3em;
+        }
+
+        &__input,
+        &__btn {
+            height: 44px;
+        }
     }
 }
 

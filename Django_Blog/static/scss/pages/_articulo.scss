@@ -1,0 +1,96 @@
+@use '../helpers/placeholders' as *;
+
+.container-commentary {
+    padding: 1em;
+    margin-bottom: 1.5em;
+    background-color: rgba(218, 216, 216, 0.253);
+    border-radius: .5em;
+}
+
+.container-author-commentary {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+
+    &__img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: .8em;
+        background-color: white;
+    }
+}
+
+.container-add-comment {
+    margin-bottom: 1.5em;
+
+    &__btn {
+        @extend %btn-form-movil;
+        width: 160px;
+    }
+
+    &__textarea {
+        @extend %input-form-movil;
+        @extend %textarea-form-movil;
+    }
+}
+
+.container-actions-commentary {
+    margin-bottom: 0;
+
+    &__link {
+        @extend %btn-form-movil;
+    }
+
+    &__link-color {
+        background-color: rgb(182, 62, 62);
+    }
+}
+
+.container-detail-article {
+    &__title {
+        margin-top: 0;
+    }
+
+    &__paragraph {
+        line-height: 1.7em;
+        text-align: justify;
+    }
+
+    &__paragraph a {
+        color: inherit;
+    }
+
+    &__paragraph--font {
+        text-align: end;
+        font-size: .9rem;
+        color: rgb(70, 70, 70);
+        margin-top: .6em;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+.container-list-commentaries {
+    margin-top: 2em;
+}
+
+.container-form-edit-commentary {
+    display: none;
+
+    &__input,
+    &__link-hidden {
+        display: none;
+    }
+
+    &--show {
+        display: block;
+    }
+}

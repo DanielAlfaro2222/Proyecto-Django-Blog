@@ -251,13 +251,28 @@ class CreateArticleModelForm(forms.ModelForm):
         fields = ['name', 'author', 'image',
                   'resume', 'state', 'content', 'category']
         widgets = {
-            'name': forms.TextInput(attrs={'class': ''}),
-            'image': forms.FileInput(attrs={'class': ''}),
-            'resume': forms.TextInput(attrs={'class': ''}),
-            'content': forms.Textarea(attrs={'class': ''}),
-            'category': forms.Select(attrs={'class': ''}),
-            'author': forms.Select(attrs={'hidden': 'true'}),
-            'state': forms.Select(attrs={'class': ''})
+            'name': forms.TextInput(attrs={
+                'class': 'container-label-mis-publicaciones__input',
+                'autofocus': 'true'
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'container-label-mis-publicaciones__image'
+            }),
+            'resume': forms.TextInput(attrs={
+                'class': 'container-label-mis-publicaciones__input'
+            }),
+            'content': forms.Textarea(attrs={
+                'class': 'container-label-mis-publicaciones__textarea'
+            }),
+            'category': forms.Select(attrs={
+                'class': 'container-label-mis-publicaciones__select'
+            }),
+            'author': forms.Select(attrs={
+                'hidden': 'true'
+            }),
+            'state': forms.Select(attrs={
+                'class': 'container-label-mis-publicaciones__select'
+            })
         }
 
 
@@ -267,5 +282,32 @@ class UserModelForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'biography',
                   'image', 'gender', 'linkedin', 'twitter', 'city']
         widgets = {
-            'biography': forms.Textarea(attrs={'class': ''}),
+            'first_name': forms.TextInput(attrs={
+                'class': 'container-label-update-data-user__input',
+                'autofocus': 'true',
+            }),
+            'last_name': forms.TextInput(attrs={
+                'class': 'container-label-update-data-user__input'
+            }),
+            'email': forms.EmailInput(attrs={
+                'class': 'container-label-update-data-user__input'
+            }),
+            'biography': forms.Textarea(attrs={
+                'class': 'container-label-update-data-user__textarea'
+            }),
+            'image': forms.FileInput(attrs={
+                'class': 'container-label-update-data-user__image'
+            }),
+            'gender': forms.Select(attrs={
+                'class': 'container-label-update-data-user__select'
+            }),
+            'linkedin': forms.TextInput(attrs={
+                'class': 'container-label-update-data-user__input'
+            }),
+            'twitter': forms.TextInput(attrs={
+                'class': 'container-label-update-data-user__input'
+            }),
+            'city': forms.Select(attrs={
+                'class': 'container-label-update-data-user__select'
+            })
         }

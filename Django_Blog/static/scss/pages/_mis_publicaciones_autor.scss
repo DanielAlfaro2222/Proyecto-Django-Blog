@@ -1,7 +1,7 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
 
-.main-register {
+.main-mis-publicaciones {
     @include media-query(600px) {
         width: 400px;
         margin-left: auto;
@@ -13,7 +13,7 @@
     }
 }
 
-.container-label-register {
+.container-label-mis-publicaciones {
     @extend %label-form-movil;
 
     &__input,
@@ -35,25 +35,9 @@
         position: relative;
         top: .4em;
     }
-
-    @include media-query(1000px) {
-
-        &__input,
-        &__select {
-            height: 44px;
-        }
-
-        &__input {
-            padding-left: 1.2em;
-        }
-
-        &__textarea {
-            padding: 1.2em
-        }
-    }
 }
 
-.container-form-register {
+.container-form-mis-publicaciones {
     &__btn {
         @extend %btn-form-movil;
     }

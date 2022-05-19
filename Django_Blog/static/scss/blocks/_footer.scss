@@ -1,8 +1,6 @@
 @use '../helpers/mixins' as *;
 @use '../config/config' as *;
 
-
-/* ------------------------ESTILOS DEL FOOTER------------------------ */
 .main-footer {
     width: 100%;
     height: 57px;
@@ -20,6 +18,10 @@
 
     &__paragraph a {
         color: inherit;
+    }
+
+    @include media-query(800px) {
+        font-size: 1.1rem;
     }
 }
 

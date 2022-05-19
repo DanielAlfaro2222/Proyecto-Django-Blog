@@ -1,4 +1,17 @@
 @use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+
+.main-contact {
+    @include media-query(600px) {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @include media-query(1000px) {
+        width: 460px;
+    }
+}
 
 .container-label-contact {
     @extend %label-form-movil;
@@ -18,6 +31,22 @@
     &__textarea {
         @extend %textarea-form-movil;
     }
+
+    @include media-query(1000px) {
+
+        &__input,
+        &__select {
+            height: 44px;
+        }
+
+        &__input {
+            padding-left: 1.2em;
+        }
+
+        &__textarea {
+            padding: 1.2em
+        }
+    }
 }
 
 .container-form-contact {
@@ -29,5 +58,12 @@
 
     &__btn:hover {
         @extend %btn-form-movil-hover;
+    }
+
+    @include media-query(1000px) {
+
+        &__btn {
+            height: 44px;
+        }
     }
 }
