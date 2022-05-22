@@ -1,20 +1,50 @@
 @use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+
+.main-cities-admin {
+    @extend %main-forms;
+}
 
 .container-label-cities {
-    @extend %label-form-movil;
+    @extend %label-form;
 
     &__input,
     &__select {
-        @extend %input-form-movil;
+        @extend %input-form;
+    }
+
+    &__span {
+        @extend %span-label-forms;
     }
 }
 
 .container-form-cities {
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
+        @extend %btn-form-hover;
+    }
+}
+
+// Estilos tabla
+.section-list-cities-admin {
+    @extend %section-list-registers;
+}
+
+.container-table-cities {
+    @extend %table;
+}
+
+.container-thead-cities {
+    @extend %height-row-table;
+
+    &__column {
+        @extend %border-table;
+
+        @include media-query(800px) {
+            width: calc(100% / 5);
+        }
     }
 }

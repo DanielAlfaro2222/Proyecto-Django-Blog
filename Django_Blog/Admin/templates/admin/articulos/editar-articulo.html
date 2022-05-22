@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-article-admin">
     <section>
         <h2>Editar articulo</h2>
 
@@ -15,7 +15,7 @@
             {% csrf_token %}
 
             <label class="container-label-articles">
-                Nombre del articulo <span>*</span>
+                Nombre del articulo <span class="container-label-articles__span">*</span>
                 {{form.name}}
                 {% if form.name.errors %}
                 {{form.name.errors}}
@@ -23,7 +23,7 @@
             </label>
 
             <label class="container-label-articles">
-                Descripcion del articulo <span>*</span>
+                Descripcion del articulo <span class="container-label-articles__span">*</span>
                 {{form.resume}}
                 {% if form.resume.errors %}
                 {{form.resume.errors}}
@@ -31,7 +31,7 @@
             </label>
 
             <label class="container-label-articles">
-                Contenido del articulo <span>*</span>
+                Contenido del articulo <span class="container-label-articles__span">*</span>
                 {{form.content}}
                 {% if form.content.errors %}
                 {{form.content.errors}}
@@ -39,7 +39,7 @@
             </label>
 
             <label class="container-label-articles">
-                Autor del articulo <span>*</span>
+                Autor del articulo <span class="container-label-articles__span">*</span>
                 {{form.author}}
                 {% if form.author.errors %}
                 {{form.author.errors}}
@@ -47,7 +47,7 @@
             </label>
 
             <label class="container-label-articles">
-                Categoria del articulo <span>*</span>
+                Categoria del articulo <span class="container-label-articles__span">*</span>
                 {{form.category}}
                 {% if form.category.errors %}
                 {{form.category.errors}}
@@ -55,7 +55,7 @@
             </label>
 
             <label class="container-label-articles">
-                Imagen del articulo <span>*</span>
+                Imagen del articulo <span class="container-label-articles__span">*</span>
                 {{form.image}}
                 {% if form.image.errors %}
                 {{form.image.errors}}
@@ -71,7 +71,7 @@
             </label>
 
             <label class="container-label-articles">
-                Estado del articulo <span>*</span>
+                Estado del articulo <span class="container-label-articles__span">*</span>
                 {{form.state}}
                 {% if form.state.errors %}
                 {{form.state.errors}}

@@ -8,38 +8,48 @@
 
 {% block content %}
 <main class="main">
-    <section>
+    <section class="section-list-articles-with-comments-admin">
         <h2>Listado de articulos con comentarios</h2>
 
-        <table>
+        <table class="container-table-articles-with-comments">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Articulo</th>
-                    <th>Autor</th>
-                    <th>Comentarios</th>
+                <tr class="container-thead-articles-with-comments">
+                    <th class="container-thead-articles-with-comments__column">
+                        #
+                    </th>
+                    <th class="container-thead-articles-with-comments__column">
+                        Articulo
+                    </th>
+                    <th class="container-thead-articles-with-comments__column">
+                        Autor
+                    </th>
+                    <th class="container-thead-articles-with-comments__column">
+                        Comentarios
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {% for articulo in articulos %}
-                <tr>
-                    <td>
+                <tr class="container-row-table">
+                    <td class="container-column-table">
                         <a href="{% url 'Admin:list-comments-by-article' articulo.article__slug %}">
                             {{forloop.counter}}
                         </a>
                     </td>
-                    <td>
+                    <td class="container-column-table">
                         <a href="{% url 'Blog:articulo' articulo.article__slug %}">
                             {{articulo.article__name}}
                         </a>
                     </td>
-                    <td>
+                    <td class="container-column-table">
                         <a href="{% url 'Users:author' articulo.article__author__slug %}">
                             {{articulo.article__author__first_name.split | first}}
                             {{articulo.article__author__last_name.split | first}}
                         </a>
                     </td>
-                    <td>{{articulo.total}}</td>
+                    <td class="container-column-table">
+                        {{articulo.total}}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

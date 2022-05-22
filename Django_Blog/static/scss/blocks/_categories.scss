@@ -1,0 +1,62 @@
+@use '../helpers/mixins' as *;
+@use '../helpers/placeholders' as *;
+@use '../config/config' as *;
+
+
+.container-categories {
+    @include media-query(1000px) {
+        width: 28%;
+
+        &__title {
+            margin-top: 0;
+            margin-bottom: 1.3em;
+        }
+    }
+}
+
+.container-list-categories {
+    padding: 0;
+    list-style: none;
+}
+
+.container-element-list-categories {
+    @include flex(null, initial, center);
+
+    &__link {
+        color: black;
+        font-size: .9rem;
+    }
+
+    &__link:hover {
+        color: $font-color-hover;
+    }
+
+    &__icon {
+        width: 1.1em;
+        margin-right: .4em;
+    }
+
+    @include media-query(1000px) {
+        &__link {
+            font-size: 1rem;
+        }
+    }
+}
+
+.container-form-search-article {
+    &__input {
+        @include input-formulario($margin-top: 0, $padding-left: 1em, $bg-color: transparent);
+        border: 1px solid $color-border-search-article;
+        margin-bottom: 1em;
+    }
+
+    &__btn {
+        @include boton-formulario($margin-top: 0, $margin-bottom: 0);
+    }
+
+    @include media-query(1000px) {
+        &__btn {
+            font-size: 1rem;
+        }
+    }
+}

@@ -1,3 +1,4 @@
+@use '../helpers/mixins' as *;
 @use '../helpers/placeholders' as *;
 
 .container-commentary {
@@ -25,13 +26,13 @@
     margin-bottom: 1.5em;
 
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
         width: 160px;
     }
 
     &__textarea {
-        @extend %input-form-movil;
-        @extend %textarea-form-movil;
+        @extend %input-form;
+        @extend %textarea-form;
     }
 }
 
@@ -39,7 +40,7 @@
     margin-bottom: 0;
 
     &__link {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__link-color {
@@ -55,6 +56,10 @@
     &__paragraph {
         line-height: 1.7em;
         text-align: justify;
+
+        @include media-query(700px) {
+            line-height: 1.9em;
+        }
     }
 
     &__paragraph a {

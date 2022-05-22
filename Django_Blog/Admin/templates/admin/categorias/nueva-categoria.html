@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-categories-admin">
     <section>
         <h2>Nueva categoria</h2>
 
@@ -15,7 +15,7 @@
             {% csrf_token %}
 
             <label class="container-label-categories">
-                Nombre categoria <span>*</span>
+                Nombre categoria <span class="container-label-categories__span">*</span>
                 {{form.name}}
                 {% if form.name.errors %}
                 {{form.name.errors}}
@@ -23,7 +23,7 @@
             </label>
 
             <label class="container-label-categories">
-                Estado de la categoria
+                Estado de la categoria <span class="container-label-categories__span">*</span>
                 {{form.state}}
                 {% if form.state.errors %}
                 {{form.state.errors}}

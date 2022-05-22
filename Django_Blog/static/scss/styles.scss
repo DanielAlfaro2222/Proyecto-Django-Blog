@@ -7,6 +7,8 @@
 @use 'blocks/footer' as *;
 @use 'blocks/loader' as *;
 @use 'blocks/messages' as *;
+@use 'blocks/categories' as *;
+@use 'blocks/aside' as *;
 
 // Paginas
 @use 'pages/index' as *;
@@ -23,3 +25,4 @@
 @use 'pages/update_data_user' as *;
 @use 'pages/mis_publicaciones_autor' as *;
 @use 'pages/error_404' as *;
+@use 'pages/change-password' as *;

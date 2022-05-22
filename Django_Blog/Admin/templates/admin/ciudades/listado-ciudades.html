@@ -8,7 +8,7 @@
 
 {% block content %}
 <main class="main">
-    <section>
+    <section class="section-list-cities-admin">
         <h2>Gestionar ciudades</h2>
 
         {% include 'snippets/mensajes.html' %}
@@ -17,28 +17,46 @@
 
         {% include 'admin/snippets/busqueda.html' %}
 
-        <table>
+        <table class="container-table-cities">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Codigo postal</th>
-                    <th>Estado</th>
-                    <th>Fecha de modificacion</th>
+                <tr class="container-thead-cities">
+                    <th class="container-thead-cities__column">
+                        #
+                    </th>
+                    <th class="container-thead-cities__column">
+                        Nombre
+                    </th>
+                    <th class="container-thead-cities__column">
+                        Codigo postal
+                    </th>
+                    <th class="container-thead-cities__column">
+                        Estado
+                    </th>
+                    <th class="container-thead-cities__column">
+                        Fecha de modificacion
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {% for ciudad in ciudades %}
-                <tr>
-                    <td>
+                <tr class="container-row-table">
+                    <td class="container-column-table"> 
                         <a href="{% url 'Admin:edit-city' ciudad.id_city %}">
                             {{forloop.counter}}
                         </a>
                     </td>
-                    <td>{{ciudad}}</td>
-                    <td>{{ciudad.zip_code}}</td>
-                    <td>{{ciudad.state}}</td>
-                    <td>{{ciudad.modified | date:"j F Y"}}</td>
+                    <td class="container-column-table">
+                        {{ciudad}}
+                    </td>
+                    <td class="container-column-table">
+                        {{ciudad.zip_code}}
+                    </td>
+                    <td class="container-column-table">
+                        {{ciudad.state}}
+                    </td>
+                    <td class="container-column-table"> 
+                        {{ciudad.modified | date:"j F Y"}}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

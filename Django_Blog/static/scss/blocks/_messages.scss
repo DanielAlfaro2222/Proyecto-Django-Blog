@@ -9,6 +9,10 @@
     font-size: .9rem;
     border-radius: 0.7em;
     padding: .5em;
+
+    @include media-query(1000px) {
+        font-size: 1rem;
+    }
 }
 
 .mensaje_error {

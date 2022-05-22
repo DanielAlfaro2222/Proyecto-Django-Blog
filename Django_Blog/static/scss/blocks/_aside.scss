@@ -1,0 +1,13 @@
+@use '../helpers/mixins' as *;
+@use '../config/config' as *;
+
+.container-aside {
+    position: fixed;
+    bottom: 5.6em;
+    right: 1em;
+    width: 50px;
+
+    @include media-query(800px) {
+        bottom: 7em;
+    }
+}

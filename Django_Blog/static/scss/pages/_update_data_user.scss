@@ -2,54 +2,37 @@
 @use '../helpers/mixins' as *;
 
 .main-update-data-user {
-    @include media-query(600px) {
-        width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    @include media-query(1000px) {
-        width: 460px;
-    }
+    @extend %main-forms;
 }
 
 .container-label-update-data-user {
-    @extend %label-form-movil;
+    @extend %label-form;
 
     &__input,
     &__select,
     &__textarea {
-        @extend %input-form-movil;
+        @extend %input-form;
     }
 
     &__textarea {
-        @extend %textarea-form-movil;
+        @extend %textarea-form;
     }
 
     &__image {
-        @extend %label-form-file-movil;
+        @extend %label-form-file;
     }
 
     &__span {
-        font-size: 1.8rem;
-        position: relative;
-        top: .4em;
+        @extend %span-label-forms;
     }
 }
 
 .container-form-data-user-update {
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
-    }
-
-    @include media-query(1000px) {
-
-        &__btn {
-            height: 44px;
-        }
+        @extend %btn-form-hover;
     }
 }

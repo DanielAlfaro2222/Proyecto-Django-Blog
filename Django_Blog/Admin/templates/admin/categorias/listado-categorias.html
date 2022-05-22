@@ -8,39 +8,54 @@
 
 {% block content %}
 <main class="main">
-    <h2>Gestionar categorias</h2>
+    <section class="section-list-categories-admin">
+        <h2>Gestionar categorias</h2>
 
-    {% include 'snippets/mensajes.html' %}
+        {% include 'snippets/mensajes.html' %}
 
-    <a href="{% url 'Admin:new-category' %}">Agregar nueva categoria</a>
+        <a href="{% url 'Admin:new-category' %}">Agregar nueva categoria</a>
 
-    {% include 'admin/snippets/busqueda.html' %}
+        {% include 'admin/snippets/busqueda.html' %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Estado</th>
-                <th>Fecha de modificacion</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for categoria in categorias %}
-            <tr>
-                <td>
-                    <a href="{% url 'Admin:edit-category' categoria.slug %}">{{forloop.counter}}</a>
-                </td>
-                <td>
-                    <a href="{% url 'Blog:categoria' categoria.slug %}">
-                        {{categoria}}
-                    </a>
-                </td>
-                <td>{{categoria.state}}</td>
-                <td>{{categoria.modified | date:"j F Y"}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table class="container-table-categories">
+            <thead>
+                <tr class="container-thead-categories">
+                    <th class="container-thead-categories__column">
+                        #
+                    </th>
+                    <th class="container-thead-categories__column">
+                        Nombre
+                    </th>
+                    <th class="container-thead-categories__column">
+                        Estado
+                    </th>
+                    <th class="container-thead-categories__column">
+                        Fecha de modificacion
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoria in categorias %}
+                <tr class="container-row-table">
+                    <td class="container-column-table">
+                        <a href="{% url 'Admin:edit-category' categoria.slug %}">   {{forloop.counter}}
+                        </a>
+                    </td>
+                    <td class="container-column-table">
+                        <a href="{% url 'Blog:categoria' categoria.slug %}">
+                            {{categoria}}
+                        </a>
+                    </td>
+                    <td class="container-column-table">
+                        {{categoria.state}}
+                    </td>
+                    <td class="container-column-table">
+                        {{categoria.modified | date:"j F Y"}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </main>
 {% endblock %}

@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-cities-admin">
 
     <section>
         <h2>Editar ciudad</h2>
@@ -16,7 +16,7 @@
             {% csrf_token %}
 
             <label class="container-label-cities">
-                Nombre ciudad <span>*</span>
+                Nombre ciudad <span class="container-label-cities__span">*</span>
                 {{form.description}}
                 {% if form.description.errors %}
                 {{form.description.errors}}
@@ -24,7 +24,7 @@
             </label>
 
             <label class="container-label-cities">
-                Codigo postal <span>*</span>
+                Codigo postal <span class="container-label-cities__span">*</span>
                 {{form.zip_code}}
                 {% if form.zip_code.errors %}
                 {{form.zip_code}}

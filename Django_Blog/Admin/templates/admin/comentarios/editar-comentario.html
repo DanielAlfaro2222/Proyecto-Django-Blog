@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-edit-comment-admin">
     <section>
         <h2>Editar comentario</h2>
 
@@ -15,7 +15,7 @@
             {% csrf_token %}
 
             <label class="container-label-edit-comment-admin">
-                Autor
+                Autor <span class="container-label-edit-comment-admin__span">*</span>
                 {{form.author}}
                 {% if form.author.errors %}
                     {{form.author.errors}}
@@ -23,7 +23,7 @@
             </label>
 
             <label class="container-label-edit-comment-admin">
-                Articulo
+                Articulo <span class="container-label-edit-comment-admin__span">*</span>
                 {{form.article}}
                 {% if form.article.errors %}
                     {{form.article.errors}}
@@ -31,7 +31,7 @@
             </label>
 
             <label class="container-label-edit-comment-admin">
-                Contenido
+                Contenido <span class="container-label-edit-comment-admin__span">*</span>
                 {{form.content}}
                 {% if form.content.errors %}
                     {{form.content.errors}}
@@ -39,7 +39,7 @@
             </label>
 
             <label class="container-label-edit-comment-admin">
-                Estado
+                Estado <span class="container-label-edit-comment-admin__span">*</span>
                 {{form.state}}
                 {% if form.state.errors %}
                     {{form.state.errors}}

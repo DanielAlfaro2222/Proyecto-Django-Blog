@@ -15,6 +15,7 @@
 
             <label class="container-label-mis-publicaciones">
                 Nombre del articulo
+                <span class="container-label-mis-publicaciones__span">*</span>
                 {{form.name}}
                 {% if form.name.errors %}
                     {{form.name.errors}}
@@ -22,7 +23,7 @@
             </label>
 
             <label class="container-label-mis-publicaciones">
-                Imagen del articulo
+                Imagen del articulo <span class="container-label-mis-publicaciones__span">*</span>
                 {{form.image}}
                 {% if form.image.errors %}
                     {{form.image.errors}}
@@ -38,7 +39,7 @@
             </label>
 
             <label class="container-label-mis-publicaciones">
-                Categoria del articulo
+                Categoria del articulo <span class="container-label-mis-publicaciones__span">*</span>
                 {{form.category}}
                 {% if form.category.errors %}
                     {{form.category.errors}}
@@ -46,7 +47,7 @@
             </label>
 
             <label class="container-label-mis-publicaciones">
-                Descripcion del articulo
+                Descripcion del articulo <span class="container-label-mis-publicaciones__span">*</span>
                 {{form.resume}}
                 {% if form.resume.errors %}
                     {{form.resume.errors}}
@@ -54,7 +55,7 @@
             </label>
 
             <label class="container-label-mis-publicaciones">
-                Contenido del articulo
+                Contenido del articulo <span class="container-label-mis-publicaciones__span">*</span>
                 {{form.content}}
                 {% if form.content.errors %}
                     {{form.content.errors}}
@@ -62,7 +63,7 @@
             </label>
 
             <label class="container-label-mis-publicaciones">
-                Estado
+                Estado <span class="container-label-mis-publicaciones__span">*</span>
                 {{form.state}}
                 {% if form.state.errors %}
                     {{form.state.errors}}

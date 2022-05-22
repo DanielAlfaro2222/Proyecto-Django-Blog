@@ -1,20 +1,25 @@
 @use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+
+.main-article-admin {
+    @extend %main-forms;
+}
 
 .container-label-articles {
-    @extend %label-form-movil;
+    @extend %label-form;
 
     &__input,
     &__select,
     &__textarea {
-        @extend %input-form-movil;
+        @extend %input-form;
     }
 
     &__textarea {
-        @extend %textarea-form-movil;
+        @extend %textarea-form;
     }
 
     &__file {
-        @extend %label-form-file-movil;
+        @extend %label-form-file;
     }
 
     &__img {
@@ -23,14 +28,39 @@
         height: 150px;
         margin-top: 1em;
     }
+
+    &__span {
+        @extend %span-label-forms;
+    }
 }
 
 .container-form-articles {
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
+        @extend %btn-form-hover;
+    }
+}
+
+// Estilos tabla
+.section-list-articles-admin {
+    @extend %section-list-registers;
+}
+
+.container-table-articles {
+    @extend %table;
+}
+
+.container-thead-articles {
+    @extend %height-row-table;
+
+    &__column {
+        @extend %border-table;
+
+        @include media-query(800px) {
+            width: calc(100% / 5);
+        }
     }
 }

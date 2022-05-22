@@ -39,4 +39,10 @@
     &__icon {
         font-size: 1rem;
     }
+
+    @include media-query(1000px) {
+        width: 40px;
+        height: 40px;
+        top: -1.2em;
+    }
 }

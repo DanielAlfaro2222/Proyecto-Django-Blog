@@ -1,20 +1,25 @@
 @use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+
+.main-users-admin {
+    @extend %main-forms;
+}
 
 .container-label-users {
-    @extend %label-form-movil;
+    @extend %label-form;
 
     &__input,
     &__select,
     &__textarea {
-        @extend %input-form-movil;
+        @extend %input-form;
     }
 
     &__textarea {
-        @extend %textarea-form-movil;
+        @extend %textarea-form;
     }
 
     &__image {
-        @extend %label-form-file-movil;
+        @extend %label-form-file;
     }
 
     &__img {
@@ -27,15 +32,56 @@
     &__paragraph {
         font-style: italic;
     }
+
+    &__span {
+        @extend %span-label-forms;
+    }
 }
 
 .container-form-users {
 
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
+        @extend %btn-form-hover;
     }
+}
+
+// Estilos de la tabla
+.section-list-users {
+    @extend %section-list-registers;
+}
+
+.container-table-users {
+    @extend %table;
+}
+
+.container-thead-users {
+    @extend %height-row-table;
+
+    &__column {
+        @extend %border-table;
+
+        @include media-query(800px) {
+            width: calc(100% / 5);
+        }
+    }
+}
+
+.container-row-table {
+    @extend %height-row-table;
+
+    & a {
+        color: inherit;
+    }
+
+    &:hover {
+        @extend %row-table-hover;
+    }
+}
+
+.container-column-table {
+    @extend %border-table;
 }

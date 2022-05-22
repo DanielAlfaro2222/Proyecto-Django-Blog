@@ -1,20 +1,50 @@
 @use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+
+.main-categories-admin {
+    @extend %main-forms;
+}
 
 .container-label-categories {
-    @extend %label-form-movil;
+    @extend %label-form;
 
     &__input,
     &__select {
-        @extend %input-form-movil;
+        @extend %input-form;
+    }
+
+    &__span {
+        @extend %span-label-forms;
     }
 }
 
 .container-form-categories {
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
+        @extend %btn-form-hover;
+    }
+}
+
+// Estilos tabla
+.section-list-categories-admin {
+    @extend %section-list-registers;
+}
+
+.container-table-categories {
+    @extend %table;
+}
+
+.container-thead-categories {
+    @extend %height-row-table;
+
+    &__column {
+        @extend %border-table;
+
+        @include media-query(800px) {
+            width: calc(100% / 4);
+        }
     }
 }

@@ -7,40 +7,42 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
-    <section>
+<main class="main main-change-password">
+    <section class="container-section-form-change-password">
         <h2>Cambiar contraseña</h2>
 
         {% include 'snippets/mensajes.html' %}
 
-        <form method="POST">
+        <form method="POST" class="container-form-change-password">
             {% csrf_token %}
 
-            <label>
-                Contraseña antigua <span>*</span>
+            <label class="container-label-change-password">
+                Contraseña antigua <span class="container-label-change-password__span">*</span>
                 {{form.old_password}}
                 {% if form.old_password.errors %}
                 {{form.old_password.errors}}
                 {% endif %}
             </label>
 
-            <label>
-                Contraseña nueva <span>*</span>
+            <label class="container-label-change-password">
+                Contraseña nueva <span class="container-label-change-password__span">*</span>
                 {{form.new_password1}}
                 {% if form.new_password1.errors %}
                 {{form.new_password1.errors}}
                 {% endif %}
             </label>
 
-            <label>
-                Contraseña nueva (confirmación): <span>*</span>
+            <label class="container-label-change-password">
+                Contraseña nueva (confirmación): <span class="container-label-change-password__span">*</span>
                 {{form.new_password2}}
                 {% if form.new_password2.errors %}
                 {{form.new_password2.errors}}
                 {% endif %}
             </label>
 
-            <button>Cambiar contraseña</button>
+            <button class="container-form-change-password__btn">
+                Cambiar contraseña
+            </button>
         </form>
     </section>
 

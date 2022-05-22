@@ -9,7 +9,7 @@
 {% block content %}
 <main class="main">
 
-    <section>
+    <section class="section-list-users">
         <h2>Gestionar usuarios</h2>
 
         {% include 'snippets/mensajes.html' %}
@@ -18,30 +18,36 @@
 
         {% include 'admin/snippets/busqueda.html' %}
 
-        <table>
+        <table class="container-table-users">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Estado</th>
-                    <th>Rol</th>
+                <tr class="container-thead-users">
+                    <th class="container-thead-users__column">#</th>
+                    <th class="container-thead-users__column">Nombre</th>
+                    <th class="container-thead-users__column">Correo</th>
+                    <th class="container-thead-users__column">Estado</th>
+                    <th class="container-thead-users__column">Rol</th>
                 </tr>
             </thead>
             <tbody>
                 {% for usuario in usuarios %}
-                <tr>
-                    <td>
+                <tr class="container-row-table">
+                    <td class="container-column-table">
                         <a href="{% url 'Admin:edit-user' usuario.slug %}">{{forloop.counter}}</a>
                     </td>
-                    <td>
+                    <td class="container-column-table">
                         <a href="{% url 'Users:author' usuario.slug %}">
                             {{usuario.get_full_name}}
                         </a>
                     </td>
-                    <td>{{usuario}}</td>
-                    <td>{{usuario.state}}</td>
-                    <td>{{usuario.groups.first}}</td>
+                    <td class="container-column-table">
+                        {{usuario}}
+                    </td>
+                    <td class="container-column-table">
+                        {{usuario.state}}
+                    </td>
+                    <td class="container-column-table">
+                        {{usuario.groups.first}}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

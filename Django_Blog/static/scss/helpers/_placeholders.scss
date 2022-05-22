@@ -1,25 +1,96 @@
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
-%btn-form-movil {
+%btn-form {
     @include boton-formulario();
+
+    @include media-query(1000px) {
+        height: 44px;
+    }
 }
 
-%btn-form-movil-hover {
+%btn-form-hover {
     @include boton-formulario-hover();
 }
 
-%input-form-movil {
+%input-form {
     @include input-formulario();
+
+    @include media-query(1000px) {
+        height: 44px;
+        padding-left: 1.2em;
+    }
 }
 
-%textarea-form-movil {
+%textarea-form {
     @include textarea;
+
+    @include media-query(1000px) {
+        padding: 1.2em
+    }
 }
 
-%label-form-movil {
+%label-form {
     @include label-formulario();
 }
 
-%label-form-file-movil {
+%label-form-file {
     @include label-file-formulario();
+}
+
+%main-forms {
+    @include media-query(600px) {
+        width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @include media-query(1000px) {
+        width: 460px;
+    }
+}
+
+%span-label-forms {
+    font-size: 1.8rem;
+    position: relative;
+    top: .4em;
+}
+
+%border-table {
+    border: 2px solid $border-color-table;
+}
+
+%table {
+    @extend %border-table;
+
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: .7rem;
+    margin-top: 2em;
+    word-break: break-all;
+
+    @include media-query(800px) {
+        font-size: .8rem;
+    }
+
+    @include media-query(1000px) {
+        font-size: .9rem;
+    }
+}
+
+%height-row-table {
+    height: 40px;
+}
+
+%row-table-hover {
+    background-color: $row-table-hover;
+}
+
+%section-list-registers {
+    @include media-query(950px) {
+        max-width: 880px;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

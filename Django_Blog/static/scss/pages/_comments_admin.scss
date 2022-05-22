@@ -1,25 +1,58 @@
 @use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+
+.main-edit-comment-admin {
+    @extend %main-forms;
+}
 
 .container-label-edit-comment-admin {
-    @extend %label-form-movil;
+    @extend %label-form;
 
     &__input,
     &__select,
     &__textarea {
-        @extend %input-form-movil;
+        @extend %input-form;
     }
 
     &__textarea {
-        @extend %textarea-form-movil;
+        @extend %textarea-form;
+    }
+
+    &__span {
+        @extend %span-label-forms;
     }
 }
 
 .container-form-edit-comment-admin {
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
+        @extend %btn-form-hover;
+    }
+}
+
+// Estilos tablas
+.section-list-articles-with-comments-admin,
+.section-list-comments-by-article-admin {
+    @extend %section-list-registers;
+}
+
+.container-table-articles-with-comments,
+.container-table-comments-by-article {
+    @extend %table;
+}
+
+.container-thead-articles-with-comments,
+.container-thead-comments-by-article {
+    @extend %height-row-table;
+
+    &__column {
+        @extend %border-table;
+
+        @include media-query(800px) {
+            width: calc(100% / 5);
+        }
     }
 }

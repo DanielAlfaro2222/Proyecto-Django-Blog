@@ -12,7 +12,7 @@
         margin-right: auto;
     }
 
-    @include media-query(600px) {
+    @include media-query(800px) {
         width: 520px;
     }
 }
@@ -28,15 +28,15 @@
 
 .container-form-login {
     &__input {
-        @extend %input-form-movil;
+        @extend %input-form;
     }
 
     &__btn {
-        @extend %btn-form-movil;
+        @extend %btn-form;
     }
 
     &__btn:hover {
-        @extend %btn-form-movil-hover;
+        @extend %btn-form-hover;
     }
 
     @include media-query(1000px) {

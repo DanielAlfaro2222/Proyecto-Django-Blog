@@ -8,43 +8,63 @@
 
 {% block content %}
 <main class="main">
-    <h2>Gestionar articulos</h2>
+    <section class="section-list-articles-admin">
+        <h2>Gestionar articulos</h2>
 
-    {% include 'snippets/mensajes.html' %}
+        {% include 'snippets/mensajes.html' %}
 
-    <a href="{% url 'Admin:new-article' %}">Agregar nuevo articulo</a>
+        <a href="{% url 'Admin:new-article' %}">Agregar nuevo articulo</a>
 
-    {% include 'admin/snippets/busqueda.html' %}
+        {% include 'admin/snippets/busqueda.html' %}
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th>Autor</th>
-                <th>Estado</th>
-                <th>Fecha de publicacion</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for articulo in articulos %}
-            <tr>
-                <td>
-                    <a href="{% url 'Admin:edit-article' articulo.slug %}">
-                        {{forloop.counter}}
-                    </a>
-                </td>
-                <td>
-                    <a href="{% url 'Blog:articulo' articulo.slug %}">
-                        {{articulo}}
-                    </a>
-                </td>
-                <td>{{articulo.author.get_short_name}}</td>
-                <td>{{articulo.state}}</td>
-                <td>{{articulo.create | date:"j F Y"}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+        <table class="container-table-articles">
+            <thead>
+                <tr class="container-thead-articles">
+                    <th class="container-thead-users__column">
+                        #
+                    </th>
+                    <th class="container-thead-users__column">
+                        Nombre
+                    </th>
+                    <th class="container-thead-users__column">
+                        Autor
+                    </th>
+                    <th class="container-thead-users__column">
+                        Estado
+                    </th>
+                    <th class="container-thead-users__column">
+                        Fecha de publicacion
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for articulo in articulos %}
+                <tr class="container-row-table">
+                    <td class="container-column-table">
+                        <a href="{% url 'Admin:edit-article' articulo.slug %}">
+                            {{forloop.counter}}
+                        </a>
+                    </td>
+                    <td class="container-column-table"> 
+                        <a href="{% url 'Blog:articulo' articulo.slug %}">
+                            {{articulo}}
+                        </a>
+                    </td>
+                    <td class="container-column-table">
+                        <a href="{% url 'Users:author' articulo.author.slug %}">
+                            {{articulo.author.get_short_name}}
+                        </a>
+                    </td>
+                    <td class="container-column-table">
+                        {{articulo.state}}
+                    </td>
+                    <td class="container-column-table">
+                        {{articulo.create | date:"j F Y"}}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 </main>
 {% endblock %}

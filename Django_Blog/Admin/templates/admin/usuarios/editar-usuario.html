@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="main">
+<main class="main main-users-admin">
 
     <section>
         <h2>Editar usuario</h2>
@@ -16,7 +16,7 @@
             {% csrf_token %}
 
             <label class="container-label-users">
-                Nombres <span>*</span>
+                Nombres <span class="container-label-users__span">*</span>
                 {{form.first_name}}
                 {% if form.first_name.errors %}
                 {{form.first_name.errors}}
@@ -24,7 +24,7 @@
             </label>
 
             <label class="container-label-users">
-                Apellidos <span>*</span>
+                Apellidos <span class="container-label-users__span">*</span>
                 {{form.last_name}}
                 {% if form.last_name.errors %}
                 {{form.last_name.errors}}
@@ -32,7 +32,7 @@
             </label>
 
             <label class="container-label-users">
-                Genero <span>*</span>
+                Genero <span class="container-label-users__span">*</span>
                 {{form.gender}}
                 {% if form.gender.errors %}
                 {{form.gender.errors}}
@@ -57,7 +57,7 @@
             </label>
 
             <label class="container-label-users">
-                Ciudad <span>*</span>
+                Ciudad <span class="container-label-users__span">*</span>
                 {{form.city}}
                 {% if form.city.errors %}
                 {{form.city.errors}}
@@ -65,7 +65,7 @@
             </label>
 
             <label class="container-label-users">
-                Biografia <span>*</span>
+                Biografia <span class="container-label-users__span">*</span>
                 {{form.biography}}
                 {% if form.biography.errors %}
                 {{form.biography.errors}}
@@ -89,7 +89,7 @@
             </label>
 
             <label class="container-label-users">
-                Correo <span>*</span>
+                Correo <span class="container-label-users__span">*</span>
                 {{form.email}}
                 {% if form.email.errors %}
                 {{form.email.errors}}
@@ -106,7 +106,7 @@
             </label>
 
             <label class="container-label-users">
-                Rol <span>*</span>
+                Rol <span class="container-label-users__span">*</span>
                 {{form.groups}}
                 {% if form.groups.errors %}
                 {{form.groups.errors}}
@@ -114,7 +114,7 @@
             </label>
 
             <label class="container-label-users">
-                Estado <span>*</span>
+                Estado <span class="container-label-users__span">*</span>
                 {{form.state}}
                 {% if form.state.errors %}
                 {{form.state.errors}}
