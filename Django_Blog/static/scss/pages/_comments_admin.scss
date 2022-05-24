@@ -1,8 +1,19 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-edit-comment-admin {
     @extend %main-forms;
+}
+
+.section-list-articles-with-comments-admin,
+.section-list-comments-by-article-admin,
+.section-edit-comments-admin {
+    @extend %section-list-registers;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-edit-comment-admin {
@@ -34,11 +45,6 @@
 }
 
 // Estilos tablas
-.section-list-articles-with-comments-admin,
-.section-list-comments-by-article-admin {
-    @extend %section-list-registers;
-}
-
 .container-table-articles-with-comments,
 .container-table-comments-by-article {
     @extend %table;

@@ -1,8 +1,19 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-users-admin {
     @extend %main-forms;
+}
+
+.section-list-users,
+.section-new-user,
+.section-edit-user {
+    @extend %section-list-registers;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-users {
@@ -50,10 +61,6 @@
 }
 
 // Estilos de la tabla
-.section-list-users {
-    @extend %section-list-registers;
-}
-
 .container-table-users {
     @extend %table;
 }

@@ -1,8 +1,19 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-article-admin {
     @extend %main-forms;
+}
+
+.section-list-articles-admin,
+.section-edit-articles-admin,
+.section-new-article-admin {
+    @extend %section-list-registers;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-articles {
@@ -45,10 +56,6 @@
 }
 
 // Estilos tabla
-.section-list-articles-admin {
-    @extend %section-list-registers;
-}
-
 .container-table-articles {
     @extend %table;
 }

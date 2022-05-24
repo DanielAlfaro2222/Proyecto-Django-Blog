@@ -1,8 +1,19 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-cities-admin {
     @extend %main-forms;
+}
+
+.section-list-cities-admin,
+.section-edit-cities-admin,
+.section-new-cities-admin {
+    @extend %section-list-registers;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-cities {
@@ -29,10 +40,6 @@
 }
 
 // Estilos tabla
-.section-list-cities-admin {
-    @extend %section-list-registers;
-}
-
 .container-table-cities {
     @extend %table;
 }

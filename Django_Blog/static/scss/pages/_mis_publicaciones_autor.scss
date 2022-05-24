@@ -1,8 +1,17 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-mis-publicaciones {
     @extend %main-forms;
+}
+
+.section-my-articles {
+    @extend %section-list-registers;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-mis-publicaciones {
@@ -34,5 +43,22 @@
 
     &__btn:hover {
         @extend %btn-form-hover;
+    }
+}
+
+// Estilos tabla
+.container-table-my-articles {
+    @extend %table;
+}
+
+.container-thead-my-articles {
+    @extend %height-row-table;
+
+    &__column {
+        @extend %border-table;
+
+        @include media-query(800px) {
+            width: calc(100% / 5);
+        }
     }
 }

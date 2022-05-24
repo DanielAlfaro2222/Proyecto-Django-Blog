@@ -8,8 +8,8 @@
 
 {% block content %}
 <main class="main">
-    <section>
-        <h2>Mis publicaciones</h2>
+    <section class="section-my-articles">
+        <h2 class="section-my-articles__title">Mis publicaciones</h2>
 
         {% include 'snippets/mensajes.html' %}
 
@@ -17,34 +17,48 @@
 
         {% include 'admin/snippets/busqueda.html' %}
 
-        <table>
+        <table class="container-table-my-articles">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Estado</th>
-                    <th>Fecha de publicacion</th>
+                <tr class="container-thead-my-articles">
+                    <th class="container-thead-my-articles__column">
+                        #
+                    </th>
+                    <th class="container-thead-my-articles__column">
+                        Nombre
+                    </th>
+                    <th class="container-thead-my-articles__column">
+                        Estado
+                    </th>
+                    <th class="container-thead-my-articles__column">
+                        Fecha de publicacion
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 {% for articulo in articulos %}
-                <tr>
-                    <td>
+                <tr class="container-row-table">
+                    <td class="container-column-table">
                         <a href="{% url 'Users:edit-article' articulo.slug %}" title="Editar articulo">
                             {{ forloop.counter }}
                         </a>
                     </td>
-                    <td>
+                    <td class="container-column-table">
                         <a href="{% url 'Blog:articulo' articulo.slug %}">
                             {{ articulo }}
                         </a>
                     </td>
-                    <td>{{ articulo.state }}</td>
-                    <td>{{ articulo.create | date:"j F Y" }}</td>
+                    <td class="container-column-table">
+                        {{ articulo.state }}
+                    </td>
+                    <td class="container-column-table">
+                        {{ articulo.create | date:"j F Y" }}
+                    </td>
                 </tr>
                 {% empty %}
-                <tr>
-                    <td>No hay articulos publicados</td>
+                <tr class="container-row-table">
+                    <td class="container-column-table">
+                        No hay articulos publicados
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

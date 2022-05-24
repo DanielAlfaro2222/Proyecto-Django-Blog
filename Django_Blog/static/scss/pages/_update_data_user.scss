@@ -1,8 +1,15 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-update-data-user {
     @extend %main-forms;
+}
+
+.section-update-data-user {
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-update-data-user {

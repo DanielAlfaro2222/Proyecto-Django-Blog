@@ -23,6 +23,7 @@
     &__title {
         text-align: center;
         margin-bottom: 0;
+        font-size: $font-size-title-movil;
     }
 }
 
@@ -66,9 +67,4 @@
     &__link:hover {
         color: $font-color-hover;
     }
-}
-
-.mensaje_error,
-.mensaje_exito {
-    margin-bottom: 0;
 }

@@ -1,8 +1,19 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-categories-admin {
     @extend %main-forms;
+}
+
+.section-list-categories-admin,
+.section-new-categories-admin,
+.section-edit-categories-admin {
+    @extend %section-list-registers;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-categories {
@@ -29,10 +40,6 @@
 }
 
 // Estilos tabla
-.section-list-categories-admin {
-    @extend %section-list-registers;
-}
-
 .container-table-categories {
     @extend %table;
 }

@@ -1,6 +1,7 @@
 asgiref==3.5.0
-Django==4.0.2
-Pillow==9.0.1
+Django==4.0.4
+Pillow==9.1.1
 python-decouple==3.6
 sqlparse==0.4.2
+psycopg2==2.9.3
 whitenoise

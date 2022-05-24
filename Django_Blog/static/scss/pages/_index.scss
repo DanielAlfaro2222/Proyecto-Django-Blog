@@ -1,5 +1,6 @@
 @use '../helpers/mixins' as *;
 @use '../config/config' as *;
+@use '../helpers/placeholders' as *;
 
 .main {
     padding: 1em;
@@ -46,6 +47,14 @@
             margin-bottom: 1.3em;
         }
     }
+
+    @include media-query(1200px) {
+        width: 77%;
+    }
+
+    @include media-query(1600px) {
+        width: 80%;
+    }
 }
 
 .container-article {
@@ -83,13 +92,17 @@
         margin-bottom: 1.4em;
     }
 
+    &__link:hover {
+        @extend %btn-form-hover;
+    }
+
     @include media-query(1000px) {
         display: grid;
         grid-template-columns: 65% 35%;
-        grid-template-rows: repeat(2, 35px) 1fr 1fr;
+        grid-template-rows: repeat(2, 22px) 1fr 1fr;
         column-gap: 1em;
         row-gap: .5em;
-        height: 260px;
+        height: 240px;
         border-bottom: none;
         margin-bottom: 3em;
 
@@ -104,10 +117,19 @@
             font-size: 1rem;
         }
     }
+
+    @include media-query(1200px) {
+        grid-template-columns: 70% 30%;
+        column-gap: 1em;
+
+        &__img {
+            width: 100%;
+        }
+    }
 }
 
 .container-title-article {
-    font-size: 1.1rem;
+    font-size: $font-size-title-movil;
 
     &__link:hover {
         @include boton-formulario-hover();
@@ -182,13 +204,4 @@
         pointer-events: none;
         cursor: default;
     }
-}
-
-.errorlist {
-    padding: 0;
-    color: red;
-    font-size: .8rem;
-    list-style: none;
-    margin-top: .5em;
-    padding-left: .2em;
 }

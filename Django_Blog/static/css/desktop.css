@@ -18,27 +18,6 @@
         margin-bottom: 0;
     }
 
-    .mensaje_error {
-        font-size: 1.2rem;
-        padding: .8em;
-    }
-
-    .container-form-login__input,
-    .container-form-login__btn {
-        height: 48px;
-    }
-
-    .mensaje_exito {
-        font-size: 1.1rem;
-    }
-
-    .container-section-register,
-    .container-section-contact {
-        width: 400px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     .container-paginator-articles {
         height: 44px;
     }
@@ -117,29 +96,5 @@
 
     .container-articles-author {
         margin-top: 4em;
-    }
-
-    .container-aside {
-        bottom: 6em;
-        width: 57px;
-    }
-}
-
-@media screen and (min-width: 1200px) {
-    .container-article {
-        grid-template-columns: 70% 30%;
-    }
-
-    .container-article {
-        -moz-column-gap: 1em;
-        column-gap: 1em;
-    }
-
-    .container-article__img {
-        width: 100%;
-    }
-
-    .container-left-index {
-        width: 74%;
     }
 }

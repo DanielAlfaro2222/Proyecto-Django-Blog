@@ -1,8 +1,15 @@
 @use '../helpers/placeholders' as *;
 @use '../helpers/mixins' as *;
+@use '../config/config' as *;
 
 .main-register {
     @extend %main-forms;
+}
+
+.container-section-register {
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-label-register {

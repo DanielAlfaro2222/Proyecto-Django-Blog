@@ -1,0 +1,15 @@
+@use '../helpers/mixins' as *;
+@use '../config/config' as *;
+
+.errorlist {
+    padding: 0;
+    color: red;
+    font-size: .8rem;
+    list-style: none;
+    margin-top: .5em;
+    padding-left: .2em;
+
+    @include media-query(1000px) {
+        font-size: .9rem;
+    }
+}

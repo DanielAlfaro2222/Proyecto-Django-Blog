@@ -47,10 +47,12 @@
 
                 <textarea name="comentario" cols="30" rows="10" class="container-add-comment__textarea"
                     placeholder="Aqui va tu comentario..."></textarea>
-                <button class="container-add-comment__btn">Agregar comentario</button>
+                <button class="container-add-comment__btn">
+                    Agregar comentario
+                </button>
             </form>
 
-            <h2>Comentarios</h2>
+            <h2 class="container-list-commentaries__title">Comentarios</h2>
 
             {% for comentario in comentarios %}
             <article class="container-commentary">
@@ -68,21 +70,29 @@
                     </a>
                 </p>
 
+                <p class="container-commentary__paragraph">
+                    {{comentario.content}}
+                </p>
+
+                <p class="container-commentary__paragraph">
+                    {{comentario.modified | date:"j F Y"}}
+                </p>
+
                 {% if comentario.author == request.user %}
                     <form action="{% url 'Blog:editar_comentario' articulo.slug %}" method="POST" class="container-form-edit-commentary">
                         {% csrf_token %}
                         <input type="number" value="{{comentario.id_comment}}"  name="id" hidden="true">
-                        <textarea name="comentario" id="" cols="30" rows="10">
-                                            {{comentario.content}}
-                                        </textarea>
+                        <textarea name="comentario" cols="30" rows="10" class="container-form-edit-commentary__textarea">{{comentario.content}}</textarea>
                         <button class="container-actions-commentary__link">
-                            Editar comentairo
+                            Editar comentario
+                        </button>
+
+                        <button class="container-actions-commentary__link container-actions-commentary__link--color" type="button" onclick="cancelEditCommentary(this, this.parentNode.parentNode)">
+                            Cancelar
                         </button>
                     </form>
 
-                    <p>{{comentario.content}}</p>
-
-                    <p class="container-actions-commentary">
+                    <section class="container-actions-commentary">
                         <button class="container-actions-commentary__link" onclick="editCommentary(this, this.parentNode.parentNode)">
                             Editar
                         </button>
@@ -95,11 +105,7 @@
                                 Eliminar
                             </button>
                         </form>
-                    </p>
-
-                    <p class="container-commentary__paragraph">
-                        {{comentario.modified | date:"j F Y"}}
-                    </p>
+                    </section>
                 {% endif %}
             </article>
             {% empty %}

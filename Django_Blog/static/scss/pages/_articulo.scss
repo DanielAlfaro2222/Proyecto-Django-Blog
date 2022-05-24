@@ -1,56 +1,11 @@
 @use '../helpers/mixins' as *;
 @use '../helpers/placeholders' as *;
-
-.container-commentary {
-    padding: 1em;
-    margin-bottom: 1.5em;
-    background-color: rgba(218, 216, 216, 0.253);
-    border-radius: .5em;
-}
-
-.container-author-commentary {
-    display: flex;
-    align-items: center;
-    margin-top: 0;
-
-    &__img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin-right: .8em;
-        background-color: white;
-    }
-}
-
-.container-add-comment {
-    margin-bottom: 1.5em;
-
-    &__btn {
-        @extend %btn-form;
-        width: 160px;
-    }
-
-    &__textarea {
-        @extend %input-form;
-        @extend %textarea-form;
-    }
-}
-
-.container-actions-commentary {
-    margin-bottom: 0;
-
-    &__link {
-        @extend %btn-form;
-    }
-
-    &__link-color {
-        background-color: rgb(182, 62, 62);
-    }
-}
+@use '../config/config' as *;
 
 .container-detail-article {
     &__title {
-        margin-top: 0;
+        margin-top: .8em;
+        font-size: $font-size-title-movil;
     }
 
     &__paragraph {
@@ -80,19 +35,157 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    @include media-query(1000px) {
+        width: 72%;
+        border-right: 1px solid $color-border-search-article;
+        padding-right: 3em;
+
+        &__title {
+            margin-top: 0;
+            margin-bottom: 1.3em;
+        }
+    }
+
+    @include media-query(1200px) {
+        width: 77%;
+    }
+
+    @include media-query(1600px) {
+        width: 80%;
+    }
 }
 
+.container-categories {
+    @include media-query(1000px) {
+        margin-top: 0;
+    }
+}
+
+// Estilos comentarios
+.container-commentary {
+    padding: 1em;
+    margin-bottom: 1.5em;
+    background-color: rgba(218, 216, 216, 0.253);
+    border-radius: .5em;
+    font-size: .9rem;
+
+    &__paragraph--hidden {
+        display: none;
+    }
+
+    @include media-query(400px) {
+        padding: 1.3em;
+    }
+
+    @include media-query(800px) {
+        padding: 1.5em;
+        position: relative;
+        font-size: 1rem;
+    }
+
+    @include media-query(1000px) {
+        padding: 1.7em;
+        position: relative;
+        font-size: 1rem;
+    }
+}
+
+.container-author-commentary {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+
+    &__img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-right: .8em;
+        background-color: white;
+    }
+}
+
+.container-add-comment {
+    margin-bottom: 1.5em;
+
+    &__btn {
+        margin-top: 1.5em;
+        @extend %btn-form;
+
+        @include media-query(600px) {
+            width: 190px;
+        }
+    }
+
+    &__btn:hover {
+        @extend %btn-form-hover;
+    }
+
+    &__textarea {
+        @extend %input-form;
+        @extend %textarea-form;
+    }
+}
+
+.container-actions-commentary {
+    margin-bottom: 0;
+
+    &__link {
+        @extend %btn-form;
+        margin-bottom: 0;
+    }
+
+    &__link--color {
+        background-color: rgb(180, 25, 25);
+    }
+
+    &__link--hidden {
+        display: none;
+    }
+
+    &--hidden {
+        display: none;
+    }
+
+    @include media-query(400px) {
+
+        &__link,
+        & form {
+            display: inline-block;
+            width: 160px;
+            margin-right: 1.3em;
+        }
+    }
+
+    @include media-query(800px) {
+        position: absolute;
+        top: .6em;
+        right: 0;
+    }
+}
 
 .container-list-commentaries {
     margin-top: 2em;
+
+    &__title {
+        font-size: $font-size-title-movil;
+    }
 }
 
 .container-form-edit-commentary {
     display: none;
 
     &__input,
-    &__link-hidden {
+    &__link--hidden {
         display: none;
+    }
+
+    &__textarea {
+        @extend %input-form;
+        @extend %textarea-form;
+        margin-bottom: 1.3em;
+        background-color: white;
+        margin-top: 1.2em;
     }
 
     &--show {
