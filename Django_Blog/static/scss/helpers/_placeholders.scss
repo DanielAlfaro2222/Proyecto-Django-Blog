@@ -94,3 +94,25 @@
         margin-right: auto;
     }
 }
+
+// Botones panel admin
+%bottom-new-register {
+    max-width: 160px;
+    display: block;
+    height: 40px;
+    margin-left: auto;
+    text-align: center;
+    line-height: 40px;
+    background-color: $bg-color-header;
+    color: white;
+    border-radius: .4em;
+    font-size: .8rem;
+    margin-bottom: 1em;
+
+    @include media-query(800px) {
+        max-width: 190px;
+        font-size: .88rem;
+        height: 44px;
+        line-height: 44px;
+    }
+}

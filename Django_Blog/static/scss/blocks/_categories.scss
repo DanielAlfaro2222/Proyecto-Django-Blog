@@ -16,6 +16,7 @@
         &__title {
             margin-top: 0;
             margin-bottom: 1.3em;
+            font-size: $font-size-title-tablet;
         }
     }
 
@@ -31,6 +32,11 @@
 .container-list-categories {
     padding: 0;
     list-style: none;
+    font-size: .9rem;
+
+    @include media-query(1000px) {
+        font-size: .97rem;
+    }
 }
 
 .container-element-list-categories {
@@ -38,7 +44,6 @@
 
     &__link {
         color: black;
-        font-size: .9rem;
     }
 
     &__link:hover {
@@ -49,16 +54,11 @@
         width: 1.1em;
         margin-right: .4em;
     }
-
-    @include media-query(800px) {
-        &__link {
-            font-size: 1rem;
-        }
-    }
 }
 
 .container-form-search-article {
     margin-top: 1.7em;
+    font-size: .9rem;
 
     &__input {
         @include input-formulario($margin-top: 0, $padding-left: 1em, $bg-color: transparent);
@@ -74,10 +74,22 @@
         @extend %btn-form-hover;
     }
 
+    @include media-query(700px) {
+        max-width: 330px;
+    }
+
     @include media-query(1000px) {
-        &__btn {
-            max-width: 200px;
-            font-size: 1rem;
+        font-size: .97rem;
+        max-width: 240px;
+
+        &__btn,
+        &__input {
+            font-size: inherit;
+            height: 44px;
         }
+    }
+
+    @include media-query(1400px) {
+        max-width: 260px;
     }
 }

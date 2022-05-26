@@ -1,9 +1,11 @@
-<form method="get">
-    <input type="text" name="q" value="{{request.GET.q}}">
-</form>
-
-{% if request.GET.q %}
-<p>
-    Resultados encontrados para {{request.GET.q}}: {{resultado}}
-</p>
-{% endif %}
+<article class="article-search-admin">
+    <form method="get" class="container-form-search-admin">
+        <input type="text" name="q" value="{{request.GET.q}}" placeholder="Buscar..." class="container-form-search-admin__input">
+    </form>
+    
+    {% if request.GET.q %}
+        <p class="article-search-admin__paragraph">
+            Resultados encontrados para {{request.GET.q}}: {{resultado}}
+        </p>
+    {% endif %}
+</article>

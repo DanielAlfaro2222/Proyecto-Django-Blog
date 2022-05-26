@@ -211,7 +211,7 @@ class PublicationsListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['registros'] = Article.objects.filter(
             author=self.request.user).order_by('-create')
-        context['paginacion'] = Paginator(context['registros'], 10)
+        context['paginacion'] = Paginator(context['registros'], 7)
         context['num_pagina'] = self.request.GET.get('page')
         context['articulos'] = context['paginacion'].get_page(
             context['num_pagina'])
@@ -226,7 +226,7 @@ class PublicationsListView(LoginRequiredMixin, ListView):
                 context['registros'] = Article.objects.filter(
                     author=self.request.user).order_by('-create')
 
-        context['paginacion'] = Paginator(context['registros'], 10)
+        context['paginacion'] = Paginator(context['registros'], 7)
         context['articulos'] = context['paginacion'].get_page(
             context['num_pagina'])
 

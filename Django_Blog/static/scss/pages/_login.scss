@@ -25,6 +25,18 @@
         margin-bottom: 0;
         font-size: $font-size-title-movil;
     }
+
+    @include media-query(1000px) {
+        &__title {
+            font-size: $font-size-title-tablet;
+        }
+    }
+
+    @include media-query(1400px) {
+        &__title {
+            font-size: $font-size-title-desktop;
+        }
+    }
 }
 
 .container-form-login {

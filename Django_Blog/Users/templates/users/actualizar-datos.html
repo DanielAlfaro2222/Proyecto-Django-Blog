@@ -48,6 +48,15 @@
                 {% if formulario.image.errors %}
                 {{formulario.image.errors}}
                 {% endif %}
+
+                Foto actual
+
+                {% if request.user.has_image %}
+                <img src="{{request.user.image.url}}" alt="Foto de {{request.user.get_short_name}}" loading="lazy"
+                    decoding="async" class="container-label-users__img">
+                {% else %}
+                <p class="container-label-users__paragraph">Sin foto de perfil</p>
+                {% endif %}
             </label>
 
             <label class="container-label-update-data-user">

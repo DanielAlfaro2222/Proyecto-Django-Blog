@@ -65,7 +65,7 @@
                         alt="Foto de perfil usuario" class="container-author-commentary__img" loading="lazy">
                     {% endif %}
 
-                    <a href="{% url 'Users:author' comentario.author.slug %}">
+                    <a href="{% url 'Users:author' comentario.author.slug %}" class="container-author-commentary__link">
                         {{ comentario.author.get_short_name }}
                     </a>
                 </p>

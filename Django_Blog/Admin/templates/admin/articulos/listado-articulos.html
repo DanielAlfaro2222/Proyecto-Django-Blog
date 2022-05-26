@@ -13,7 +13,9 @@
 
         {% include 'snippets/mensajes.html' %}
 
-        <a href="{% url 'Admin:new-article' %}">Agregar nuevo articulo</a>
+        <a href="{% url 'Admin:new-article' %}" class="section-list-articles-admin__link">
+            Agregar nuevo articulo
+        </a>
 
         {% include 'admin/snippets/busqueda.html' %}
 

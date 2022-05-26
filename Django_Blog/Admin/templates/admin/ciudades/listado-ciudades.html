@@ -9,11 +9,15 @@
 {% block content %}
 <main class="main">
     <section class="section-list-cities-admin">
-        <h2 class="section-list-cities-admin__title">Gestionar ciudades</h2>
+        <h2 class="section-list-cities-admin__title">
+            Gestionar ciudades
+        </h2>
 
         {% include 'snippets/mensajes.html' %}
 
-        <a href="{% url 'Admin:new-city' %}">Agregar nueva ciudad</a>
+        <a href="{% url 'Admin:new-city' %}" class="section-list-cities-admin__link">
+            Agregar nueva ciudad
+        </a>
 
         {% include 'admin/snippets/busqueda.html' %}
 

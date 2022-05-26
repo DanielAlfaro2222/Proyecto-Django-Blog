@@ -13,7 +13,9 @@
 
         {% include 'snippets/mensajes.html' %}
 
-        <a href="{% url 'Users:new-article' %}">Publicar un nuevo articulo</a>
+        <a href="{% url 'Users:new-article' %}" class="section-my-articles__link">
+            Publicar un nuevo articulo
+        </a>
 
         {% include 'admin/snippets/busqueda.html' %}
 

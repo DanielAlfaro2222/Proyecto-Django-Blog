@@ -44,11 +44,18 @@
         &__title {
             margin-top: 0;
             margin-bottom: 1.3em;
+            font-size: $font-size-title-tablet;
         }
     }
 
     @include media-query(1200px) {
         width: 77%;
+    }
+
+    @include media-query(1400px) {
+        &__title {
+            font-size: $font-size-title-desktop;
+        }
     }
 
     @include media-query(1600px) {
@@ -102,6 +109,10 @@
         border-radius: 50%;
         margin-right: .8em;
         background-color: white;
+    }
+
+    &__link {
+        color: inherit;
     }
 }
 
@@ -169,6 +180,18 @@
 
     &__title {
         font-size: $font-size-title-movil;
+    }
+
+    @include media-query(1000px) {
+        &__title {
+            font-size: $font-size-title-tablet;
+        }
+    }
+
+    @include media-query(1400px) {
+        &__title {
+            font-size: $font-size-title-desktop;
+        }
     }
 }
 
