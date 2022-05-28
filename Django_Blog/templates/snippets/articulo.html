@@ -12,5 +12,18 @@
         </a>
     </p>
     <p class="container-article__paragraph">{{articulo.content}}</p>
+
+    <div class="container-info-likes container-info-likes--position">
+        <p class="container-info-likes__paragraph">
+            <i class="fa-solid fa-thumbs-up" aria-hidden="true"></i>
+            {{articulo.quantity_likes}}
+        </p>
+        
+        <p class="container-info-likes__paragraph"> 
+            <i class="fa-solid fa-message" aria-hidden="true"></i>
+            {{articulo.quantity_comments}}
+        </p>
+    </div>
+
     <a href="{% url 'Blog:articulo' articulo.slug %}" class="container-article__link">Leer mas</a>
 </article>

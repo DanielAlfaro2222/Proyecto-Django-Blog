@@ -24,6 +24,7 @@
     @include flex(null, center, center);
     color: white;
     font-size: 1rem;
+    position: relative;
 
     &__icon {
         margin-right: .3em;
@@ -42,8 +43,45 @@
         background-color: white;
     }
 
+    &__icon {
+        margin-left: .4em;
+        cursor: pointer;
+    }
+
     @include media_query(1000px) {
         font-size: 1.2rem;
+    }
+}
+
+.container-nav-options-user-account {
+    display: none;
+    width: 195px;
+    position: absolute;
+    list-style: none;
+    background-color: white;
+    top: 55px;
+    border-radius: .4em;
+    text-align: center;
+    padding: 0;
+    font-size: .9rem;
+    right: .5em;
+    overflow: hidden;
+
+    &--show {
+        display: block;
+    }
+}
+
+.container-element-options-user-account {
+    height: 40px;
+    line-height: 40px;
+
+    &__link {
+        color: black;
+    }
+
+    &:hover {
+        background-color: $row-table-hover;
     }
 }
 

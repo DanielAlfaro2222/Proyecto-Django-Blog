@@ -8,25 +8,30 @@
 
 {% block content %}
 <main class="main">
-    <section>
-        <h2>¡Bienvenido de nuevo, {{request.user.get_short_name}}!</h2>
+    <section class="container-my-account">
+        <h2 class="container-my-account__title">
+            ¡Bienvenido de nuevo, {{request.user.get_short_name}}!
+        </h2>
 
         {% include 'snippets/mensajes.html' %}
 
-        <ul>
-            <li>
-                <a href="{% url 'Users:update-data-user' request.user.slug %}">
+        <ul class="container-list-options-my-account">
+            <li class="container-element-options-my-account">
+                <a href="{% url 'Users:update-data-user' request.user.slug %}" class="container-link-options-my-account">
                     Actualizar datos personales
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653619438/Proyecto%20django-blog/account_yefxda.webp" alt="" decoding="async" loading="lazy" class="container-link-options-my-account__image">
                 </a>
             </li>
-            <li>
-                <a href="{% url 'Users:change-password' %}">
+            <li class="container-element-options-my-account">
+                <a href="{% url 'Users:change-password' %}" class="container-link-options-my-account">
                     Cambiar contraseña
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653619423/Proyecto%20django-blog/change-password_qpv7pg.webp" alt="" decoding="async" loading="lazy" class="container-link-options-my-account__image">
                 </a>
             </li>
-            <li>
-                <a href="{% url 'Users:articles-user' %}">
+            <li class="container-element-options-my-account">
+                <a href="{% url 'Users:articles-user' %}" class="container-link-options-my-account">
                     Mis publicaciones
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653619426/Proyecto%20django-blog/my_publications_q677sg.webp" alt="" decoding="async" loading="lazy" class="container-link-options-my-account__image">
                 </a>
             </li>
         </ul>

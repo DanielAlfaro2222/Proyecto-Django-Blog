@@ -112,10 +112,10 @@
     @include media-query(1000px) {
         display: grid;
         grid-template-columns: 65% 35%;
-        grid-template-rows: repeat(2, 22px) 1fr 1fr;
+        grid-template-rows: repeat(2, 22px) 132px 22px 1fr;
         column-gap: 1em;
         row-gap: .5em;
-        height: 240px;
+        height: 273px;
         border-bottom: none;
         margin-bottom: 3em;
         font-size: 1rem;

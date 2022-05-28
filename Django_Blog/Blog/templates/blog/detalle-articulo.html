@@ -27,15 +27,29 @@
             {{articulo.modified|date:"j F Y"}}
         </p>
 
+        <div class="container-info-likes">
+            <a href="{% url 'Blog:like' articulo.slug %}" class="container-info-likes__link">
+                <i class="fa-solid fa-thumbs-up" aria-hidden="true"></i>
+                {{articulo.quantity_likes}}
+            </a>
+            
+            <p class="container-info-likes__paragraph">
+                <i class="fa-solid fa-message" aria-hidden="true"></i>
+                {{articulo.quantity_comments}}
+            </p>
+        </div>
+
         <p class="container-detail-article__paragraph">
             Por
             <a href="{% url 'Users:author' articulo.author.slug %}">
                 {{articulo.author.get_short_name}}
             </a>
         </p>
+
         <p class="container-detail-article__paragraph">
             {{articulo.resume}}
         </p>
+
         <p class="container-detail-article__paragraph">
             {{articulo.content}}
         </p>

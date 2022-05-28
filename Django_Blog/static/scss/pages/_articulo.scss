@@ -24,8 +24,9 @@
     &__paragraph--font {
         text-align: end;
         font-size: .9rem;
-        color: rgb(70, 70, 70);
+        color: $color-gray-likes;
         margin-top: .6em;
+        font-style: italic;
     }
 
     &__img {
@@ -213,5 +214,37 @@
 
     &--show {
         display: block;
+    }
+}
+
+.container-info-likes {
+    @include flex($justify-content: flex-end, $align-items: center);
+    text-align: end;
+    font-size: 1.15rem;
+    color: $color-gray-likes;
+    margin-top: .6em;
+    font-style: italic;
+    gap: 1em;
+
+    &__link {
+        color: inherit;
+    }
+
+    &__paragraph {
+        margin: 0;
+    }
+
+    @include media-query(600px) {
+        font-size: 1.2rem;
+    }
+}
+
+.container-info-likes--position {
+    justify-content: flex-start;
+    margin: 0 0 .8em 0;
+    font-size: 1rem;
+
+    @include media-query(600px) {
+        font-size: 1.1rem;
     }
 }

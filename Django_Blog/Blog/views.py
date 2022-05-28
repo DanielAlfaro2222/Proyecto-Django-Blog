@@ -9,10 +9,15 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse
+from .models import Like
 from django.http import Http404
 
 
 def category_view(request, slug):
+    """
+    Vista encargada de ver el detalle de una categoria.
+    """
+
     categoria = Category.objects.get(slug=slug)
 
     if categoria.state == 'Desactivo' and not request.user.is_staff:
@@ -44,6 +49,10 @@ def category_view(request, slug):
 
 
 class ArticleDetailView(DetailView):
+    """
+    Vista encargada de mostrar el detalle de una publicacion.
+    """
+
     template_name = 'blog/detalle-articulo.html'
     model = Article
 
@@ -61,6 +70,10 @@ class ArticleDetailView(DetailView):
 
 @login_required
 def add_comment(request, slug):
+    """
+    Vista encargada de agregar un comentario.
+    """
+
     if request.method == 'POST':
         comentario = Comment.objects.create(
             author=request.user,
@@ -74,6 +87,10 @@ def add_comment(request, slug):
 
 @login_required
 def delete_comment(request, slug):
+    """
+    Vista encargada de eliminar un comentario.
+    """
+
     if request.method == 'POST':
         comentario = Comment.objects.get(id_comment=request.POST.get('id'))
         comentario.state = 'Desactivo'
@@ -86,6 +103,10 @@ def delete_comment(request, slug):
 
 @login_required
 def edit_comment(request, slug):
+    """
+    Vista encargada de editar un comentario.
+    """
+
     if request.method == 'POST':
         comentario = Comment.objects.get(id_comment=request.POST.get('id'))
         comentario.content = request.POST.get('comentario')
@@ -94,3 +115,20 @@ def edit_comment(request, slug):
         messages.success(request, 'Comentario editado con exito!')
 
     return redirect(reverse('Blog:articulo', kwargs={'slug': slug}))
+
+
+@login_required
+def like_view(request, slug):
+    """
+    Vista para dar o quitar el me gusta de una publicacion.
+    """
+
+    article = Article.objects.get(slug=slug)
+    like = Like.objects.filter(article=article, author=request.user)
+
+    if like.first():
+        like.delete()
+    else:
+        Like.objects.create(article=article, author=request.user)
+
+    return redirect('Blog:articulo', slug)

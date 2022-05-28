@@ -49,6 +49,12 @@ class Article(models.Model):
     def has_image(self):
         return True if self.image else False
 
+    def quantity_comments(self):
+        return self.comment_set.filter(state='Activo').count()
+
+    def quantity_likes(self):
+        return self.like_set.filter(state='Activo').count()
+
     class Meta:
         verbose_name = 'Articulo'
         verbose_name_plural = 'Articulos'
@@ -94,9 +100,9 @@ pre_save.connect(set_slug_articulo, sender=Article)
 class Comment(models.Model):
     id_comment = models.AutoField('Id comentario', primary_key=True)
     author = models.ForeignKey(
-        User, verbose_name='Autor', on_delete=models.DO_NOTHING)
+        User, verbose_name='Autor', on_delete=models.CASCADE)
     article = models.ForeignKey(
-        Article, verbose_name='Articulo', on_delete=models.DO_NOTHING)
+        Article, verbose_name='Articulo', on_delete=models.CASCADE)
     content = models.TextField('Contenido')
     create = models.DateTimeField('Fecha de creacion', auto_now_add=True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
@@ -111,3 +117,24 @@ class Comment(models.Model):
         verbose_name_plural = 'Comentarios'
         ordering = ['id_comment']
         db_table = 'Comentario'
+
+
+class Like(models.Model):
+    id_like = models.AutoField('Id like', primary_key=True)
+    author = models.ForeignKey(
+        User, verbose_name='Autor', on_delete=models.CASCADE)
+    article = models.ForeignKey(
+        Article, verbose_name='Articulo', on_delete=models.CASCADE)
+    create = models.DateTimeField('Fecha de creacion', auto_now_add=True)
+    modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
+    state = models.CharField('Estado', choices=ESTADO,
+                             default='Activo', max_length=10)
+
+    def __str__(self):
+        return self.id_like
+
+    class Meta:
+        verbose_name = 'Me gusta'
+        verbose_name_plural = 'Me gustas'
+        ordering = ['id_like']
+        db_table = 'Me gusta'

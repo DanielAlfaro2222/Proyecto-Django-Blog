@@ -51,7 +51,7 @@
 
                 {% if request.user.is_authenticated %}
                 <li class="container-element-nav">
-                    <a href="#" class="container-nav-link">
+                    <div class="container-nav-link">
                         {% if request.user.has_image %}
                         <img src="{{request.user.image.url}}" alt="Foto {{request.user.get_short_name}}"
                             class="container-nav-link__img" loading="lazy" decoding="async">
@@ -62,29 +62,30 @@
                         {% endif %}
 
                         {{request.user.get_short_name}}
-                        <i class="fa-solid fa-angle-down" aria-hidden="true"></i>
 
-                        <ul>
-                            <li>
-                                <a href="{% url 'Users:account' %}">
+                        <i class="fa-solid fa-angle-down container-nav-link__icon" aria-hidden="true" id="button-nav-main"></i>
+
+                        <ul class="container-nav-options-user-account" id="options-account">
+                            <li class="container-element-options-user-account">
+                                <a href="{% url 'Users:account' %}" class="container-element-options-user-account__link">
                                     Mi cuenta
                                 </a>
                             </li>
                             {% if request.user.is_staff %}
-                                <li>
-                                    <a href="{% url 'Admin:admin' %}">
+                                <li class="container-element-options-user-account">
+                                    <a href="{% url 'Admin:admin' %}" class="container-element-options-user-account__link">
                                         Panel de administracion
                                     </a>
                                 </li>
                             {% endif %}
 
-                            <li>
-                                <a href="{% url 'Users:logout' %}">
+                            <li class="container-element-options-user-account">
+                                <a href="{% url 'Users:logout' %}" class="container-element-options-user-account__link">
                                     Cerrar sesion
                                 </a>
                             </li>
                         </ul>
-                    </a>
+                    </div>
                 </li>
                 {% else %}
                 <li class="container-element-nav">
@@ -104,7 +105,10 @@
     <footer class="main-footer">
         <p class="main-footer__paragraph">
             &copy; Diseñado por
-            <a href="https://github.com/DanielAlfaro2222" rel="noopener" target="_blank">Daniel Alfaro</a> {% now "Y" %}
+            <a href="https://github.com/DanielAlfaro2222" rel="noopener" target="_blank">
+                Daniel Alfaro
+            </a> 
+            {% now "Y" %}
         </p>
         <a href="#header" class="container-footer-link">
             <i class="fas fa-chevron-up container-footer-link__icon" aria-hidden="true"></i>

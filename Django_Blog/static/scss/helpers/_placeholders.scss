@@ -116,3 +116,35 @@
         line-height: 44px;
     }
 }
+
+%list-options-menu-account {
+    list-style: none;
+    padding: 0;
+
+    @include media-query(1000px) {
+        @include flex($flex-wrap: wrap);
+        flex-shrink: 0;
+        gap: 1.8em;
+    }
+}
+
+%element-options-menu-account {
+    height: 96px;
+    background-color: rgba(225, 225, 215, 0.822);
+    margin-bottom: 1.7em;
+    border-radius: 1em;
+    font-size: .9rem;
+    padding: 1em;
+    box-shadow: 1px 1px 13px black;
+
+    @include media-query(800px) {
+        font-size: 1rem;
+    }
+}
+
+%link-options-menu-account {
+    @include flex($align-items: center, $justify-content: center);
+    column-gap: 1.2em;
+    height: 100%;
+    color: inherit;
+}

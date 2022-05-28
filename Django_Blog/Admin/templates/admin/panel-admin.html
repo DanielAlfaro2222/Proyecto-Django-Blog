@@ -8,26 +8,43 @@
 
 {% block content %}
 <main class="main">
-    <h2>Panel de administracion</h2>
+    <section class="container-panel-admin">
+        <h2 class="container-panel-admin__title">
+            Panel de administracion
+        </h2>
 
-    <ul>
-        <li>
-            <a href="{% url 'Admin:users' %}">Gestionar usuarios</a>
-        </li>
-        <li>
-            <a href="{% url 'Admin:articles' %}">Gestionar articulos</a>
-        </li>
-        <li>
-            <a href="{% url 'Admin:cities' %}">Gestionar ciudades</a>
-        </li>
-        <li>
-            <a href="{% url 'Admin:categories' %}">Gestionar categorias</a>
-        </li>
-        <li>
-            <a href="{% url 'Admin:list-articles-with-comments' %}">
-                Gestionar comentarios
-            </a>
-        </li>
-    </ul>
+        <ul class="container-list-options-panel-admin">
+            <li class="container-element-options-panel-admin">
+                <a href="{% url 'Admin:users' %}" class="container-link-options-panel-admin">
+                    Gestionar usuarios
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653608921/Proyecto%20django-blog/users_mtof2c.webp" alt="" decoding="async" loading="lazy" class="container-link-options-panel-admin__img">
+                </a>
+            </li>
+            <li class="container-element-options-panel-admin">
+                <a href="{% url 'Admin:articles' %}" class="container-link-options-panel-admin">
+                    Gestionar articulos
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653608948/Proyecto%20django-blog/articles_sgkwze.webp" alt="" decoding="async" loading="lazy" class="container-link-options-panel-admin__img">
+                </a>
+            </li>
+            <li class="container-element-options-panel-admin">
+                <a href="{% url 'Admin:cities' %}" class="container-link-options-panel-admin">
+                    Gestionar ciudades
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653608934/Proyecto%20django-blog/cities_v3iryp.webp" alt="" decoding="async" loading="lazy" class="container-link-options-panel-admin__img">
+                </a>
+            </li>
+            <li class="container-element-options-panel-admin">
+                <a href="{% url 'Admin:categories' %}" class="container-link-options-panel-admin">
+                    Gestionar categorias
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653608943/Proyecto%20django-blog/categories_e30dxc.webp" alt="" decoding="async" loading="lazy" class="container-link-options-panel-admin__img">
+                </a>
+            </li>
+            <li class="container-element-options-panel-admin">
+                <a href="{% url 'Admin:list-articles-with-comments' %}" class="container-link-options-panel-admin">
+                    Gestionar comentarios
+                    <img src="https://res.cloudinary.com/dpxek6oka/image/upload/v1653608929/Proyecto%20django-blog/comment_ee3aqd.webp" alt="" decoding="async" loading="lazy" class="container-link-options-panel-admin__img">
+                </a>
+            </li>
+        </ul>
+    </section>
 </main>
 {% endblock %}
