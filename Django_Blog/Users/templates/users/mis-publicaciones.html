@@ -9,7 +9,9 @@
 {% block content %}
 <main class="main">
     <section class="section-my-articles">
-        <h2 class="section-my-articles__title">Mis publicaciones</h2>
+        <h2 class="section-my-articles__title">
+            Mis publicaciones
+        </h2>
 
         {% include 'snippets/mensajes.html' %}
 
@@ -66,7 +68,7 @@
             </tbody>
         </table>
 
-        {% include 'snippets/paginacion_articulos.html' %}
+        {% include 'snippets/paginacion.html' with registros=articulos %}
     </section>
 
     {% include 'snippets/aside_contacto.html' %}

@@ -5,20 +5,28 @@
 {% endblock %}
 
 {% block content %}
-<h2>Recuperar contraseña</h2>
-
-{% include 'snippets/mensajes.html' %}
-
-<form method="POST">
-    {% csrf_token %}
-
-    <label>
-        Correo electronico
-        {{form.email}}
-    </label>
-
-    <button>Recuperar contraseña</button>
-</form>
-
-{% include 'snippets/aside_contacto.html' %}
+    <main class="main main-reset-password">
+        <section class="section-reset-password">
+            <h2 class="section-reset-password__title">
+                Recuperar contraseña
+            </h2>
+        
+            {% include 'snippets/mensajes.html' %}
+        
+            <form method="POST" class="container-form-reset-password">
+                {% csrf_token %}
+        
+                <label class="container-label-reset-password">
+                    Correo electronico <span class="container-label-reset-password__span">*</span>
+                    {{form.email}}
+                </label>
+        
+                <button class="container-form-reset-password__btn">
+                    Recuperar contraseña
+                </button>
+            </form>
+        </section>
+        
+        {% include 'snippets/aside_contacto.html' %}
+    </main>
 {% endblock %}

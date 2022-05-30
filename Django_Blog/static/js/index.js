@@ -3,9 +3,11 @@
 const $buttonNav = document.getElementById('button-nav-main');
 const $menu = document.getElementById('options-account');
 
-$buttonNav.addEventListener('click', () => {
-    $menu.classList.toggle('container-nav-options-user-account--show');
-});
+if ($buttonNav) {
+    $buttonNav.addEventListener('click', () => {
+        $menu.classList.toggle('container-nav-options-user-account--show');
+    });
+}
 
 function editCommentary(button, article) {
     article.childNodes[7].classList.toggle('container-form-edit-commentary--show');

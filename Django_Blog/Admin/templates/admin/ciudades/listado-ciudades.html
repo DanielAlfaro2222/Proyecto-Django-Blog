@@ -65,6 +65,9 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% include 'snippets/paginacion.html' with registros=ciudades %}
     </section>
+
 </main>
 {% endblock %}

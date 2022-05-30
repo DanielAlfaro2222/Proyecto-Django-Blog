@@ -1,14 +1,14 @@
-{% if articulos.has_other_pages %}
+{% if registros.has_other_pages %}
     <article class="container-paginator-articles">
             <ul class="container-list-paginator-articles">
                 <li class="container-element-list-paginator container-element-list-paginator--width">
-                    {% if articulos.has_previous %}
+                    {% if registros.has_previous %}
                             {% if request.GET.q %}
-                                <a href="?q={{request.GET.q}}&page={{articulos.previous_page_number}}" class="container-element-list-paginator__link">
+                                <a href="?q={{request.GET.q}}&page={{registros.previous_page_number}}" class="container-element-list-paginator__link">
                                     Anterior
                                 </a>
                             {% else %}
-                                <a href="?page={{articulos.previous_page_number}}" class="container-element-list-paginator__link">
+                                <a href="?page={{registros.previous_page_number}}" class="container-element-list-paginator__link">
                                     Anterior
                                 </a>
                             {% endif %}
@@ -20,7 +20,7 @@
                 </li>
                         
                 {% for i in paginacion.page_range %}
-                    {% if articulos.number == i %}
+                    {% if registros.number == i %}
                         {% if request.GET.q %}
                             <li class="container-element-list-paginator container-element-list-paginator--active">
                                 <a href="?q={{request.GET.q}}&page={{i}}" class="container-element-list-paginator__link container-element-list-paginator__link--active">
@@ -52,13 +52,13 @@
                 {% endfor %}
 
                 <li class="container-element-list-paginator container-element-list-paginator--width ">
-                {% if articulos.has_next %}
+                {% if registros.has_next %}
                     {% if request.GET.q %}
-                        <a href="?q={{request.GET.q}}&page={{articulos.next_page_number}}" class="container-element-list-paginator__link">
+                        <a href="?q={{request.GET.q}}&page={{registros.next_page_number}}" class="container-element-list-paginator__link">
                             Siguiente
                         </a>
                     {% else %}
-                        <a href="?page={{articulos.next_page_number}}" class="container-element-list-paginator__link">
+                        <a href="?page={{registros.next_page_number}}" class="container-element-list-paginator__link">
                             Siguiente
                         </a>
                     {% endif %}

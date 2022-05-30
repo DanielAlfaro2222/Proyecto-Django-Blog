@@ -1,0 +1,65 @@
+@use '../helpers/mixins' as *;
+@use '../config/config' as *;
+@use '../helpers/placeholders' as *;
+
+.container-paginator-articles {
+    height: 40px;
+    margin-top: 1.5em;
+}
+
+.container-list-paginator-articles {
+    @include flex();
+    height: 100%;
+    padding: 0;
+    list-style: none;
+    font-size: .9rem;
+
+    @include media-query(1000px) {
+        font-size: 1rem;
+    }
+}
+
+.container-element-list-paginator {
+    width: 25px;
+    border: 1px solid rgb(204, 204, 204);
+    text-align: center;
+
+    &__link {
+        color: $bg-color-header;
+        line-height: 40px;
+    }
+
+    &--width {
+        width: 70px;
+        height: 100%;
+    }
+
+    &--active,
+    &__link--active {
+        background-color: $bg-color-header;
+        color: white;
+        border: none;
+    }
+
+    &__link--deactivate {
+        color: gray;
+        pointer-events: none;
+        cursor: default;
+    }
+
+    @include media-query(600px) {
+        width: 32px;
+
+        &--width {
+            width: 80px;
+        }
+    }
+
+    @include media-query(1000px) {
+        width: 33px;
+
+        &--width {
+            width: 90px;
+        }
+    }
+}

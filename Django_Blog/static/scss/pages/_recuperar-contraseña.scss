@@ -1,0 +1,51 @@
+@use '../helpers/placeholders' as *;
+@use '../helpers/mixins' as *;
+@use '../config/config' as *;
+
+.main-reset-password {
+    @extend %main-forms;
+}
+
+.section-reset-password {
+    &__title {
+        font-size: $font-size-title-movil;
+    }
+
+    &__paragraph {
+        font-size: .9rem;
+    }
+
+    @include media-query(1000px) {
+        &__title {
+            font-size: $font-size-title-tablet;
+        }
+    }
+
+    @include media-query(1400px) {
+        &__title {
+            font-size: $font-size-title-desktop;
+        }
+    }
+}
+
+.container-label-reset-password {
+    @extend %label-form;
+
+    & input {
+        @extend %input-form;
+    }
+
+    &__span {
+        @extend %span-label-forms;
+    }
+}
+
+.container-form-reset-password {
+    &__btn {
+        @extend %btn-form;
+    }
+
+    &__btn:hover {
+        @extend %btn-form-hover;
+    }
+}

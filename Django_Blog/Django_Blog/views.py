@@ -16,22 +16,26 @@ from django.shortcuts import redirect
 
 def index_view(request):
     """
+    Vista encargada de mostrar la pagina principal de la aplicacion.
     """
 
-    articulos = Article.objects.filter(
-        state='Activo').order_by('-id_article')
+    articulos = Article.objects.filter(state='Activo').order_by('-id_article')
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')
+        articulos = busqueda_articulos(request, parametro_busqueda)
 
-        if len(busqueda_articulos(request, parametro_busqueda)) == 0:
+        if articulos.count() == 0:
             messages.error(
                 request, f'No se encontraron coincidencias con {parametro_busqueda}')
+            articulos = Article.objects.filter(
+                state='Activo').order_by('-id_article')
         else:
-            articulos = busqueda_articulos(request, request.GET.get('q'))
+            messages.success(
+                request, f'Se encontraron {articulos.count()} articulos para {request.GET.get("q")}')
 
     # Paginacion por cada 5 articulos
-    paginacion = Paginator(articulos, 8)
+    paginacion = Paginator(articulos, 7)
     num_pagina = request.GET.get('page')
     articulos = paginacion.get_page(num_pagina)
 
@@ -43,6 +47,7 @@ def index_view(request):
 
 class Error400TemplateView(TemplateView):
     """
+    Vista encargada de renderizar el template personalizado del error 400.
     """
 
     template_name = 'codigos_error/400.html'
@@ -50,6 +55,7 @@ class Error400TemplateView(TemplateView):
 
 class Error403TemplateView(TemplateView):
     """
+    Vista encargada de renderizar el template personalizado del error 403.
     """
 
     template_name = 'codigos_error/403.html'
@@ -57,6 +63,7 @@ class Error403TemplateView(TemplateView):
 
 class Error404TemplateView(TemplateView):
     """
+    Vista encargada de renderizar el template personalizado del error 404.
     """
 
     template_name = 'codigos_error/404.html'
@@ -64,6 +71,7 @@ class Error404TemplateView(TemplateView):
 
 class Error500TemplateView(TemplateView):
     """
+    Vista encargada de renderizar el template personalizado del error 500.
     """
 
     template_name = 'codigos_error/500.html'
@@ -82,6 +90,7 @@ class Error500TemplateView(TemplateView):
 
 def reset_password(request):
     """
+    Vista encargada de enviar el correo al usuario para restablecer la contraseña.
     """
 
     form = PasswordResetForm(request.POST or None)

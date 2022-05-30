@@ -10,6 +10,7 @@
 @use 'blocks/categories' as *;
 @use 'blocks/aside' as *;
 @use 'blocks/errorlist' as *;
+@use 'blocks/paginacion' as *;
 
 // Paginas
 @use 'pages/index' as *;
@@ -29,3 +30,4 @@
 @use 'pages/change-password' as *;
 @use 'pages/panel_admin' as *;
 @use 'pages/mi-cuenta' as *;
+@use 'pages/recuperar-contraseña' as *;

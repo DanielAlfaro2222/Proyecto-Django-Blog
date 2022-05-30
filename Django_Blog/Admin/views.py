@@ -23,10 +23,12 @@ from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from .forms import CommentModelForm
 from django.db.models import Q
+from django.core.paginator import Paginator
 
 
 class AdminTemplateView(LoginRequiredMixin, AdminGroupTest, TemplateView):
     """
+    Vista encargada de mostrar la pagina principal del panel de administacion.
     """
 
     template_name = 'admin/panel-admin.html'
@@ -34,30 +36,37 @@ class AdminTemplateView(LoginRequiredMixin, AdminGroupTest, TemplateView):
 
 class ArticlesListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
+    Vista encargada de mostrar el listado de articulos en el panel de administracion.
     """
 
     template_name = 'admin/articulos/listado-articulos.html'
     model = Article
+    queryset = Article.objects.all().order_by('-modified')
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articulos'] = Article.objects.all().order_by('-modified')
+        context['paginacion'] = context['paginator']
+        context['articulos'] = context['paginacion'].get_page(
+            self.request.GET.get('page'))
 
         if self.request.GET.get('q'):
             parametro_busqueda = self.request.GET.get('q')
-            context['articulos'] = Article.objects.filter(
-                Q(name__icontains=parametro_busqueda) | Q(content__icontains=parametro_busqueda) | Q(resume__icontains=parametro_busqueda))
-            context['resultado'] = context['articulos'].count()
+            context['query'] = Article.objects.filter(
+                Q(name__icontains=parametro_busqueda) | Q(content__icontains=parametro_busqueda) | Q(resume__icontains=parametro_busqueda)).order_by('-modified')
+            context['resultado'] = context['query'].count()
 
-            if context['articulos'].count() == 0:
-                context['articulos'] = Article.objects.all().order_by(
-                    '-modified')
+            if context['resultado'] != 0:
+                context['paginacion'] = Paginator(context['query'], 8)
+                context['articulos'] = context['paginacion'].get_page(
+                    self.request.GET.get('page'))
 
         return context
 
 
 class ArticleCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
     """
+    Vista encargada de crear un articulo en el panel de administacion.
     """
 
     template_name = 'admin/articulos/nuevo-articulo.html'
@@ -69,6 +78,7 @@ class ArticleCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest,
 
 class ArticleUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, UpdateView, SingleObjectMixin):
     """
+    Vista encargada de actualizar un articulo en el panel de administacion.
     """
 
     template_name = 'admin/articulos/editar-articulo.html'
@@ -93,29 +103,37 @@ class ArticleUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest,
 
 class UsersListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
+    Vista encargada de mostrar el listado de usuarios en el panel de administracion.
     """
 
     template_name = 'admin/usuarios/listado-usuarios.html'
     model = User
+    queryset = User.objects.all().order_by('-id_user')
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['usuarios'] = User.objects.all().order_by('-id_user')
+        context['paginacion'] = context['paginator']
+        context['usuarios'] = context['paginacion'].get_page(
+            self.request.GET.get('page'))
 
         if self.request.GET.get('q'):
             parametro_busqueda = self.request.GET.get('q')
-            context['usuarios'] = User.objects.filter(
+            context['query'] = User.objects.filter(
                 Q(first_name__icontains=parametro_busqueda) | Q(last_name__icontains=parametro_busqueda) | Q(email__icontains=parametro_busqueda))
-            context['resultado'] = context['usuarios'].count()
+            context['resultado'] = context['query'].count()
 
-            if context['usuarios'].count() == 0:
-                context['usuarios'] = User.objects.all().order_by('-id_user')
+            if context['resultado'] != 0:
+                context['paginacion'] = Paginator(context['query'], 8)
+                context['usuarios'] = context['paginacion'].get_page(
+                    self.request.GET.get('page'))
 
         return context
 
 
 class UserCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
     """
+    Vista encargada de crear un usuario en el panel de administacion.
     """
 
     template_name = 'admin/usuarios/nuevo-usuario.html'
@@ -155,6 +173,7 @@ class UserCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, Cr
 
 class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, UpdateView):
     """
+    Vista encargada de actualizar un usuario en el panel de administracion.
     """
 
     template_name = 'admin/usuarios/editar-usuario.html'
@@ -206,29 +225,38 @@ class UserUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, Up
 
 class CitiesListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
+    Vista encargada de mostrar el listado de ciudades en el panel de administracion.
     """
 
     template_name = 'admin/ciudades/listado-ciudades.html'
     model = City
+    queryset = City.objects.all().order_by('-modified')
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['ciudades'] = City.objects.all().order_by('-modified')
+        context['paginacion'] = context['paginator']
+        context['ciudades'] = context['paginacion'].get_page(
+            self.request.GET.get('page'))
 
         if self.request.GET.get('q'):
             parametro_busqueda = self.request.GET.get('q')
-            context['ciudades'] = City.objects.filter(
+            context['query'] = self.queryset.filter(
                 description__icontains=parametro_busqueda)
-            context['resultado'] = context['ciudades'].count()
+            context['resultado'] = context['query'].count()
 
-            if context['ciudades'].count() == 0:
-                context['ciudades'] = City.objects.all().order_by('-modified')
+            if context['resultado'] != 0:
+                context['paginacion'] = Paginator(
+                    context['query'], 8)
+                context['ciudades'] = context['paginacion'].get_page(
+                    self.request.GET.get('page'))
 
         return context
 
 
 class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
     """
+    Vista encargada de crear una ciudad en el panel de administacion.
     """
 
     template_name = 'admin/ciudades/nueva-ciudad.html'
@@ -240,6 +268,7 @@ class CityCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, Cr
 
 class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, UpdateView):
     """
+    Vista encargada de actualizar una ciudad en el panel de administacion.
     """
 
     template_name = 'admin/ciudades/editar-ciudad.html'
@@ -262,30 +291,37 @@ class CityUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, Up
 
 class CategoriesListView(LoginRequiredMixin, AdminGroupTest, ListView):
     """
+    Vista encargada de mostrar el listado de categorias en el panel de administracion.
     """
 
     template_name = 'admin/categorias/listado-categorias.html'
     model = Category
+    queryset = Category.objects.all().order_by('-modified')
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['categorias'] = Category.objects.all().order_by('-modified')
+        context['paginacion'] = context['paginator']
+        context['categorias'] = context['paginacion'].get_page(
+            self.request.GET.get('page'))
 
         if self.request.GET.get('q'):
             parametro_busqueda = self.request.GET.get('q')
-            context['categorias'] = Category.objects.filter(
+            context['query'] = Category.objects.filter(
                 name__icontains=parametro_busqueda)
-            context['resultado'] = context['categorias'].count()
+            context['resultado'] = context['query'].count()
 
-            if context['categorias'].count() == 0:
-                context['categorias'] = Category.objects.all().order_by(
-                    '-modified')
+            if context['resultado'] != 0:
+                context['paginacion'] = Paginator(context['query'], 8)
+                context['categorias'] = context['paginacion'].get_page(
+                    self.request.GET.get('page'))
 
         return context
 
 
 class CategoriesCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, CreateView):
     """
+    Vista encargada de crear una categoria en el panel de administacion.
     """
 
     template_name = 'admin/categorias/nueva-categoria.html'
@@ -297,6 +333,7 @@ class CategoriesCreateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTe
 
 class CategoryUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, UpdateView):
     """
+    Vista encargada de actualizar una categoria en el panel de administacion.
     """
 
     template_name = 'admin/categorias/editar-categoria.html'
@@ -319,6 +356,10 @@ class CategoryUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest
 
 
 class ListArticlesWithComments(LoginRequiredMixin, AdminGroupTest, TemplateView):
+    """
+    Vista encargada de mostrar el listado de articulos con comentarios en el panel de administacion.
+    """
+
     template_name = 'admin/comentarios/listado-articulos-con-comentarios.html'
 
     def get_context_data(self, **kwargs):
@@ -330,6 +371,10 @@ class ListArticlesWithComments(LoginRequiredMixin, AdminGroupTest, TemplateView)
 
 
 class ListCommentsByArticle(LoginRequiredMixin, AdminGroupTest, TemplateView):
+    """
+    Vista encargada de mostrar el listado de comentarios por articulo en el panel de administracion.
+    """
+
     template_name = 'admin/comentarios/comentarios-por-articulo.html'
 
     def get(self, request, *args, **kwargs):
@@ -356,6 +401,10 @@ class ListCommentsByArticle(LoginRequiredMixin, AdminGroupTest, TemplateView):
 
 
 class CommentUpdateView(SuccessMessageMixin, LoginRequiredMixin, AdminGroupTest, UpdateView):
+    """
+    Vista encargada de actualizar un comentario en el panel de administracion.
+    """
+
     template_name = 'admin/comentarios/editar-comentario.html'
     model = Comment
     form_class = CommentModelForm

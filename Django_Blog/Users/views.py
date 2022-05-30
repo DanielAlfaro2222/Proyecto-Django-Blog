@@ -203,14 +203,13 @@ class PublicationsListView(LoginRequiredMixin, ListView):
     """
     Vista encargada de listar las publicaciones de un autor.
     """
-
     template_name = 'users/mis-publicaciones.html'
     model = Article
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['registros'] = Article.objects.filter(
-            author=self.request.user).order_by('-create')
+            author=self.request.user).order_by('-modified')
         context['paginacion'] = Paginator(context['registros'], 7)
         context['num_pagina'] = self.request.GET.get('page')
         context['articulos'] = context['paginacion'].get_page(
@@ -218,22 +217,23 @@ class PublicationsListView(LoginRequiredMixin, ListView):
 
         if self.request.GET.get('q'):
             parametro_busqueda = self.request.GET.get('q')
-            context['registros'] = Article.objects.filter(
-                Q(name__icontains=parametro_busqueda) | Q(content__icontains=parametro_busqueda) | Q(resume__icontains=parametro_busqueda), author=self.request.user)
-            context['resultado'] = context['registros'].count()
+            context['query'] = Article.objects.filter(
+                Q(name__icontains=parametro_busqueda) | Q(content__icontains=parametro_busqueda) | Q(resume__icontains=parametro_busqueda), author=self.request.user).order_by('-modified')
+            context['resultado'] = context['query'].count()
 
-            if context['registros'].count() == 0:
-                context['registros'] = Article.objects.filter(
-                    author=self.request.user).order_by('-create')
-
-        context['paginacion'] = Paginator(context['registros'], 7)
-        context['articulos'] = context['paginacion'].get_page(
-            context['num_pagina'])
+            if context['resultado'] != 0:
+                context['paginacion'] = Paginator(context['query'], 8)
+                context['articulos'] = context['paginacion'].get_page(
+                    self.request.GET.get('page'))
 
         return context
 
 
 class CreateArticleView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """
+    Vista encargada de crear un nuevo articulo desde el panel del usuario.
+    """
+
     template_name = 'users/nuevo-articulo.html'
     form_class = CreateArticleModelForm
     success_url = reverse_lazy('Users:articles-user')
@@ -245,6 +245,10 @@ class CreateArticleView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class UpdateArticleView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    Vista encargada de actualizar un articulo desde el panel del usuario.
+    """
+
     template_name = 'users/editar-articulo.html'
     form_class = CreateArticleModelForm
     success_url = reverse_lazy('Users:articles-user')
@@ -266,6 +270,9 @@ class UpdateArticleView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 @login_required
 def change_password(request):
+    """
+    Vista encargada de cambiar la contraseña del usuario.
+    """
 
     form = PasswordChangeForm(user=request.user, data=request.POST or None)
 

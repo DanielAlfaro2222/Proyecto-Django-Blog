@@ -58,6 +58,8 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% include 'snippets/paginacion.html' with registros=categorias %}
     </section>
 </main>
 {% endblock %}

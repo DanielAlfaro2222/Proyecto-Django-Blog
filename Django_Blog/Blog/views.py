@@ -28,13 +28,17 @@ def category_view(request, slug):
 
     if request.GET.get('q'):
         parametro_busqueda = request.GET.get('q')
+        articulos = busqueda_articulos_por_categoria(
+            request, parametro_busqueda, categoria)
 
-        if len(busqueda_articulos_por_categoria(request, parametro_busqueda, categoria)) == 0:
+        if articulos.count() == 0:
             messages.error(
                 request, f'No se encontraron coincidencias con {parametro_busqueda}')
+            articulos = Article.objects.filter(
+                category=categoria, state='Activo').order_by('-id_article')
         else:
-            articulos = busqueda_articulos_por_categoria(
-                request, parametro_busqueda, categoria)
+            messages.success(
+                request, f'Se encontraron {articulos.count()} articulos para {request.GET.get("q")}')
 
     # Paginacion por cada 8 articulos
     paginacion = Paginator(articulos, 8)

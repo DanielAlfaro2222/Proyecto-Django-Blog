@@ -41,32 +41,34 @@
             </thead>
             <tbody>
                 {% for articulo in articulos %}
-                <tr class="container-row-table">
-                    <td class="container-column-table">
-                        <a href="{% url 'Admin:edit-article' articulo.slug %}">
-                            {{forloop.counter}}
-                        </a>
-                    </td>
-                    <td class="container-column-table"> 
-                        <a href="{% url 'Blog:articulo' articulo.slug %}">
-                            {{articulo}}
-                        </a>
-                    </td>
-                    <td class="container-column-table">
-                        <a href="{% url 'Users:author' articulo.author.slug %}">
-                            {{articulo.author.get_short_name}}
-                        </a>
-                    </td>
-                    <td class="container-column-table">
-                        {{articulo.state}}
-                    </td>
-                    <td class="container-column-table">
-                        {{articulo.create | date:"j F Y"}}
-                    </td>
-                </tr>
+                    <tr class="container-row-table">
+                        <td class="container-column-table">
+                            <a href="{% url 'Admin:edit-article' articulo.slug %}">
+                                {{forloop.counter}}
+                            </a>
+                        </td>
+                        <td class="container-column-table"> 
+                            <a href="{% url 'Blog:articulo' articulo.slug %}">
+                                {{articulo}}
+                            </a>
+                        </td>
+                        <td class="container-column-table">
+                            <a href="{% url 'Users:author' articulo.author.slug %}">
+                                {{articulo.author.get_short_name}}
+                            </a>
+                        </td>
+                        <td class="container-column-table">
+                            {{articulo.state}}
+                        </td>
+                        <td class="container-column-table">
+                            {{articulo.modified | date:"j F Y"}}
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        {% include 'snippets/paginacion.html' with registros=articulos %}
     </section>
 </main>
 {% endblock %}

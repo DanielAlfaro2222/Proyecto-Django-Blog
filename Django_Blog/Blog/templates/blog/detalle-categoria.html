@@ -12,14 +12,7 @@
     <main class="main main-index">
         <section class="container-left-index">
             <h2 class="container-left-index__title">Articulos</h2>
-            {% if messages %}
-                {% for mensaje in messages %}
-                    <p class="mensaje_error">
-                        <i class="fas fa-exclamation-circle mensaje_error__icon"></i>
-                        {{mensaje}}
-                    </p>
-                {% endfor %}
-            {% endif %}
+            {% include 'snippets/mensajes.html' %}
 
             {% for articulo in articulos %}
                 {% include 'snippets/articulo.html' %}
@@ -27,7 +20,7 @@
                 <p>No hay articulos relacionados con esta categoria :(</p>
             {% endfor %}
 
-            {% include 'snippets/paginacion_articulos.html' %}
+            {% include 'snippets/paginacion.html' with registros=articulos %}
         </section>
     
         <section class="container-categories">
