@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from .utils import send_email
 from django.shortcuts import redirect
+import threading
 
 
 def index_view(request):
@@ -111,7 +112,10 @@ def reset_password(request):
                     'protocolo': protocolo,
                 }
 
-                send_email(template, context, 'Recuperar contraseña', email)
+                thread = threading.Thread(target=send_email, args=[
+                                          template, context, 'Recuperar contraseña', email])
+
+                thread.start()
 
                 messages.success(
                     request, 'Le enviamos las instrucciones por correo electrónico para configurar su nueva contraseña')

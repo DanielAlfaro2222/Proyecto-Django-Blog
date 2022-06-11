@@ -225,25 +225,6 @@ class ContactForm(forms.Form):
         })
     )
 
-    def enviar_correo(self, dominio, protocolo):
-        try:
-            template = 'mails/email_contacto.html'
-            context = {
-                'nombre': self.cleaned_data.get('nombre').strip(),
-                'asunto': self.cleaned_data.get('asunto').strip(),
-                'correo': self.cleaned_data.get('correo').strip(),
-                'mensaje': self.cleaned_data.get('mensaje').strip(),
-                'dominio': dominio,
-                'protocolo': protocolo,
-            }
-            subject = 'Nuevo mensaje de contacto'
-            thread = threading.Thread(
-                target=send_email(template, context, subject))
-            thread.start()
-            return True
-        except:
-            return False
-
 
 class CreateArticleModelForm(forms.ModelForm):
     class Meta:

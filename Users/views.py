@@ -102,8 +102,8 @@ def register_view(request):
             'usuario': usuario.get_short_name(),
         }
 
-        thread = threading.Thread(target=send_email(
-            template, context, 'Bienvenid@ a Django Blog', usuario.email))
+        thread = threading.Thread(target=send_email, args=[
+                                  template, context, 'Bienvenid@ a Django Blog', usuario.email])
         thread.start()
 
         if usuario:
@@ -124,14 +124,29 @@ def contact_view(request):
 
     if request.method == 'POST' and formulario.is_valid():
         protocolo = 'https' if request.is_secure() else 'http'
+        dominio = get_current_site(request).domain
 
-        if formulario.enviar_correo(get_current_site(request).domain, protocolo):
+        try:
+            template = 'mails/email_contacto.html'
+            context = {
+                'nombre': formulario.cleaned_data.get('nombre').strip(),
+                'asunto': formulario.cleaned_data.get('asunto').strip(),
+                'correo': formulario.cleaned_data.get('correo').strip(),
+                'mensaje': formulario.cleaned_data.get('mensaje').strip(),
+                'dominio': dominio,
+                'protocolo': protocolo,
+            }
+            subject = 'Nuevo mensaje de contacto'
+            thread = threading.Thread(
+                target=send_email, args=[template, context, subject, 'kdalfaro45@misena.edu.co'])
+            thread.start()
+
             messages.success(
                 request, 'Correo enviado con exito, un asesor se comunicara pronto contigo')
 
             return redirect('Users:contact')
 
-        else:
+        except:
             messages.error(
                 request, 'Ocurrio un error el correo no se pudo enviar, intentalo de nuevo')
 

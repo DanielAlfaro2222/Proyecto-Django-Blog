@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Recuperaracion de contraseña completado</title>
+{% endblock %}
+
+{% block content %}
+    <main class="main main-reset-password">
+        <section class="section-reset-password">
+            <h2 class="section-reset-password__title">
+                Recuperaracion de contraseña completado
+            </h2>
+
+            <p class="section-reset-password__paragraph">
+                La recuperacion de la contraseña se realizo con exito, ya puedes iniciar sesion.
+            </p>
+            
+
+            
+            <a class="section-reset-password__link" href="{% url 'Users:login' %}">
+                Iniciar sesion
+            </a>
+        </section>
+        
+        {% include 'snippets/aside_contacto.html' %}
+    </main>
+{% endblock %}
