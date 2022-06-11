@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'Django_Blog.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = db.SQLITE
+DATABASES = db.POSTGRESQL
 
 
 # Password validation
