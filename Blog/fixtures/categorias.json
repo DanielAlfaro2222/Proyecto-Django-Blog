@@ -1,0 +1,57 @@
+[
+{
+    "model": "Blog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Programacion",
+        "slug": "programacion",
+        "create": "2022-02-04T01:23:20.226Z",
+        "modified": "2022-02-04T01:23:20.226Z",
+        "state": "Activo"
+    }
+},
+{
+    "model": "Blog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Tecnologia",
+        "slug": "tecnologia",
+        "create": "2022-02-04T01:23:26.742Z",
+        "modified": "2022-02-04T01:23:26.742Z",
+        "state": "Activo"
+    }
+},
+{
+    "model": "Blog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Video juegos",
+        "slug": "video-juegos",
+        "create": "2022-02-04T01:23:34.108Z",
+        "modified": "2022-02-04T01:23:34.108Z",
+        "state": "Activo"
+    }
+},
+{
+    "model": "Blog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Desarrollo web",
+        "slug": "desarrollo-web",
+        "create": "2022-02-06T23:51:46.808Z",
+        "modified": "2022-02-06T23:51:46.808Z",
+        "state": "Activo"
+    }
+},
+{
+    "model": "Blog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Desarrollo mobile",
+        "slug": "desarollo-mobile",
+        "create": "2022-02-06T23:51:56.671Z",
+        "modified": "2022-05-19T17:04:24.858Z",
+        "state": "Activo"
+    }
+}
+]
