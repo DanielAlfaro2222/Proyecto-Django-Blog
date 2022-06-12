@@ -10,7 +10,7 @@ from Django_Blog.utils import ESTADO
 class Category(models.Model):
     id_category = models.AutoField('Id categoria', primary_key=True)
     name = models.CharField('Nombre categoria', max_length=45, unique=True)
-    slug = models.SlugField('Url', null=True, blank=True)
+    slug = models.SlugField('Url', null=True, blank=True, max_length=255)
     create = models.DateTimeField('Fecha de creacion', auto_now_add=True)
     modified = models.DateTimeField('Fecha de modificacion', auto_now=True)
     state = models.CharField('Estado', choices=ESTADO,
@@ -39,7 +39,7 @@ class Article(models.Model):
         User, verbose_name='Autor', on_delete=models.DO_NOTHING)
     category = models.ForeignKey(
         Category, verbose_name='Categoria', on_delete=models.DO_NOTHING)
-    slug = models.SlugField('Url', null=True, blank=True)
+    slug = models.SlugField('Url', null=True, blank=True, max_length=255)
     state = models.CharField('Estado', choices=ESTADO,
                              default='Activo', max_length=10)
 

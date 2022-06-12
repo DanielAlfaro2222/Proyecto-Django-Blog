@@ -91,7 +91,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField('Administrador', default=False)
     state = models.CharField('Estado', choices=ESTADO,
                              default='Activo', max_length=10)
-    slug = models.SlugField('Url', null=True, blank=True, unique=True)
+    slug = models.SlugField('Url', null=True, blank=True,
+                            unique=True, max_length=255)
     city = models.ForeignKey(City, verbose_name="Ciudad",
                              on_delete=models.CASCADE, null=True, blank=True)
 
