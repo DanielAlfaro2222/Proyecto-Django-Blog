@@ -62,7 +62,8 @@
             Lo siento, por ahora no hay articulos relacionados con este autor :(
         </p>
         {% endfor %}
-        {% include 'snippets/paginacion_articulos.html' %}
+        
+        {% include 'snippets/paginacion.html' with registros=articulos %}
     </section>
 
     {% include 'snippets/aside_contacto.html' %}
